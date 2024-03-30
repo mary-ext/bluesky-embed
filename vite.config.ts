@@ -22,9 +22,9 @@ export default defineConfig({
 		},
 		rollupOptions: {
 			external: [
-				'@externdefs/bluesky-client/agent',
+				'@externdefs/bluesky-client',
+				'@externdefs/bluesky-client/lexicons',
 				'@externdefs/bluesky-client/xrpc',
-				'@externdefs/bluesky-client/atp-schema',
 			],
 		},
 	},

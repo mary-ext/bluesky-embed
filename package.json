@@ -27,14 +27,14 @@
 		"@externdefs/bluesky-client": "^0.5.7"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.24.0",
-		"@babel/plugin-syntax-typescript": "^7.23.3",
+		"@babel/core": "^7.24.3",
+		"@babel/plugin-syntax-typescript": "^7.24.1",
 		"@intrnl/jsx-to-string": "^0.1.6",
 		"@rollup/plugin-babel": "^6.0.4",
 		"prettier": "^3.2.5",
-		"prettier-plugin-css-order": "^2.0.1",
-		"typescript": "^5.3.3",
-		"vite": "^5.1.4",
-		"vite-plugin-dts": "^3.7.3"
+		"prettier-plugin-css-order": "^2.1.1",
+		"typescript": "~5.4.3",
+		"vite": "^5.2.7",
+		"vite-plugin-dts": "^3.8.1"
 	}
 }

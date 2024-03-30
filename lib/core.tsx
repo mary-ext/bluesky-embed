@@ -123,8 +123,8 @@ export const render = (resp: ThreadResponse, contextless: boolean): TrustedHTML 
 					const record = post.record as PostRecord;
 					const author = post.author;
 
-					const author_url = get_profile_url(author.handle);
-					const post_url = get_post_url(author.handle, get_record_key(post.uri));
+					const author_url = get_profile_url(author.did);
+					const post_url = get_post_url(author.did, get_record_key(post.uri));
 
 					if (main) {
 						return (
@@ -579,7 +579,7 @@ const EmbedPost = ({ post, large }: { post: AppBskyEmbedRecord.ViewRecord; large
 
 	const show_large_images = images !== undefined && (large || !text);
 
-	const post_url = get_post_url(author.handle, get_record_key(post.uri));
+	const post_url = get_post_url(author.did, get_record_key(post.uri));
 
 	return (
 		<a href={post_url} target="_blank" class="embed-post interactive">

@@ -1,4 +1,6 @@
 import type { TrustedHTML } from '@intrnl/jsx-to-string';
+
+import { BskyXRPC } from '@externdefs/bluesky-client';
 import type {
 	AppBskyEmbedExternal,
 	AppBskyEmbedImages,
@@ -7,11 +9,9 @@ import type {
 	AppBskyFeedGetPostThread,
 	AppBskyFeedPost,
 	AppBskyGraphDefs,
-} from '@externdefs/bluesky-client/atp-schema';
+} from '@externdefs/bluesky-client/lexicons';
 
 import './style.css';
-
-import { Agent } from './utils/agent.ts';
 
 import { segment_richtext } from './utils/richtext/segmentize.ts';
 import type { Facet } from './utils/richtext/types.ts';
@@ -45,7 +45,7 @@ export const get = async (
 	contextless: boolean,
 	service: string = 'https://public.api.bsky.app',
 ): Promise<ThreadResponse> => {
-	const agent = new Agent(service);
+	const rpc = new BskyXRPC({ service });
 
 	const [actor, rkey] = parse_src(src);
 
@@ -53,7 +53,7 @@ export const get = async (
 	if (actor.startsWith('did:')) {
 		did = actor;
 	} else {
-		const response = await agent.get('com.atproto.identity.resolveHandle', {
+		const response = await rpc.get('com.atproto.identity.resolveHandle', {
 			params: {
 				handle: actor,
 			},
@@ -62,7 +62,7 @@ export const get = async (
 		did = response.data.did;
 	}
 
-	const response = await agent.get('app.bsky.feed.getPostThread', {
+	const response = await rpc.get('app.bsky.feed.getPostThread', {
 		params: {
 			uri: `at://${did}/app.bsky.feed.post/${rkey}`,
 			parentHeight: !contextless ? 2 : 1,

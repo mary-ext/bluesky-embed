@@ -1,4 +1,4 @@
-import type { AppBskyRichtextFacet } from '@externdefs/bluesky-client/atp-schema';
+import type { AppBskyRichtextFacet } from '@externdefs/bluesky-client/lexicons';
 
 export type Facet = AppBskyRichtextFacet.Main;
 export type LinkFeature = AppBskyRichtextFacet.Link;

@@ -6,5 +6,13 @@
 	"semi": true,
 	"singleQuote": true,
 	"bracketSpacing": true,
-	"plugins": ["prettier-plugin-css-order"]
+	"plugins": ["prettier-plugin-css-order"],
+	"overrides": [
+		{
+			"files": ["tsconfig.json", "jsconfig.json"],
+			"options": {
+				"parser": "jsonc"
+			}
+		}
+	]
 }

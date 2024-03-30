@@ -589,6 +589,9 @@ p {
 	margin: 12px 12px 0 12px;
 	color: var(--text-secondary);
 }
+.embed-post__header + .embed-image {
+	margin: 12px 0 0 0;
+}
 
 .embed-post__avatar-wrapper {
 	flex-shrink: 0;

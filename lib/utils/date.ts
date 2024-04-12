@@ -1,24 +1,12 @@
-const is_nan = Number.isNaN;
+export const abs_long = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
+export const abs_short = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
 
-const abs_with_time = new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeStyle: 'short' });
-const abs_with_year = new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' });
+export const format_date = (formatter: Intl.DateTimeFormat, date: string | number) => {
+	const inst = new Date(date);
 
-export const format_abs_date = (time: string | number) => {
-	const date = new Date(time);
-
-	if (is_nan(date.getTime())) {
+	if (isNaN(inst.getTime())) {
 		return 'N/A';
 	}
 
-	return abs_with_year.format(date);
-};
-
-export const format_abs_date_time = (time: string | number) => {
-	const date = new Date(time);
-
-	if (is_nan(date.getTime())) {
-		return 'N/A';
-	}
-
-	return abs_with_time.format(date);
+	return formatter.format(inst);
 };

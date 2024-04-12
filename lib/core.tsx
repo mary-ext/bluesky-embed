@@ -16,7 +16,7 @@ import './style.css';
 import { segment_richtext } from './utils/richtext/segmentize.ts';
 import type { Facet } from './utils/richtext/types.ts';
 
-import { format_abs_date, format_abs_date_time } from './utils/date.ts';
+import { abs_long, abs_short, format_date } from './utils/date.ts';
 import { format_compact } from './utils/number.ts';
 
 type ThreadResponse = AppBskyFeedGetPostThread.Output;
@@ -182,7 +182,7 @@ export const render = (resp: ThreadResponse, contextless: boolean): TrustedHTML 
 								) : null}
 
 								<time datetime={record.createdAt} class="main-post__date">
-									{format_abs_date_time(record.createdAt)}
+									{format_date(abs_long, record.createdAt)}
 								</time>
 
 								<div class="main-post__stats">
@@ -244,10 +244,10 @@ export const render = (resp: ThreadResponse, contextless: boolean): TrustedHTML 
 										<a
 											href={post_url}
 											target="_blank"
-											title={format_abs_date_time(record.createdAt)}
+											title={format_date(abs_long, record.createdAt)}
 											class="reply-post__date"
 										>
-											<time datetime={record.createdAt}>{format_abs_date(record.createdAt)}</time>
+											<time datetime={record.createdAt}>{format_date(abs_short, record.createdAt)}</time>
 										</a>
 									</div>
 
@@ -592,7 +592,7 @@ const EmbedPost = ({ post, large }: { post: AppBskyEmbedRecord.ViewRecord; large
 					·
 				</span>
 
-				<span class="embed-post__date">{format_abs_date(record.createdAt)}</span>
+				<span class="embed-post__date">{format_date(abs_short, record.createdAt)}</span>
 			</div>
 
 			{text ? (

@@ -181,46 +181,36 @@ export const render = (resp: ThreadResponse, contextless: boolean): TrustedHTML 
 									</div>
 								) : null}
 
-								<div class="main-post__footer">
-									<a href={post_url} target="_blank" class="main-post__date">
-										<time datetime={record.createdAt}>{format_abs_date_time(record.createdAt)}</time>
+								<time datetime={record.createdAt} class="main-post__date">
+									{format_abs_date_time(record.createdAt)}
+								</time>
+
+								<div class="main-post__stats">
+									<span class="main-post__stat" title={`${post.likeCount || 0} likes`}>
+										<svg viewBox="0 0 24 24" class="icon">
+											<path
+												fill="currentColor"
+												d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5C22 5.42 19.58 3 16.5 3m-4.4 15.55l-.1.1l-.1-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05"
+											></path>
+										</svg>
+										<span>{format_compact(post.likeCount || 0)}</span>
+									</span>
+
+									<span class="main-post__stat" title={`${post.repostCount || 0} reposts`}>
+										<svg viewBox="0 0 24 24" class="icon">
+											<path
+												fill="currentColor"
+												d="M7 7h10v3l4-4l-4-4v3H5v6h2zm10 10H7v-3l-4 4l4 4v-3h12v-6h-2z"
+											></path>
+										</svg>
+										<span>{format_compact(post.repostCount || 0)}</span>
+									</span>
+
+									<div class="gap"></div>
+
+									<a href={post_url} target="_blank" class="permalink">
+										<span>Read {format_compact(post.replyCount || 0)} replies on Bluesky</span>
 									</a>
-
-									<span aria-hidden="true" class="dot">
-										·
-									</span>
-
-									<span class="main-post__stats">
-										<span class="main-post__stat" title={`${post.replyCount || 0} replies`}>
-											<svg viewBox="0 0 24 24" class="icon">
-												<path
-													fill="currentColor"
-													d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m0 14H6l-2 2V4h16z"
-												></path>
-											</svg>
-											<span>{format_compact(post.replyCount || 0)}</span>
-										</span>
-
-										<span class="main-post__stat" title={`${post.likeCount || 0} likes`}>
-											<svg viewBox="0 0 24 24" class="icon">
-												<path
-													fill="currentColor"
-													d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3C4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5C22 5.42 19.58 3 16.5 3m-4.4 15.55l-.1.1l-.1-.1C7.14 14.24 4 11.39 4 8.5C4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5c0 2.89-3.14 5.74-7.9 10.05"
-												></path>
-											</svg>
-											<span>{format_compact(post.likeCount || 0)}</span>
-										</span>
-
-										<span class="main-post__stat" title={`${post.repostCount || 0} reposts`}>
-											<svg viewBox="0 0 24 24" class="icon">
-												<path
-													fill="currentColor"
-													d="M7 7h10v3l4-4l-4-4v3H5v6h2zm10 10H7v-3l-4 4l4 4v-3h12v-6h-2z"
-												></path>
-											</svg>
-											<span>{format_compact(post.repostCount || 0)}</span>
-										</span>
-									</span>
 								</div>
 							</div>
 						);

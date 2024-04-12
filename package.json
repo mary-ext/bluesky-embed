@@ -24,17 +24,17 @@
 		"./style.css": "./dist/style.css"
 	},
 	"dependencies": {
-		"@externdefs/bluesky-client": "^0.5.7"
+		"@externdefs/bluesky-client": "^0.5.8"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.24.3",
+		"@babel/core": "^7.24.4",
 		"@babel/plugin-syntax-typescript": "^7.24.1",
 		"@intrnl/jsx-to-string": "^0.1.6",
 		"@rollup/plugin-babel": "^6.0.4",
 		"prettier": "^3.2.5",
-		"prettier-plugin-css-order": "^2.1.1",
-		"typescript": "~5.4.3",
-		"vite": "^5.2.7",
+		"prettier-plugin-css-order": "^2.1.2",
+		"typescript": "~5.4.5",
+		"vite": "^5.2.8",
 		"vite-plugin-dts": "^3.8.1"
 	}
 }

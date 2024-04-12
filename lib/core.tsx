@@ -592,7 +592,9 @@ const EmbedPost = ({ post, large }: { post: AppBskyEmbedRecord.ViewRecord; large
 					·
 				</span>
 
-				<span class="embed-post__date">{format_date(abs_short, record.createdAt)}</span>
+				<time datetime={record.createdAt} class="embed-post__date">
+					{format_date(abs_short, record.createdAt)}
+				</time>
 			</div>
 
 			{text ? (

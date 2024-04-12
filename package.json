@@ -7,7 +7,7 @@
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/mary-ext/bluesky-post-embed.git"
+		"url": "git+https://codeberg.org/mary-ext/bluesky-post-embed.git"
 	},
 	"files": [
 		"dist/"

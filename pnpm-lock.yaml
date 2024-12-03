@@ -118,10 +118,10 @@ importers:
         specifier: ^2.0.6
         version: 2.0.6
       bluesky-post-embed:
-        specifier: workspace:0.2.0-alpha.1
+        specifier: workspace:^
         version: link:../bluesky-post-embed
       bluesky-profile-feed-embed:
-        specifier: workspace:0.2.0-alpha.1
+        specifier: workspace:^
         version: link:../bluesky-profile-feed-embed
       internal:
         specifier: workspace:^

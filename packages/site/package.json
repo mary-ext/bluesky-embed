@@ -10,8 +10,8 @@
 	},
 	"dependencies": {
 		"@atcute/client": "^2.0.6",
-		"bluesky-post-embed": "workspace:0.2.0-alpha.1",
-		"bluesky-profile-feed-embed": "workspace:0.2.0-alpha.1",
+		"bluesky-post-embed": "workspace:^",
+		"bluesky-profile-feed-embed": "workspace:^",
 		"internal": "workspace:^",
 		"preact": "^10.25.0"
 	},

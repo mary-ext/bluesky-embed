@@ -5,7 +5,8 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc -b && vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"publish": "pnpm run build && ./scripts/publish.sh"
 	},
 	"dependencies": {
 		"@atcute/client": "^2.0.6",

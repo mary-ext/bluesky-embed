@@ -167,7 +167,7 @@ const PostEmbedding = ({ matched }: { matched: ExtractedPostInfo }) => {
 };
 
 const getPrerequisitePostMarkup = () => {
-	const JSDELIVR_URL = `https://cdn.jsdelivr.net/npm/bluesky-post-embed@~0.2.0-alpha.2`;
+	const JSDELIVR_URL = `https://cdn.jsdelivr.net/npm/bluesky-post-embed@^1.0.0`;
 
 	return `<!-- Core web component and styling -->
 <script type="module" src="${JSDELIVR_URL}/+esm"></script>
@@ -291,7 +291,7 @@ const ProfileFeedEmbedding = ({ matched }: { matched: ExtractedProfileInfo }) =>
 };
 
 const getPrerequisiteProfileFeedMarkup = () => {
-	const JSDELIVR_URL = `https://cdn.jsdelivr.net/npm/bluesky-profile-feed-embed@~0.2.0-alpha.2`;
+	const JSDELIVR_URL = `https://cdn.jsdelivr.net/npm/bluesky-profile-feed-embed@^1.0.0`;
 
 	return `<!-- Core web component and styling -->
 <script type="module" src="${JSDELIVR_URL}/+esm"></script>

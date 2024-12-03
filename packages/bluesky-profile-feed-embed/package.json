@@ -2,7 +2,7 @@
 	"type": "module",
 	"name": "bluesky-profile-feed-embed",
 	"description": "Custom element for embedding Bluesky profile feeds",
-	"version": "0.2.0-alpha.2",
+	"version": "1.0.0",
 	"author": "externdefs",
 	"license": "MIT",
 	"repository": {

@@ -1,0 +1,22 @@
+{
+	"type": "module",
+	"private": true,
+	"name": "site",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc -b && vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@atcute/client": "^2.0.6",
+		"bluesky-post-embed": "workspace:0.2.0-alpha.1",
+		"bluesky-profile-feed-embed": "workspace:0.2.0-alpha.1",
+		"internal": "workspace:^",
+		"preact": "^10.25.0"
+	},
+	"devDependencies": {
+		"@preact/preset-vite": "^2.9.1",
+		"typescript": "~5.6.2",
+		"vite": "^6.0.1"
+	}
+}

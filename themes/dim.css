@@ -1,0 +1,19 @@
+.bluesky-embed {
+	--font-size: 16px;
+	--font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif, 'Apple Color Emoji',
+		'Segoe UI Emoji';
+	--max-feed-height: 600px;
+}
+
+.bluesky-embed {
+	--text-primary: #f1f3f5;
+	--text-secondary: #aebbc9;
+	--text-link: #1083fe;
+	--background-primary: #161e27;
+	--background-secondary: #212d3b;
+	--divider: #2e4052;
+	--divider-hover: #4a6179;
+	--button: #208bfe;
+	--button-text: #ffffff;
+	--button-hover: #4ca2fe;
+}

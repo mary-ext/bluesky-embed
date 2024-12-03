@@ -1,0 +1,4 @@
+packages:
+  - packages/internal
+  - packages/bluesky-post-embed
+  - packages/bluesky-profile-feed-embed

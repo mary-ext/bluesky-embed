@@ -1,0 +1,86 @@
+diff --git a/src/internal/server/index.js b/src/internal/server/index.js
+index 615a49fbd4c0279b1b4c28c2845293001922307e..13d7cd09da61d418337fd73b08007b549809b049 100644
+--- a/src/internal/server/index.js
++++ b/src/internal/server/index.js
+@@ -94,50 +94,13 @@ export let on_destroy = [];
+  * @param {{ props?: Omit<Props, '$$slots' | '$$events'>; context?: Map<any, any> }} [options]
+  * @returns {RenderOutput}
+  */
+-export function render(component, options = {}) {
++export function render(component, options) {
+ 	/** @type {Payload} */
+-	const payload = { out: '', css: new Set(), head: { title: '', out: '' } };
+-
+-	const prev_on_destroy = on_destroy;
+-	on_destroy = [];
+-	payload.out += BLOCK_OPEN;
+-
+-	let reset_reset_element;
+-
+-	if (DEV) {
+-		// prevent parent/child element state being corrupted by a bad render
+-		reset_reset_element = reset_elements();
+-	}
+-
+-	if (options.context) {
+-		push();
+-		/** @type {Component} */ (current_component).c = options.context;
+-	}
+-
+-	// @ts-expect-error
+-	component(payload, options.props ?? {}, {}, {});
+-
+-	if (options.context) {
+-		pop();
+-	}
+-
+-	if (reset_reset_element) {
+-		reset_reset_element();
+-	}
+-
+-	payload.out += BLOCK_CLOSE;
+-	for (const cleanup of on_destroy) cleanup();
+-	on_destroy = prev_on_destroy;
+-
+-	let head = payload.head.out + payload.head.title;
+-
+-	for (const { hash, code } of payload.css) {
+-		head += `<style id="${hash}">${code}</style>`;
+-	}
++	const payload = { out: '' };
++	component(payload, options?.props ?? {});
+ 
+ 	return {
+-		head,
+-		html: payload.out,
++		head: '',
+ 		body: payload.out
+ 	};
+ }
+@@ -492,12 +455,7 @@ export { await_block as await };
+ 
+ /** @param {any} array_like_or_iterator */
+ export function ensure_array_like(array_like_or_iterator) {
+-	if (array_like_or_iterator) {
+-		return array_like_or_iterator.length !== undefined
+-			? array_like_or_iterator
+-			: Array.from(array_like_or_iterator);
+-	}
+-	return [];
++	return array_like_or_iterator;
+ }
+ 
+ /**
+diff --git a/src/internal/shared/attributes.js b/src/internal/shared/attributes.js
+index 867d6ba5d37888ecad4c7b7c92e07b96bed92dca..fbe57a65b1d1edb10d6a7555cc32a394c7dedf9b 100644
+--- a/src/internal/shared/attributes.js
++++ b/src/internal/shared/attributes.js
+@@ -22,7 +22,7 @@ const replacements = {
+  */
+ export function attr(name, value, is_boolean = false) {
+ 	if (value == null || (!value && is_boolean) || (value === '' && name === 'class')) return '';
+-	const normalized = (name in replacements && replacements[name].get(value)) || value;
++	const normalized = value;
+ 	const assignment = is_boolean ? '' : `="${escape_html(normalized, true)}"`;
+ 	return ` ${name}${assignment}`;
+ }

@@ -1,0 +1,17 @@
+{
+	"private": true,
+	"scripts": {
+		"fmt": "prettier --cache --write ."
+	},
+	"devDependencies": {
+		"prettier": "^3.4.1",
+		"prettier-plugin-css-order": "^2.1.2",
+		"prettier-plugin-svelte": "^3.3.2",
+		"typescript": "^5.7.2"
+	},
+	"pnpm": {
+		"patchedDependencies": {
+			"svelte": "patches/svelte.patch"
+		}
+	}
+}

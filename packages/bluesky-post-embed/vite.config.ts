@@ -68,7 +68,7 @@ function svelte(): Plugin {
 				generate: 'server',
 				css: 'external',
 				cssHash({ hash, filename }) {
-					const prefix = `github:mary-ext/bluesky-embed/`;
+					const prefix = `github:mary-ext/bluesky-post-embed/`;
 					return `s-` + hash(prefix + path.relative(__dirname, filename));
 				},
 				runes: true,

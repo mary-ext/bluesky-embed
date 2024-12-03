@@ -1,8 +1,5 @@
 # &lt;bluesky-profile-feed-embed>
 
-> [!CAUTION]  
-> This is a new, work-in-progress version of `bluesky-post-embed`, things aren't done yet.
-
 A custom element for embedding Bluesky profile feeds.
 
 ## Installation

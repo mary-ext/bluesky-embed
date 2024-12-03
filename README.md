@@ -1,8 +1,5 @@
 # &lt;bluesky-embed>
 
-> [!CAUTION]  
-> This is a new, work-in-progress version of `bluesky-post-embed`, things aren't done yet.
-
 A custom element for embedding Bluesky posts.
 
 - **Lightweight**, the entire package + dependencies is only ~20 KB (~6 KB gzipped)

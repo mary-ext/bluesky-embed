@@ -1,8 +1,5 @@
 # &lt;bluesky-post-embed>
 
-> [!CAUTION]  
-> This is a new, work-in-progress version of `bluesky-post-embed`, things aren't done yet.
-
 A custom element for embedding Bluesky posts.
 
 ## Installation

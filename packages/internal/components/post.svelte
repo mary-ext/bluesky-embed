@@ -144,6 +144,7 @@
 		display: flex;
 		align-items: center;
 		margin: 0 0 2px 0;
+		padding: 0 calc(24px + 8px) 0 0;
 		color: var(--text-secondary);
 
 		.name-wrapper {

@@ -22,9 +22,9 @@
 	},
 	"scripts": {
 		"dev": "vite",
-		"build": "pnpm run check && vite build",
+		"build": "pnpm run check && vite build && rsync -aHAX --delete ../../themes/ themes/",
 		"check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
-		"prepack": "pnpm run build; rsync -aHAX --delete ../../themes/ themes/"
+		"prepack": "pnpm run build"
 	},
 	"dependencies": {
 		"@atcute/bluesky": "^1.0.9",

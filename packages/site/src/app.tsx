@@ -15,7 +15,6 @@ import BlueskyPost from './components/bluesky-post';
 import BlueskyProfileFeed from './components/bluesky-profile-feed';
 import CodeBlock from './components/code-block';
 
-const UNPKG_URL = `https://unpkg.com/bluesky-embed@~0.2.0-alpha.2`;
 const DEFAULT_URL = 'https://bsky.app/profile/did:plc:ragtjsm2j2vknwkz3zp4oxrd/post/3kj2umze7zj2n';
 
 const App = () => {
@@ -168,13 +167,15 @@ const PostEmbedding = ({ matched }: { matched: ExtractedPostInfo }) => {
 };
 
 const getPrerequisitePostMarkup = () => {
+	const JSDELIVR_URL = `https://cdn.jsdelivr.net/npm/bluesky-post-embed@~0.2.0-alpha.2`;
+
 	return `<!-- Core web component and styling -->
-<script type="module" src="${UNPKG_URL}/dist/post-wc.js"></script>
-<link rel="stylesheet" href="${UNPKG_URL}/dist/post-core.css">
+<script type="module" src="${JSDELIVR_URL}/+esm"></script>
+<link rel="stylesheet" href="${JSDELIVR_URL}/dist/core.min.css">
 
 <!-- Built-in themes -->
-<link rel="stylesheet" href="${UNPKG_URL}/themes/light.css" media="(prefers-color-scheme: light)">
-<link rel="stylesheet" href="${UNPKG_URL}/themes/dim.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="${JSDELIVR_URL}/themes/light.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="${JSDELIVR_URL}/themes/dim.min.css" media="(prefers-color-scheme: dark)">
 
 <!-- Fallback/placeholder elements if JS script is taking a while to load or is failing -->
 <style>
@@ -290,13 +291,15 @@ const ProfileFeedEmbedding = ({ matched }: { matched: ExtractedProfileInfo }) =>
 };
 
 const getPrerequisiteProfileFeedMarkup = () => {
+	const JSDELIVR_URL = `https://cdn.jsdelivr.net/npm/bluesky-profile-feed-embed@~0.2.0-alpha.2`;
+
 	return `<!-- Core web component and styling -->
-<script type="module" src="${UNPKG_URL}/dist/profile-feed-wc.js"></script>
-<link rel="stylesheet" href="${UNPKG_URL}/dist/profile-feed-core.css">
+<script type="module" src="${JSDELIVR_URL}/+esm"></script>
+<link rel="stylesheet" href="${JSDELIVR_URL}/dist/core.min.css">
 
 <!-- Built-in themes -->
-<link rel="stylesheet" href="${UNPKG_URL}/themes/light.css" media="(prefers-color-scheme: light)">
-<link rel="stylesheet" href="${UNPKG_URL}/themes/dim.css" media="(prefers-color-scheme: dark)">
+<link rel="stylesheet" href="${JSDELIVR_URL}/themes/light.min.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="${JSDELIVR_URL}/themes/dim.min.css" media="(prefers-color-scheme: dark)">
 `;
 };
 

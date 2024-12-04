@@ -4,6 +4,12 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+catalogs:
+  default:
+    svelte:
+      specifier: ^5.5.3
+      version: 5.5.3
+
 patchedDependencies:
   svelte:
     hash: 6qynve6ufonlwufsl6x7wujmdu
@@ -48,7 +54,7 @@ importers:
         specifier: workspace:^
         version: link:../internal
       svelte:
-        specifier: ^5.5.3
+        specifier: 'catalog:'
         version: 5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
       svelte-check:
         specifier: ^4.1.0
@@ -82,7 +88,7 @@ importers:
         specifier: workspace:^
         version: link:../internal
       svelte:
-        specifier: ^5.5.3
+        specifier: 'catalog:'
         version: 5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
       svelte-check:
         specifier: ^4.1.0
@@ -109,8 +115,8 @@ importers:
         specifier: ^5.0.4
         version: 5.0.4
       svelte:
-        specifier: ^5.3.1
-        version: 5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
+        specifier: 'catalog:'
+        version: 5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
 
   packages/site:
     dependencies:
@@ -1038,10 +1044,6 @@ packages:
     peerDependencies:
       svelte: ^4.0.0 || ^5.0.0-next.0
       typescript: '>=5.0.0'
-
-  svelte@5.3.1:
-    resolution: {integrity: sha512-Y6PXppQhIZZ0HLZKj6UMV/VZPJbHiK98K8A5M7mJ+PGrz4erUmuDRUa8l7aw4La++Vl51YWzLUuuB0FZ7JPfnw==}
-    engines: {node: '>=18'}
 
   svelte@5.5.3:
     resolution: {integrity: sha512-0j7XTSg5iXcLNCFcEsIZPtHO7SQeE0KgMcyF1K4K7HkjdKVPumz7dnxeXq5lGJRHfVAMZKqpEJ46rPKPKRJ57Q==}
@@ -2007,22 +2009,6 @@ snapshots:
       typescript: 5.7.2
     transitivePeerDependencies:
       - picomatch
-
-  svelte@5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu):
-    dependencies:
-      '@ampproject/remapping': 2.3.0
-      '@jridgewell/sourcemap-codec': 1.5.0
-      '@types/estree': 1.0.6
-      acorn: 8.14.0
-      acorn-typescript: 1.4.13(acorn@8.14.0)
-      aria-query: 5.3.2
-      axobject-query: 4.1.0
-      esm-env: 1.2.1
-      esrap: 1.2.3
-      is-reference: 3.0.3
-      locate-character: 3.0.0
-      magic-string: 0.30.14
-      zimmerframe: 1.1.2
 
   svelte@5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu):
     dependencies:

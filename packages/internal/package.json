@@ -12,13 +12,13 @@
 		"@atcute/bluesky": "^1.0.9",
 		"@atcute/bluesky-richtext-segmenter": "^1.0.5",
 		"@atcute/client": "^2.0.6",
-		"svelte": "^5.3.1"
+		"svelte": "catalog:"
 	},
 	"devDependencies": {
 		"@atcute/bluesky": "^1.0.9",
 		"@atcute/bluesky-richtext-segmenter": "^1.0.5",
 		"@atcute/client": "^2.0.6",
 		"@tsconfig/svelte": "^5.0.4",
-		"svelte": "^5.3.1"
+		"svelte": "catalog:"
 	}
 }

@@ -3,3 +3,6 @@ packages:
   - packages/site
   - packages/bluesky-post-embed
   - packages/bluesky-profile-feed-embed
+
+catalog:
+  svelte: ^5.5.3

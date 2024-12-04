@@ -21,7 +21,7 @@ importers:
         version: 2.1.2(postcss@8.4.49)(prettier@3.4.1)
       prettier-plugin-svelte:
         specifier: ^3.3.2
-        version: 3.3.2(prettier@3.4.1)(svelte@5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu))
+        version: 3.3.2(prettier@3.4.1)(svelte@5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu))
       typescript:
         specifier: ^5.7.2
         version: 5.7.2
@@ -37,9 +37,6 @@ importers:
       '@atcute/client':
         specifier: ^2.0.6
         version: 2.0.6
-      svelte:
-        specifier: ^5.3.1
-        version: 5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
     devDependencies:
       '@tsconfig/svelte':
         specifier: ^5.0.4
@@ -50,9 +47,12 @@ importers:
       internal:
         specifier: workspace:^
         version: link:../internal
+      svelte:
+        specifier: ^5.5.3
+        version: 5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
       svelte-check:
         specifier: ^4.1.0
-        version: 4.1.0(picomatch@4.0.2)(svelte@5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(typescript@5.7.2)
+        version: 4.1.0(picomatch@4.0.2)(svelte@5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(typescript@5.7.2)
       vite:
         specifier: ^6.0.2
         version: 6.0.2(@types/node@22.10.1)
@@ -71,9 +71,6 @@ importers:
       '@atcute/client':
         specifier: ^2.0.6
         version: 2.0.6
-      svelte:
-        specifier: ^5.3.1
-        version: 5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
     devDependencies:
       '@tsconfig/svelte':
         specifier: ^5.0.4
@@ -84,9 +81,12 @@ importers:
       internal:
         specifier: workspace:^
         version: link:../internal
+      svelte:
+        specifier: ^5.5.3
+        version: 5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
       svelte-check:
         specifier: ^4.1.0
-        version: 4.1.0(picomatch@4.0.2)(svelte@5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(typescript@5.7.2)
+        version: 4.1.0(picomatch@4.0.2)(svelte@5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(typescript@5.7.2)
       vite:
         specifier: ^6.0.2
         version: 6.0.2(@types/node@22.10.1)
@@ -1043,6 +1043,10 @@ packages:
     resolution: {integrity: sha512-Y6PXppQhIZZ0HLZKj6UMV/VZPJbHiK98K8A5M7mJ+PGrz4erUmuDRUa8l7aw4La++Vl51YWzLUuuB0FZ7JPfnw==}
     engines: {node: '>=18'}
 
+  svelte@5.5.3:
+    resolution: {integrity: sha512-0j7XTSg5iXcLNCFcEsIZPtHO7SQeE0KgMcyF1K4K7HkjdKVPumz7dnxeXq5lGJRHfVAMZKqpEJ46rPKPKRJ57Q==}
+    engines: {node: '>=18'}
+
   typescript@5.4.2:
     resolution: {integrity: sha512-+2/g0Fds1ERlP6JsakQQDXjZdZMM+rqpamFZJEKh4kwTIn3iDkgKtby0CeNd5ATNZ4Ry1ax15TMx0W2V+miizQ==}
     engines: {node: '>=14.17'}
@@ -1919,10 +1923,10 @@ snapshots:
     transitivePeerDependencies:
       - postcss
 
-  prettier-plugin-svelte@3.3.2(prettier@3.4.1)(svelte@5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu)):
+  prettier-plugin-svelte@3.3.2(prettier@3.4.1)(svelte@5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu)):
     dependencies:
       prettier: 3.4.1
-      svelte: 5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
+      svelte: 5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
 
   prettier@3.4.1: {}
 
@@ -1992,19 +1996,35 @@ snapshots:
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
-  svelte-check@4.1.0(picomatch@4.0.2)(svelte@5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(typescript@5.7.2):
+  svelte-check@4.1.0(picomatch@4.0.2)(svelte@5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(typescript@5.7.2):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       chokidar: 4.0.1
       fdir: 6.4.2(picomatch@4.0.2)
       picocolors: 1.1.1
       sade: 1.8.1
-      svelte: 5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
+      svelte: 5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
       typescript: 5.7.2
     transitivePeerDependencies:
       - picomatch
 
   svelte@5.3.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu):
+    dependencies:
+      '@ampproject/remapping': 2.3.0
+      '@jridgewell/sourcemap-codec': 1.5.0
+      '@types/estree': 1.0.6
+      acorn: 8.14.0
+      acorn-typescript: 1.4.13(acorn@8.14.0)
+      aria-query: 5.3.2
+      axobject-query: 4.1.0
+      esm-env: 1.2.1
+      esrap: 1.2.3
+      is-reference: 3.0.3
+      locate-character: 3.0.0
+      magic-string: 0.30.14
+      zimmerframe: 1.1.2
+
+  svelte@5.5.3(patch_hash=6qynve6ufonlwufsl6x7wujmdu):
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0

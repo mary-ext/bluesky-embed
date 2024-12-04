@@ -22,7 +22,23 @@ export class BlueskyPost extends HTMLElement {
 		const data = await fetchPost({ uri: src, contextless, allowUnauthenticated, serviceUri });
 		const html = renderPost(data);
 
-		this.innerHTML = html;
+		const root = this.shadowRoot;
+
+		if (!root) {
+			this.innerHTML = html;
+		} else {
+			const template = document.createElement('template');
+			template.innerHTML = html;
+
+			const fragment = template.content;
+			const slot = root.querySelector('slot');
+
+			if (slot) {
+				slot.replaceWith(fragment);
+			} else {
+				root.appendChild(fragment);
+			}
+		}
 	}
 }
 

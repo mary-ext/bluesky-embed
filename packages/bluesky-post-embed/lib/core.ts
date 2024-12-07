@@ -3,8 +3,8 @@ import '@atcute/bluesky/lexicons';
 import { simpleFetchHandler, XRPC, XRPCError } from '@atcute/client';
 import { render } from 'svelte/server';
 
-import { DEFAULT_APPVIEW_URL } from 'internal/utils/constants.js';
 import type { PostData } from 'internal/types/post.js';
+import { DEFAULT_APPVIEW_URL } from 'internal/utils/constants.js';
 
 import BlueskyPost from './bluesky-post.svelte';
 

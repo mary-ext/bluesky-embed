@@ -9,7 +9,7 @@
 	"plugins": ["prettier-plugin-svelte", "prettier-plugin-css-order"],
 	"overrides": [
 		{
-			"files": ["tsconfig.json", "jsconfig.json"],
+			"files": ["tsconfig.json", "jsconfig.json", "tsconfig.*.json"],
 			"options": {
 				"parser": "jsonc"
 			}

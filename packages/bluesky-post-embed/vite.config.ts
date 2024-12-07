@@ -33,6 +33,7 @@ export default defineConfig({
 		preact(),
 		dts({
 			rollupTypes: true,
+			tsconfigPath: 'tsconfig.build.json',
 			beforeWriteFile(filePath, content) {
 				if (filePath.endsWith('/core.d.ts')) {
 					// Make sure the relevant types are present

@@ -2,7 +2,7 @@
 	"type": "module",
 	"name": "bluesky-post-embed",
 	"description": "Custom element for embedding Bluesky posts",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"author": "externdefs",
 	"license": "MIT",
 	"repository": {

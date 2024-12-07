@@ -56,6 +56,7 @@
 	.video-embed {
 		display: block;
 		position: relative;
+		background: #000000;
 		aspect-ratio: 16 / 9;
 		overflow: hidden;
 	}
@@ -79,7 +80,7 @@
 	.thumbnail {
 		width: 100%;
 		height: 100%;
-		object-fit: cover;
+		object-fit: contain;
 	}
 	.placeholder {
 		width: 100vw;

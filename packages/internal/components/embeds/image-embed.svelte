@@ -22,60 +22,59 @@
 	{#if length === 4}
 		<div class="grid">
 			<div class="col">
-				<div class="item wide">
-					{@render Image(images[0])}
+				<div class="item wide tl">
+					{@render Image(0)}
 				</div>
-				<div class="item wide">
-					{@render Image(images[2])}
+				<div class="item wide bl">
+					{@render Image(2)}
 				</div>
 			</div>
 			<div class="col">
-				<div class="item wide">
-					{@render Image(images[1])}
+				<div class="item wide tr">
+					{@render Image(1)}
 				</div>
-				<div class="item wide">
-					{@render Image(images[3])}
+				<div class="item wide br">
+					{@render Image(3)}
 				</div>
 			</div>
 		</div>
 	{:else if length === 3}
 		<div class="grid">
 			<div class="col square">
-				<div class="item">
-					{@render Image(images[0])}
+				<div class="item tl bl">
+					{@render Image(0)}
 				</div>
 			</div>
 			<div class="col square">
-				<div class="item">
-					{@render Image(images[1])}
+				<div class="item tr">
+					{@render Image(1)}
 				</div>
-				<div class="item">
-					{@render Image(images[2])}
+				<div class="item br">
+					{@render Image(2)}
 				</div>
 			</div>
 		</div>
 	{:else if length === 2}
 		<div class="grid">
 			<div class="col">
-				<div class="item square">
-					{@render Image(images[0])}
+				<div class="item square tl bl">
+					{@render Image(0)}
 				</div>
 			</div>
 			<div class="col">
-				<div class="item square">
-					{@render Image(images[1])}
+				<div class="item square tr br">
+					{@render Image(1)}
 				</div>
 			</div>
 		</div>
 	{:else if length === 1}
-		{@const image = images[0]}
-		{@const ratio = standalone && image.aspectRatio}
+		{@const ratio = standalone && images[0].aspectRatio}
 
 		<div
-			class={`single-item` + (ratio ? ` is-standalone` : ``)}
+			class={`single-item tl tr bl br` + (ratio ? ` is-standalone` : ``)}
 			style={ratio ? `aspect-ratio: ${ratio.width}/${ratio.height}` : ``}
 		>
-			{@render Image(image)}
+			{@render Image(0)}
 
 			{#if ratio}
 				<div class="placeholder"></div>
@@ -84,16 +83,13 @@
 	{/if}
 </div>
 
-{#snippet Image(image: AppBskyEmbedImages.ViewImage)}
+{#snippet Image(index: number)}
+	{@const image = images[index]}
+
 	<img loading="lazy" src={image.thumb} alt={image.alt} class={`image` + (blur ? ` is-blurred` : ``)} />
 {/snippet}
 
 <style>
-	.is-bordered {
-		border: 1px solid var(--divider);
-		border-radius: 6px;
-		overflow: hidden;
-	}
 	.is-aligned {
 		align-self: baseline;
 		max-width: 100%;
@@ -122,6 +118,28 @@
 		flex-grow: 1;
 		flex-shrink: 0;
 		overflow: hidden;
+	}
+
+	.is-bordered {
+		.tl,
+		.tr,
+		.bl,
+		.br {
+			border: 1px solid var(--divider);
+		}
+
+		.tl {
+			border-top-left-radius: 6px;
+		}
+		.tr {
+			border-top-right-radius: 6px;
+		}
+		.bl {
+			border-bottom-left-radius: 6px;
+		}
+		.br {
+			border-bottom-right-radius: 6px;
+		}
 	}
 
 	.single-item {

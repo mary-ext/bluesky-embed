@@ -3,6 +3,7 @@ import * as path from 'node:path';
 import { compile as compileSvelte } from 'svelte/compiler';
 import { type Plugin, createFilter, defineConfig } from 'vite';
 
+import preact from '@preact/preset-vite';
 import dts from 'vite-plugin-dts';
 
 export default defineConfig({
@@ -29,6 +30,7 @@ export default defineConfig({
 	},
 	plugins: [
 		svelte(),
+		preact(),
 		dts({
 			rollupTypes: true,
 			beforeWriteFile(filePath, content) {

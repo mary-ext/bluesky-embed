@@ -3,6 +3,7 @@
 
 	import { getPostUrl, getProfileUrl } from '../utils/bsky-url';
 	import { formatLongDate } from '../utils/date';
+	import { findLabel } from '../utils/labels';
 	import { formatCompactNumber, formatLongNumber } from '../utils/number';
 	import { parseAtUri } from '../utils/syntax/at-url';
 
@@ -27,14 +28,20 @@
 	const replyCount = post.replyCount || 0;
 	const likeCount = post.likeCount || 0;
 	const repostCount = (post.repostCount || 0) + (post.quoteCount || 0);
+
+	const isAuthorBlurred = !!findLabel(author.labels, author.did);
 </script>
 
 <div class="highlighted-post">
 	<div class="meta">
 		<a href={authorUrl} target="_blank" class="avatar-wrapper">
 			{#if author.avatar}
-				<!-- svelte-ignore a11y_missing_attribute -->
-				<img loading="lazy" src={author.avatar} class="avatar" />
+				<img
+					loading="lazy"
+					src={author.avatar}
+					alt=""
+					class={`avatar` + (isAuthorBlurred ? ` is-blurred` : ``)}
+				/>
 			{/if}
 		</a>
 
@@ -143,53 +150,58 @@
 		gap: 12px;
 		margin: 0 0 12px 0;
 		color: var(--text-secondary);
+	}
 
-		.avatar-wrapper {
-			display: block;
-			flex-shrink: 0;
-			border-radius: 9999px;
-			background: var(--background-secondary);
-			width: 40px;
-			height: 40px;
-			overflow: hidden;
+	.avatar-wrapper {
+		display: block;
+		flex-shrink: 0;
+		border-radius: 9999px;
+		background: var(--background-secondary);
+		width: 40px;
+		height: 40px;
+		overflow: hidden;
 
-			&:hover {
-				filter: brightness(0.85);
-			}
+		&:hover {
+			filter: brightness(0.85);
 		}
-		.avatar {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-		}
+	}
 
-		.name-wrapper {
-			display: block;
-			flex-grow: 1;
-			max-width: 100%;
-			overflow: hidden;
-			color: inherit;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-		}
-		.display-name-wrapper {
-			overflow: hidden;
-			text-overflow: ellipsis;
+	.avatar {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+	.is-blurred {
+		scale: 125%;
+		filter: blur(4px);
+	}
 
-			.name-wrapper:hover & {
-				text-decoration: underline;
-			}
+	.name-wrapper {
+		display: block;
+		flex-grow: 1;
+		max-width: 100%;
+		overflow: hidden;
+		color: inherit;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+	.display-name-wrapper {
+		overflow: hidden;
+		text-overflow: ellipsis;
+
+		.name-wrapper:hover & {
+			text-decoration: underline;
 		}
-		.display-name {
-			color: var(--text-primary);
-			font-weight: 700;
-		}
-		.handle {
-			display: block;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-		}
+	}
+	.display-name {
+		color: var(--text-primary);
+		font-weight: 700;
+	}
+	.handle {
+		display: block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 
 	.logo {

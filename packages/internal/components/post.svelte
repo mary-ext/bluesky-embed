@@ -3,6 +3,7 @@
 
 	import { getPostUrl, getProfileUrl } from '../utils/bsky-url';
 	import { formatLongDate, formatShortDate } from '../utils/date';
+	import { findLabel } from '../utils/labels';
 	import { parseAtUri } from '../utils/syntax/at-url';
 
 	import Embeds from './embeds/embeds.svelte';
@@ -22,6 +23,8 @@
 
 	const record = post.record as AppBskyFeedPost.Record;
 	const postUrl = getPostUrl(author.did, parseAtUri(post.uri).rkey);
+
+	const isAuthorBlurred = !!findLabel(author.labels, author.did);
 </script>
 
 <div class="post">
@@ -37,7 +40,12 @@
 	<div class="aside">
 		<a target="_blank" href={authorUrl} class="avatar-wrapper">
 			{#if author.avatar}
-				<img loading="lazy" src={author.avatar} alt="" class="avatar" />
+				<img
+					loading="lazy"
+					src={author.avatar}
+					alt=""
+					class={`avatar` + (isAuthorBlurred ? ` is-blurred` : ``)}
+				/>
 			{/if}
 		</a>
 
@@ -123,6 +131,10 @@
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+	}
+	.is-blurred {
+		scale: 125%;
+		filter: blur(4px);
 	}
 
 	.line {

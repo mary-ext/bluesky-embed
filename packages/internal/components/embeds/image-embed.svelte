@@ -26,12 +26,12 @@
 					{@render Image(images[0])}
 				</div>
 				<div class="item wide">
-					{@render Image(images[1])}
+					{@render Image(images[2])}
 				</div>
 			</div>
 			<div class="col">
 				<div class="item wide">
-					{@render Image(images[2])}
+					{@render Image(images[1])}
 				</div>
 				<div class="item wide">
 					{@render Image(images[3])}

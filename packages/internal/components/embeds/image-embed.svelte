@@ -5,9 +5,10 @@
 		embed: AppBskyEmbedImages.View;
 		borderless?: boolean;
 		standalone?: boolean;
+		blur?: boolean;
 	}
 
-	const { embed, borderless, standalone }: Props = $props();
+	const { embed, borderless, standalone, blur }: Props = $props();
 
 	const images = embed.images;
 	const length = images.length;
@@ -84,7 +85,7 @@
 </div>
 
 {#snippet Image(image: AppBskyEmbedImages.ViewImage)}
-	<img loading="lazy" src={image.thumb} alt={image.alt} class="image" />
+	<img loading="lazy" src={image.thumb} alt={image.alt} class={`image` + (blur ? ` is-blurred` : ``)} />
 {/snippet}
 
 <style>
@@ -120,6 +121,7 @@
 		position: relative;
 		flex-grow: 1;
 		flex-shrink: 0;
+		overflow: hidden;
 	}
 
 	.single-item {
@@ -146,6 +148,10 @@
 		height: 100%;
 		object-fit: cover;
 		font-size: 0px;
+	}
+	.is-blurred {
+		scale: 125%;
+		filter: blur(24px);
 	}
 
 	.placeholder {

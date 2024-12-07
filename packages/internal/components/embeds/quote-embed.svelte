@@ -35,6 +35,7 @@
 
 	import { getPostUrl } from '../../utils/bsky-url';
 	import { formatShortDate } from '../../utils/date';
+	import { findLabel } from '../../utils/labels';
 	import { parseAtUri } from '../../utils/syntax/at-url';
 
 	import ImageEmbed from './image-embed.svelte';
@@ -58,6 +59,8 @@
 	const video = getPostVideo(embed);
 
 	const postUrl = getPostUrl(author.did, parseAtUri(quote.uri).rkey);
+
+	const isMediaBlurred = !!findLabel(quote.labels, author.did);
 </script>
 
 <a target="_blank" href={postUrl} class="quote-embed">
@@ -90,11 +93,11 @@
 			{#if !large}
 				{#if image}
 					<div class="aside">
-						<ImageEmbed embed={image} />
+						<ImageEmbed embed={image} blur={isMediaBlurred} />
 					</div>
 				{:else if video}
 					<div class="aside">
-						<VideoEmbed embed={video} />
+						<VideoEmbed embed={video} blur={isMediaBlurred} />
 					</div>
 				{/if}
 			{/if}
@@ -107,9 +110,9 @@
 
 	{#if large || !text}
 		{#if image}
-			<ImageEmbed embed={image} borderless />
+			<ImageEmbed embed={image} borderless blur={isMediaBlurred} />
 		{:else if video}
-			<VideoEmbed embed={video} borderless />
+			<VideoEmbed embed={video} borderless blur={isMediaBlurred} />
 		{/if}
 	{/if}
 </a>

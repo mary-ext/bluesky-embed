@@ -27,7 +27,10 @@
 		Brand,
 	} from '@atcute/client/lexicons';
 
+	import { findLabel } from '../../utils/labels';
 	import { parseAtUri } from '../../utils/syntax/at-url';
+
+	import ContentHider from '../content-hider.svelte';
 
 	import ExternalEmbed from './external-embed.svelte';
 	import FeedEmbed from './feed-embed.svelte';
@@ -62,15 +65,19 @@
 </div>
 
 {#snippet Media(embed: MediaEmbed)}
-	{#if embed.$type === 'app.bsky.embed.external#view'}
-		<ExternalEmbed {embed} />
-	{:else if embed.$type === 'app.bsky.embed.images#view'}
-		<ImageEmbed {embed} standalone />
-	{:else if embed.$type === 'app.bsky.embed.video#view'}
-		<VideoEmbed {post} {embed} standalone />
-	{:else}
-		{@render Message(`Unsupported media embed`)}
-	{/if}
+	{@const warning = post && findLabel(post.labels, post.author.did)}
+
+	<ContentHider {warning}>
+		{#if embed.$type === 'app.bsky.embed.external#view'}
+			<ExternalEmbed {embed} />
+		{:else if embed.$type === 'app.bsky.embed.images#view'}
+			<ImageEmbed {embed} standalone />
+		{:else if embed.$type === 'app.bsky.embed.video#view'}
+			<VideoEmbed {post} {embed} standalone />
+		{:else}
+			{@render Message(`Unsupported media embed`)}
+		{/if}
+	</ContentHider>
 {/snippet}
 
 {#snippet Record(embed: RecordEmbed)}

@@ -9,9 +9,10 @@
 		embed: AppBskyEmbedVideo.View;
 		borderless?: boolean;
 		standalone?: boolean;
+		blur?: boolean;
 	}
 
-	const { post, embed: video, borderless = false, standalone = false }: Props = $props();
+	const { post, embed: video, borderless, standalone, blur }: Props = $props();
 
 	const ratio = standalone && video.aspectRatio;
 
@@ -38,7 +39,7 @@
 {/if}
 
 {#snippet Content()}
-	<img loading="lazy" src={video.thumbnail} alt="" class="thumbnail" />
+	<img loading="lazy" src={video.thumbnail} alt="" class={`thumbnail` + (blur ? ` is-blurred` : ``)} />
 
 	{#if ratio}
 		<div class="placeholder"></div>
@@ -82,6 +83,11 @@
 		height: 100%;
 		object-fit: contain;
 	}
+	.is-blurred {
+		scale: 125%;
+		filter: blur(24px);
+	}
+
 	.placeholder {
 		width: 100vw;
 		height: 100vh;

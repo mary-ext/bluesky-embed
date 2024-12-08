@@ -45,8 +45,8 @@ importers:
         version: 2.0.6
     devDependencies:
       '@preact/preset-vite':
-        specifier: ^2.9.2
-        version: 2.9.2(@babel/core@7.26.0)(preact@10.25.1)(vite@6.0.3(@types/node@22.10.1))
+        specifier: ^2.9.3
+        version: 2.9.3(@babel/core@7.26.0)(preact@10.25.1)(vite@6.0.3(@types/node@22.10.1))
       '@tsconfig/svelte':
         specifier: ^5.0.4
         version: 5.0.4
@@ -143,8 +143,8 @@ importers:
         version: 10.25.1
     devDependencies:
       '@preact/preset-vite':
-        specifier: ^2.9.2
-        version: 2.9.2(@babel/core@7.26.0)(preact@10.25.1)(vite@6.0.3(@types/node@22.10.1))
+        specifier: ^2.9.3
+        version: 2.9.3(@babel/core@7.26.0)(preact@10.25.1)(vite@6.0.3(@types/node@22.10.1))
       vite:
         specifier: ^6.0.3
         version: 6.0.3(@types/node@22.10.1)
@@ -433,8 +433,8 @@ packages:
   '@microsoft/tsdoc@0.15.1':
     resolution: {integrity: sha512-4aErSrCR/On/e5G2hDP0wjooqDdauzEbIq8hIkIe5pXV0rtWJZvdCEKL0ykZxex+IxIwBp0eGeV48hQN07dXtw==}
 
-  '@preact/preset-vite@2.9.2':
-    resolution: {integrity: sha512-Gtp0pPd4s/bZiPAvn4Lhd/on5YZXd/AaXoO03MMtLTmH7nsH3BuXFZnBqvXpqozBDthjxwDWwGEJcf129ctY+g==}
+  '@preact/preset-vite@2.9.3':
+    resolution: {integrity: sha512-uVDSKsFnPa/bmRTAcPiYpTvC04T1lhIH2ho3CJZLYibwcwliElS/i64iyATZkgR4DJxSc/JwOCSQS4IF/a03OQ==}
     peerDependencies:
       '@babel/core': 7.x
       vite: 2.x || 3.x || 4.x || 5.x || 6.x
@@ -1417,7 +1417,7 @@ snapshots:
 
   '@microsoft/tsdoc@0.15.1': {}
 
-  '@preact/preset-vite@2.9.2(@babel/core@7.26.0)(preact@10.25.1)(vite@6.0.3(@types/node@22.10.1))':
+  '@preact/preset-vite@2.9.3(@babel/core@7.26.0)(preact@10.25.1)(vite@6.0.3(@types/node@22.10.1))':
     dependencies:
       '@babel/code-frame': 7.26.2
       '@babel/core': 7.26.0

@@ -32,7 +32,7 @@
 		"@atcute/client": "^2.0.6"
 	},
 	"devDependencies": {
-		"@preact/preset-vite": "^2.9.2",
+		"@preact/preset-vite": "^2.9.3",
 		"@tsconfig/svelte": "^5.0.4",
 		"@types/node": "^22.10.1",
 		"internal": "workspace:^",

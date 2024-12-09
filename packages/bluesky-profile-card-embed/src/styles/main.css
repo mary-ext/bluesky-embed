@@ -1,0 +1,8 @@
+@import './normalize.css';
+
+.app {
+	margin: 0 auto;
+	padding: 36px 16px;
+	width: 100%;
+	max-width: calc(550px + (16 * 2px));
+}

@@ -2,6 +2,7 @@ packages:
   - packages/internal
   - packages/site
   - packages/bluesky-post-embed
+  - packages/bluesky-profile-card-embed
   - packages/bluesky-profile-feed-embed
 
 catalog:

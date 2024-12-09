@@ -1,0 +1,45 @@
+{
+	"type": "module",
+	"name": "bluesky-profile-card-embed",
+	"description": "Custom element for embedding Bluesky profile cards",
+	"version": "1.0.0",
+	"author": "externdefs",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mary-ext/bluesky-embed",
+		"directory": "packages/bluesky-profile-card-embed"
+	},
+	"files": [
+		"dist/",
+		"themes/"
+	],
+	"exports": {
+		".": "./dist/wc.js",
+		"./core": "./dist/core.js",
+		"./style.css": "./dist/core.css",
+		"./themes/*": "./themes/*"
+	},
+	"scripts": {
+		"dev": "vite",
+		"build": "pnpm run check && vite build && rsync -aHAX --delete ../../themes/ themes/",
+		"check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
+		"prepack": "pnpm run build"
+	},
+	"dependencies": {
+		"@atcute/bluesky": "^1.0.9",
+		"@atcute/bluesky-richtext-parser": "^1.0.7",
+		"@atcute/client": "^2.0.6"
+	},
+	"devDependencies": {
+		"@preact/preset-vite": "^2.9.3",
+		"@tsconfig/svelte": "^5.0.4",
+		"@types/node": "^22.10.1",
+		"internal": "workspace:^",
+		"preact": "^10.25.1",
+		"svelte": "catalog:",
+		"svelte-check": "^4.1.1",
+		"vite": "^6.0.3",
+		"vite-plugin-dts": "^4.3.0"
+	}
+}

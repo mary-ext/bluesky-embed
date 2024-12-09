@@ -1,0 +1,81 @@
+# &lt;bluesky-profile-card-embed>
+
+A custom element for embedding Bluesky profile cards.
+
+## Installation
+
+### via npm
+
+```
+npm install bluesky-profile-card-embed
+```
+
+then, import the package on your app.
+
+```js
+import 'bluesky-profile-card-embed';
+
+import 'bluesky-profile-card-embed/style.css';
+import 'bluesky-profile-card-embed/themes/light.css';
+```
+
+## Usage
+
+```html
+<bluesky-profile-card src="did:plc:2gkh62xvzokhlf6li4ol3b3d">
+	<blockquote class="bluesky-post-fallback">
+		<p dir="auto">angel mode</p>
+		— Paul Frazee (@pfrazee.com)
+		<a href="https://bsky.app/profile/did:plc:ragtjsm2j2vknwkz3zp4oxrd/post/3kj2umze7zj2n"
+			>January 16, 2024 at 9:11 AM</a
+		>
+	</blockquote>
+</bluesky-profile-card>
+```
+
+### Attributes
+
+- `actor` **Required**  
+  DID or handle of the account
+- `allow-unauthenticated` **Optional**  
+  Whether to allow unauthenticated viewing
+- `service-uri` **Optional**  
+  URL to an AppView service, defaults to `https://public.api.bsky.app`
+
+### Events
+
+- `loaded`  
+  Fired when the embed has successfully loaded the post
+- `error`  
+  Fired when the embed fails to load the post
+
+## SSR usage
+
+The embeds are powered by a static HTML renderer, this renderer can be used directly in your
+server-rendering framework of choice for a zero-JS experience.
+
+```tsx
+import { fetchProfileCard, renderProfileCard } from 'bluesky-profile-card-embed/core';
+
+import 'bluesky-profile-card-embed/style.css';
+import 'bluesky-profile-card-embed/themes/light.css';
+
+// fetch the post
+const controller = new AbortController();
+const data = await fetchPost({
+	actor: `did:plc:ragtjsm2j2vknwkz3zp4oxrd`,
+	signal: controller.signal,
+});
+
+// render the post
+const html = renderProfileCard(data);
+return (
+	<bluesky-profile-card
+		actor={data.profile?.did}
+		dangerouslySetInnerHTML={{ __html: html }}
+	></bluesky-post>
+);
+```
+
+Check out examples for [Astro](https://github.com/mary-ext/bluesky-embed-astro) and
+[SvelteKit](https://github.com/mary-ext/bluesky-embed-sveltekit).

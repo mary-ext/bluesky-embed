@@ -72,6 +72,46 @@ importers:
         specifier: ^4.3.0
         version: 4.3.0(@types/node@22.10.1)(rollup@4.28.1)(typescript@5.7.2)(vite@6.0.3(@types/node@22.10.1))
 
+  packages/bluesky-profile-card-embed:
+    dependencies:
+      '@atcute/bluesky':
+        specifier: ^1.0.9
+        version: 1.0.9(@atcute/client@2.0.6)
+      '@atcute/bluesky-richtext-parser':
+        specifier: ^1.0.7
+        version: 1.0.7
+      '@atcute/client':
+        specifier: ^2.0.6
+        version: 2.0.6
+    devDependencies:
+      '@preact/preset-vite':
+        specifier: ^2.9.3
+        version: 2.9.3(@babel/core@7.26.0)(preact@10.25.1)(vite@6.0.3(@types/node@22.10.1))
+      '@tsconfig/svelte':
+        specifier: ^5.0.4
+        version: 5.0.4
+      '@types/node':
+        specifier: ^22.10.1
+        version: 22.10.1
+      internal:
+        specifier: workspace:^
+        version: link:../internal
+      preact:
+        specifier: ^10.25.1
+        version: 10.25.1
+      svelte:
+        specifier: 'catalog:'
+        version: 5.8.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
+      svelte-check:
+        specifier: ^4.1.1
+        version: 4.1.1(picomatch@4.0.2)(svelte@5.8.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(typescript@5.7.2)
+      vite:
+        specifier: ^6.0.3
+        version: 6.0.3(@types/node@22.10.1)
+      vite-plugin-dts:
+        specifier: ^4.3.0
+        version: 4.3.0(@types/node@22.10.1)(rollup@4.28.1)(typescript@5.7.2)(vite@6.0.3(@types/node@22.10.1))
+
   packages/bluesky-profile-feed-embed:
     dependencies:
       '@atcute/bluesky':
@@ -111,6 +151,9 @@ importers:
       '@atcute/bluesky':
         specifier: ^1.0.9
         version: 1.0.9(@atcute/client@2.0.6)
+      '@atcute/bluesky-richtext-parser':
+        specifier: ^1.0.7
+        version: 1.0.7
       '@atcute/bluesky-richtext-segmenter':
         specifier: ^1.0.5
         version: 1.0.5(@atcute/bluesky@1.0.9(@atcute/client@2.0.6))(@atcute/client@2.0.6)
@@ -154,6 +197,9 @@ packages:
   '@ampproject/remapping@2.3.0':
     resolution: {integrity: sha512-30iZtAPgz+LTIYoeivqYo853f02jBYSd5uGnGpkFV0M3xOt9aN73erkgYAmZU43x4VfqcnLxW9Kpg3R5LC4YYw==}
     engines: {node: '>=6.0.0'}
+
+  '@atcute/bluesky-richtext-parser@1.0.7':
+    resolution: {integrity: sha512-nOvU699OXiGMbyswao7JJnY0C9WkwE7PVC/m5WWt0UN9fsXSOor9IZWw+v9SATp+94BTJoG38XyUomUaJnoQRA==}
 
   '@atcute/bluesky-richtext-segmenter@1.0.5':
     resolution: {integrity: sha512-D0FfmJVwppky9naL1OGKcQjtgO0lDLhkG4iCQHpShuHhEZ9FUdf3eUb/eQpVRNJGaJ4ShjEOHA6FlAizcjMkGQ==}
@@ -1154,6 +1200,8 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
+
+  '@atcute/bluesky-richtext-parser@1.0.7': {}
 
   '@atcute/bluesky-richtext-segmenter@1.0.5(@atcute/bluesky@1.0.9(@atcute/client@2.0.6))(@atcute/client@2.0.6)':
     dependencies:

@@ -23,13 +23,13 @@ import 'bluesky-profile-card-embed/themes/light.css';
 
 ```html
 <bluesky-profile-card src="did:plc:2gkh62xvzokhlf6li4ol3b3d">
-	<blockquote class="bluesky-post-fallback">
-		<p dir="auto">angel mode</p>
-		— Paul Frazee (@pfrazee.com)
-		<a href="https://bsky.app/profile/did:plc:ragtjsm2j2vknwkz3zp4oxrd/post/3kj2umze7zj2n"
-			>January 16, 2024 at 9:11 AM</a
-		>
-	</blockquote>
+	<a
+		target="_blank"
+		href="https://bsky.app/profile/did:plc:2gkh62xvzokhlf6li4ol3b3d"
+		class="bluesky-profile-card-fallback"
+	>
+		@patak.dev's Bluesky profile
+	</a>
 </bluesky-profile-card>
 ```
 

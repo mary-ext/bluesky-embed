@@ -45,9 +45,9 @@ import 'bluesky-profile-card-embed/themes/light.css';
 ### Events
 
 - `loaded`  
-  Fired when the embed has successfully loaded the post
+  Fired when the embed has successfully loaded the profile card
 - `error`  
-  Fired when the embed fails to load the post
+  Fired when the embed fails to load the profile card
 
 ## SSR usage
 

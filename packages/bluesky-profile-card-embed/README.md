@@ -60,20 +60,20 @@ import { fetchProfileCard, renderProfileCard } from 'bluesky-profile-card-embed/
 import 'bluesky-profile-card-embed/style.css';
 import 'bluesky-profile-card-embed/themes/light.css';
 
-// fetch the post
+// fetch the profile
 const controller = new AbortController();
-const data = await fetchPost({
+const data = await fetchProfileCard({
 	actor: `did:plc:ragtjsm2j2vknwkz3zp4oxrd`,
 	signal: controller.signal,
 });
 
-// render the post
+// render the profile
 const html = renderProfileCard(data);
 return (
 	<bluesky-profile-card
 		actor={data.profile?.did}
 		dangerouslySetInnerHTML={{ __html: html }}
-	></bluesky-post>
+	></bluesky-profile-card>
 );
 ```
 

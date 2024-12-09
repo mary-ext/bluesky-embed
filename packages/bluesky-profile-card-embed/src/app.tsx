@@ -29,12 +29,12 @@ const App = () => {
 		};
 	}, [actor]);
 
-	return <div class="app">{state && <BlueskyPost data={state.data} />}</div>;
+	return <div class="app">{state && <BlueskyProfileCard data={state.data} />}</div>;
 };
 
 export default App;
 
-const BlueskyPost = ({ data }: { data: ProfileCardData }) => {
+const BlueskyProfileCard = ({ data }: { data: ProfileCardData }) => {
 	const html = useMemo(() => renderProfileCard(data), [data, renderProfileCard]);
 
 	return (

@@ -20,11 +20,6 @@ export interface ProfileCardFetchOptions {
 	 */
 	signal?: AbortSignal;
 	/**
-	 * Include pinned posts
-	 * @default false
-	 */
-	includePins?: boolean;
-	/**
 	 * Allow unauthenticated viewing
 	 * @default false
 	 */

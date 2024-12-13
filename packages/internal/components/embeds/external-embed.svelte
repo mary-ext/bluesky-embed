@@ -73,9 +73,14 @@
 
 	.thumbnail {
 		display: block;
+		border-bottom: 1px solid var(--divider);
 		background: #000000;
 		aspect-ratio: 1.91;
 		width: 100%;
+
+		.external-embed:hover & {
+			border-color: var(--divider-hover);
+		}
 	}
 
 	.meta {

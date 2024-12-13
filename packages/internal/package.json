@@ -24,7 +24,7 @@
 		}
 	},
 	"devDependencies": {
-		"@atcute/bluesky": "^1.0.9",
+		"@atcute/bluesky": "^1.0.10",
 		"@atcute/bluesky-richtext-parser": "^1.0.7",
 		"@atcute/bluesky-richtext-segmenter": "^1.0.5",
 		"@atcute/client": "^2.0.6",

@@ -27,16 +27,16 @@
 		"prepack": "pnpm run build"
 	},
 	"dependencies": {
-		"@atcute/bluesky": "^1.0.9",
+		"@atcute/bluesky": "^1.0.10",
 		"@atcute/bluesky-richtext-parser": "^1.0.7",
 		"@atcute/client": "^2.0.6"
 	},
 	"devDependencies": {
 		"@preact/preset-vite": "^2.9.3",
 		"@tsconfig/svelte": "^5.0.4",
-		"@types/node": "^22.10.1",
+		"@types/node": "^22.10.2",
 		"internal": "workspace:^",
-		"preact": "^10.25.1",
+		"preact": "^10.25.2",
 		"svelte": "catalog:",
 		"svelte-check": "^4.1.1",
 		"vite": "^6.0.3",

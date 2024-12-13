@@ -6,4 +6,4 @@ packages:
   - packages/bluesky-profile-feed-embed
 
 catalog:
-  svelte: ^5.8.1
+  svelte: ^5.12.0

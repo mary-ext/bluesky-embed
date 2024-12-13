@@ -1,3 +1,7 @@
+<script lang="ts" module>
+	const DEFAULT_RATIO = { width: 16, height: 9 };
+</script>
+
 <script lang="ts">
 	import type { AppBskyEmbedImages } from '@atcute/client/lexicons';
 
@@ -68,7 +72,7 @@
 			</div>
 		</div>
 	{:else if length === 1}
-		{@const ratio = standalone && images[0].aspectRatio}
+		{@const ratio = standalone && (images[0].aspectRatio || DEFAULT_RATIO)}
 
 		<div
 			class={`single-item tl tr bl br` + (ratio ? ` is-standalone` : ``)}

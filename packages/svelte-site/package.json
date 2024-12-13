@@ -1,0 +1,30 @@
+{
+	"name": "svelte-site",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
+		"publish": "pnpm run build && ./scripts/publish.sh"
+	},
+	"dependencies": {
+		"@atcute/bluesky": "^1.0.9",
+		"@atcute/client": "^2.0.6",
+		"bluesky-post-embed": "workspace:^",
+		"bluesky-profile-card-embed": "workspace:^",
+		"bluesky-profile-feed-embed": "workspace:^",
+		"internal": "workspace:^"
+	},
+	"devDependencies": {
+		"@sveltejs/vite-plugin-svelte": "^5.0.1",
+		"@tsconfig/svelte": "^5.0.4",
+		"svelte": "^5.11.2",
+		"svelte-check": "^4.1.1",
+		"terser": "^5.37.0",
+		"tslib": "^2.8.1",
+		"vite": "^6.0.3"
+	}
+}

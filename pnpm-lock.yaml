@@ -167,31 +167,6 @@ importers:
         specifier: 'catalog:'
         version: 5.8.1(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
 
-  packages/site:
-    dependencies:
-      '@atcute/client':
-        specifier: ^2.0.6
-        version: 2.0.6
-      bluesky-post-embed:
-        specifier: workspace:^
-        version: link:../bluesky-post-embed
-      bluesky-profile-feed-embed:
-        specifier: workspace:^
-        version: link:../bluesky-profile-feed-embed
-      internal:
-        specifier: workspace:^
-        version: link:../internal
-      preact:
-        specifier: ^10.25.1
-        version: 10.25.1
-    devDependencies:
-      '@preact/preset-vite':
-        specifier: ^2.9.3
-        version: 2.9.3(@babel/core@7.26.0)(preact@10.25.1)(vite@6.0.3(@types/node@22.10.1)(terser@5.37.0))
-      vite:
-        specifier: ^6.0.3
-        version: 6.0.3(@types/node@22.10.1)(terser@5.37.0)
-
   packages/svelte-site:
     dependencies:
       '@atcute/bluesky':

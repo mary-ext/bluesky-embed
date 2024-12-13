@@ -1,6 +1,5 @@
 packages:
   - packages/internal
-  - packages/site
   - packages/svelte-site
   - packages/bluesky-post-embed
   - packages/bluesky-profile-card-embed

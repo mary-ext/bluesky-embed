@@ -11,7 +11,7 @@
 		"publish": "pnpm run build && ./scripts/publish.sh"
 	},
 	"dependencies": {
-		"@atcute/bluesky": "^1.0.10",
+		"@atcute/bluesky": "^1.0.11",
 		"@atcute/client": "^2.0.6",
 		"bluesky-post-embed": "workspace:^",
 		"bluesky-profile-card-embed": "workspace:^",
@@ -19,9 +19,9 @@
 		"internal": "workspace:^"
 	},
 	"devDependencies": {
-		"@sveltejs/vite-plugin-svelte": "^5.0.2",
+		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@tsconfig/svelte": "^5.0.4",
-		"svelte": "^5.12.0",
+		"svelte": "^5.14.4",
 		"svelte-check": "^4.1.1",
 		"terser": "^5.37.0",
 		"tslib": "^2.8.1",

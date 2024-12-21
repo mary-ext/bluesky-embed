@@ -22,7 +22,7 @@ import 'bluesky-profile-card-embed/themes/light.css';
 ## Usage
 
 ```html
-<bluesky-profile-card src="did:plc:2gkh62xvzokhlf6li4ol3b3d">
+<bluesky-profile-card actor="did:plc:2gkh62xvzokhlf6li4ol3b3d">
 	<a
 		target="_blank"
 		href="https://bsky.app/profile/did:plc:2gkh62xvzokhlf6li4ol3b3d"

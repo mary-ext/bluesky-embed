@@ -36,10 +36,10 @@
 		"@tsconfig/svelte": "^5.0.4",
 		"@types/node": "^22.10.2",
 		"internal": "workspace:^",
-		"preact": "^10.25.3",
+		"preact": "^10.25.4",
 		"svelte": "catalog:",
 		"svelte-check": "^4.1.1",
-		"vite": "^6.0.5",
+		"vite": "^6.0.6",
 		"vite-plugin-dts": "^4.4.0"
 	}
 }

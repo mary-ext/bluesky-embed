@@ -46,13 +46,13 @@ importers:
     devDependencies:
       '@preact/preset-vite':
         specifier: ^2.9.3
-        version: 2.9.3(@babel/core@7.26.0)(preact@10.25.4)(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))
+        version: 2.9.3(@babel/core@7.26.0)(preact@10.25.4)(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))
       '@tsconfig/svelte':
         specifier: ^5.0.4
         version: 5.0.4
       '@types/node':
-        specifier: ^22.10.2
-        version: 22.10.2
+        specifier: ^22.10.3
+        version: 22.10.3
       internal:
         specifier: workspace:^
         version: link:../internal
@@ -67,10 +67,10 @@ importers:
         version: 4.1.1(picomatch@4.0.2)(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(typescript@5.7.2)
       vite:
         specifier: ^6.0.6
-        version: 6.0.6(@types/node@22.10.2)(terser@5.37.0)
+        version: 6.0.6(@types/node@22.10.3)(terser@5.37.0)
       vite-plugin-dts:
         specifier: ^4.4.0
-        version: 4.4.0(@types/node@22.10.2)(rollup@4.29.1)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))
+        version: 4.4.0(@types/node@22.10.3)(rollup@4.29.1)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))
 
   packages/bluesky-profile-card-embed:
     dependencies:
@@ -86,13 +86,13 @@ importers:
     devDependencies:
       '@preact/preset-vite':
         specifier: ^2.9.3
-        version: 2.9.3(@babel/core@7.26.0)(preact@10.25.4)(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))
+        version: 2.9.3(@babel/core@7.26.0)(preact@10.25.4)(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))
       '@tsconfig/svelte':
         specifier: ^5.0.4
         version: 5.0.4
       '@types/node':
-        specifier: ^22.10.2
-        version: 22.10.2
+        specifier: ^22.10.3
+        version: 22.10.3
       internal:
         specifier: workspace:^
         version: link:../internal
@@ -107,10 +107,10 @@ importers:
         version: 4.1.1(picomatch@4.0.2)(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(typescript@5.7.2)
       vite:
         specifier: ^6.0.6
-        version: 6.0.6(@types/node@22.10.2)(terser@5.37.0)
+        version: 6.0.6(@types/node@22.10.3)(terser@5.37.0)
       vite-plugin-dts:
         specifier: ^4.4.0
-        version: 4.4.0(@types/node@22.10.2)(rollup@4.29.1)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))
+        version: 4.4.0(@types/node@22.10.3)(rollup@4.29.1)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))
 
   packages/bluesky-profile-feed-embed:
     dependencies:
@@ -128,8 +128,8 @@ importers:
         specifier: ^5.0.4
         version: 5.0.4
       '@types/node':
-        specifier: ^22.10.2
-        version: 22.10.2
+        specifier: ^22.10.3
+        version: 22.10.3
       internal:
         specifier: workspace:^
         version: link:../internal
@@ -141,10 +141,10 @@ importers:
         version: 4.1.1(picomatch@4.0.2)(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(typescript@5.7.2)
       vite:
         specifier: ^6.0.6
-        version: 6.0.6(@types/node@22.10.2)(terser@5.37.0)
+        version: 6.0.6(@types/node@22.10.3)(terser@5.37.0)
       vite-plugin-dts:
         specifier: ^4.4.0
-        version: 4.4.0(@types/node@22.10.2)(rollup@4.29.1)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))
+        version: 4.4.0(@types/node@22.10.3)(rollup@4.29.1)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))
 
   packages/internal:
     devDependencies:
@@ -190,7 +190,7 @@ importers:
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
         specifier: ^5.0.3
-        version: 5.0.3(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))
+        version: 5.0.3(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))
       '@tsconfig/svelte':
         specifier: ^5.0.4
         version: 5.0.4
@@ -208,7 +208,7 @@ importers:
         version: 2.8.1
       vite:
         specifier: ^6.0.6
-        version: 6.0.6(@types/node@22.10.2)(terser@5.37.0)
+        version: 6.0.6(@types/node@22.10.3)(terser@5.37.0)
 
 packages:
 
@@ -683,8 +683,8 @@ packages:
   '@types/estree@1.0.6':
     resolution: {integrity: sha512-AYnb1nQyY49te+VRAVgmzfcgjYS91mY5P0TKUDCLEM+gNnA+3T6rWITXRLYCpahpqSQbN5cE+gHpnPyXjHWxcw==}
 
-  '@types/node@22.10.2':
-    resolution: {integrity: sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==}
+  '@types/node@22.10.3':
+    resolution: {integrity: sha512-DifAyw4BkrufCILvD3ucnuN8eydUfc/C1GlyrnI+LK6543w5/L3VeVgf05o3B4fqSXP1dKYLOZsKfutpxPzZrw==}
 
   '@volar/language-core@2.4.11':
     resolution: {integrity: sha512-lN2C1+ByfW9/JRPpqScuZt/4OrUUse57GLI6TbLgTIqBVemdl1wNcZ1qYGEo2+Gw8coYLgCy7SuKqn6IrQcQgg==}
@@ -1518,23 +1518,23 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
 
-  '@microsoft/api-extractor-model@7.30.1(@types/node@22.10.2)':
+  '@microsoft/api-extractor-model@7.30.1(@types/node@22.10.3)':
     dependencies:
       '@microsoft/tsdoc': 0.15.1
       '@microsoft/tsdoc-config': 0.17.1
-      '@rushstack/node-core-library': 5.10.1(@types/node@22.10.2)
+      '@rushstack/node-core-library': 5.10.1(@types/node@22.10.3)
     transitivePeerDependencies:
       - '@types/node'
 
-  '@microsoft/api-extractor@7.48.1(@types/node@22.10.2)':
+  '@microsoft/api-extractor@7.48.1(@types/node@22.10.3)':
     dependencies:
-      '@microsoft/api-extractor-model': 7.30.1(@types/node@22.10.2)
+      '@microsoft/api-extractor-model': 7.30.1(@types/node@22.10.3)
       '@microsoft/tsdoc': 0.15.1
       '@microsoft/tsdoc-config': 0.17.1
-      '@rushstack/node-core-library': 5.10.1(@types/node@22.10.2)
+      '@rushstack/node-core-library': 5.10.1(@types/node@22.10.3)
       '@rushstack/rig-package': 0.5.3
-      '@rushstack/terminal': 0.14.4(@types/node@22.10.2)
-      '@rushstack/ts-command-line': 4.23.2(@types/node@22.10.2)
+      '@rushstack/terminal': 0.14.4(@types/node@22.10.3)
+      '@rushstack/ts-command-line': 4.23.2(@types/node@22.10.3)
       lodash: 4.17.21
       minimatch: 3.0.8
       resolve: 1.22.10
@@ -1553,13 +1553,13 @@ snapshots:
 
   '@microsoft/tsdoc@0.15.1': {}
 
-  '@preact/preset-vite@2.9.3(@babel/core@7.26.0)(preact@10.25.4)(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))':
+  '@preact/preset-vite@2.9.3(@babel/core@7.26.0)(preact@10.25.4)(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))':
     dependencies:
       '@babel/code-frame': 7.26.2
       '@babel/core': 7.26.0
       '@babel/plugin-transform-react-jsx': 7.25.9(@babel/core@7.26.0)
       '@babel/plugin-transform-react-jsx-development': 7.25.9(@babel/core@7.26.0)
-      '@prefresh/vite': 2.4.6(preact@10.25.4)(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))
+      '@prefresh/vite': 2.4.6(preact@10.25.4)(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))
       '@rollup/pluginutils': 4.2.1
       babel-plugin-transform-hook-names: 1.0.2(@babel/core@7.26.0)
       debug: 4.4.0
@@ -1568,7 +1568,7 @@ snapshots:
       node-html-parser: 6.1.13
       source-map: 0.7.4
       stack-trace: 1.0.0-pre2
-      vite: 6.0.6(@types/node@22.10.2)(terser@5.37.0)
+      vite: 6.0.6(@types/node@22.10.3)(terser@5.37.0)
     transitivePeerDependencies:
       - preact
       - supports-color
@@ -1581,7 +1581,7 @@ snapshots:
 
   '@prefresh/utils@1.2.0': {}
 
-  '@prefresh/vite@2.4.6(preact@10.25.4)(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))':
+  '@prefresh/vite@2.4.6(preact@10.25.4)(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))':
     dependencies:
       '@babel/core': 7.26.0
       '@prefresh/babel-plugin': 0.5.1
@@ -1589,7 +1589,7 @@ snapshots:
       '@prefresh/utils': 1.2.0
       '@rollup/pluginutils': 4.2.1
       preact: 10.25.4
-      vite: 6.0.6(@types/node@22.10.2)(terser@5.37.0)
+      vite: 6.0.6(@types/node@22.10.3)(terser@5.37.0)
     transitivePeerDependencies:
       - supports-color
 
@@ -1663,7 +1663,7 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.29.1':
     optional: true
 
-  '@rushstack/node-core-library@5.10.1(@types/node@22.10.2)':
+  '@rushstack/node-core-library@5.10.1(@types/node@22.10.3)':
     dependencies:
       ajv: 8.13.0
       ajv-draft-04: 1.0.0(ajv@8.13.0)
@@ -1674,48 +1674,48 @@ snapshots:
       resolve: 1.22.10
       semver: 7.5.4
     optionalDependencies:
-      '@types/node': 22.10.2
+      '@types/node': 22.10.3
 
   '@rushstack/rig-package@0.5.3':
     dependencies:
       resolve: 1.22.10
       strip-json-comments: 3.1.1
 
-  '@rushstack/terminal@0.14.4(@types/node@22.10.2)':
+  '@rushstack/terminal@0.14.4(@types/node@22.10.3)':
     dependencies:
-      '@rushstack/node-core-library': 5.10.1(@types/node@22.10.2)
+      '@rushstack/node-core-library': 5.10.1(@types/node@22.10.3)
       supports-color: 8.1.1
     optionalDependencies:
-      '@types/node': 22.10.2
+      '@types/node': 22.10.3
 
-  '@rushstack/ts-command-line@4.23.2(@types/node@22.10.2)':
+  '@rushstack/ts-command-line@4.23.2(@types/node@22.10.3)':
     dependencies:
-      '@rushstack/terminal': 0.14.4(@types/node@22.10.2)
+      '@rushstack/terminal': 0.14.4(@types/node@22.10.3)
       '@types/argparse': 1.0.38
       argparse: 1.0.10
       string-argv: 0.3.2
     transitivePeerDependencies:
       - '@types/node'
 
-  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0)))(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))':
+  '@sveltejs/vite-plugin-svelte-inspector@4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0)))(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))
+      '@sveltejs/vite-plugin-svelte': 5.0.3(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))
       debug: 4.4.0
       svelte: 5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
-      vite: 6.0.6(@types/node@22.10.2)(terser@5.37.0)
+      vite: 6.0.6(@types/node@22.10.3)(terser@5.37.0)
     transitivePeerDependencies:
       - supports-color
 
-  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))':
+  '@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))':
     dependencies:
-      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0)))(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))
+      '@sveltejs/vite-plugin-svelte-inspector': 4.0.1(@sveltejs/vite-plugin-svelte@5.0.3(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0)))(svelte@5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu))(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))
       debug: 4.4.0
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.17
       svelte: 5.16.0(patch_hash=6qynve6ufonlwufsl6x7wujmdu)
-      vite: 6.0.6(@types/node@22.10.2)(terser@5.37.0)
-      vitefu: 1.0.4(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0))
+      vite: 6.0.6(@types/node@22.10.3)(terser@5.37.0)
+      vitefu: 1.0.4(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0))
     transitivePeerDependencies:
       - supports-color
 
@@ -1725,7 +1725,7 @@ snapshots:
 
   '@types/estree@1.0.6': {}
 
-  '@types/node@22.10.2':
+  '@types/node@22.10.3':
     dependencies:
       undici-types: 6.20.0
 
@@ -2236,9 +2236,9 @@ snapshots:
     dependencies:
       punycode: 2.3.1
 
-  vite-plugin-dts@4.4.0(@types/node@22.10.2)(rollup@4.29.1)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0)):
+  vite-plugin-dts@4.4.0(@types/node@22.10.3)(rollup@4.29.1)(typescript@5.7.2)(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0)):
     dependencies:
-      '@microsoft/api-extractor': 7.48.1(@types/node@22.10.2)
+      '@microsoft/api-extractor': 7.48.1(@types/node@22.10.3)
       '@rollup/pluginutils': 5.1.4(rollup@4.29.1)
       '@volar/typescript': 2.4.11
       '@vue/language-core': 2.1.10(typescript@5.7.2)
@@ -2249,25 +2249,25 @@ snapshots:
       magic-string: 0.30.17
       typescript: 5.7.2
     optionalDependencies:
-      vite: 6.0.6(@types/node@22.10.2)(terser@5.37.0)
+      vite: 6.0.6(@types/node@22.10.3)(terser@5.37.0)
     transitivePeerDependencies:
       - '@types/node'
       - rollup
       - supports-color
 
-  vite@6.0.6(@types/node@22.10.2)(terser@5.37.0):
+  vite@6.0.6(@types/node@22.10.3)(terser@5.37.0):
     dependencies:
       esbuild: 0.24.2
       postcss: 8.4.49
       rollup: 4.29.1
     optionalDependencies:
-      '@types/node': 22.10.2
+      '@types/node': 22.10.3
       fsevents: 2.3.3
       terser: 5.37.0
 
-  vitefu@1.0.4(vite@6.0.6(@types/node@22.10.2)(terser@5.37.0)):
+  vitefu@1.0.4(vite@6.0.6(@types/node@22.10.3)(terser@5.37.0)):
     optionalDependencies:
-      vite: 6.0.6(@types/node@22.10.2)(terser@5.37.0)
+      vite: 6.0.6(@types/node@22.10.3)(terser@5.37.0)
 
   vscode-uri@3.0.8: {}
 

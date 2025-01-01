@@ -34,7 +34,7 @@
 	"devDependencies": {
 		"@preact/preset-vite": "^2.9.3",
 		"@tsconfig/svelte": "^5.0.4",
-		"@types/node": "^22.10.2",
+		"@types/node": "^22.10.3",
 		"internal": "workspace:^",
 		"preact": "^10.25.4",
 		"svelte": "catalog:",

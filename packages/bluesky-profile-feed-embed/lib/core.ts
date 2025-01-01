@@ -62,9 +62,9 @@ export const fetchProfileFeed = async (opts: ProfileFeedFetchOptions): Promise<P
 				signal: opts.signal,
 				params: {
 					actor,
+					filter: 'posts_no_replies',
 					includePins: opts.includePins,
 					limit: 30,
-					filter: 'posts_and_author_threads',
 				},
 			})
 			.catch((err) => {

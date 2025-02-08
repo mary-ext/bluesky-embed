@@ -73,7 +73,7 @@
 							/>
 						</svg>
 					</div>
-					<span class="flex min-w-0">Pinned</span>
+					<span class="main">Pinned</span>
 				</div>
 			{/if}
 		{/if}
@@ -391,8 +391,8 @@
 		.count {
 			padding-right: 8px;
 			overflow: hidden;
-			font-size: 0.8125rem;
-			line-height: 1.25rem;
+			font-size: calc(var(--font-size) * 0.8125);
+			line-height: calc(var(--font-size) * 1.25);
 			text-overflow: ellipsis;
 			white-space: nowrap;
 		}

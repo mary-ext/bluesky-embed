@@ -1,7 +1,7 @@
 .bluesky-embed {
 	--font-size: 16px;
-	--font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif, 'Apple Color Emoji',
-		'Segoe UI Emoji';
+	--font-family:
+		system-ui, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 	--max-feed-height: 600px;
 }
 

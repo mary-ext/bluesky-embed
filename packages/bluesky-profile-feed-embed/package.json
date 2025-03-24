@@ -27,17 +27,17 @@
 		"prepack": "pnpm run build"
 	},
 	"dependencies": {
-		"@atcute/bluesky": "^1.0.11",
+		"@atcute/bluesky": "^1.0.14",
 		"@atcute/bluesky-richtext-segmenter": "^1.0.5",
-		"@atcute/client": "^2.0.6"
+		"@atcute/client": "^2.0.8"
 	},
 	"devDependencies": {
 		"@tsconfig/svelte": "^5.0.4",
-		"@types/node": "^22.10.3",
+		"@types/node": "^22.13.11",
 		"internal": "workspace:^",
 		"svelte": "catalog:",
-		"svelte-check": "^4.1.1",
-		"vite": "^6.0.6",
-		"vite-plugin-dts": "^4.4.0"
+		"svelte-check": "^4.1.5",
+		"vite": "^6.2.2",
+		"vite-plugin-dts": "^4.5.3"
 	}
 }

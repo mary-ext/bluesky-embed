@@ -1,15 +1,19 @@
 diff --git a/src/internal/server/index.js b/src/internal/server/index.js
-index 615a49fbd4c0279b1b4c28c2845293001922307e..13d7cd09da61d418337fd73b08007b549809b049 100644
+index 6098b496c5acbad719c34b0a036fc8451b77c121..7da20e493e47b693f32576ad8b4681fa2b63a9d4 100644
 --- a/src/internal/server/index.js
 +++ b/src/internal/server/index.js
-@@ -94,50 +94,13 @@ export let on_destroy = [];
-  * @param {{ props?: Omit<Props, '$$slots' | '$$events'>; context?: Map<any, any> }} [options]
+@@ -105,57 +105,16 @@ function props_id_generator(prefix) {
   * @returns {RenderOutput}
   */
--export function render(component, options = {}) {
-+export function render(component, options) {
- 	/** @type {Payload} */
--	const payload = { out: '', css: new Set(), head: { title: '', out: '' } };
+ export function render(component, options = {}) {
+-	const uid = props_id_generator(options.idPrefix ? options.idPrefix + '-' : '');
+-	/** @type {Payload} */
+-	const payload = {
+-		out: '',
+-		css: new Set(),
+-		head: { title: '', out: '', css: new Set(), uid },
+-		uid
+-	};
 -
 -	const prev_on_destroy = on_destroy;
 -	on_destroy = [];
@@ -29,7 +33,12 @@ index 615a49fbd4c0279b1b4c28c2845293001922307e..13d7cd09da61d418337fd73b08007b54
 -
 -	// @ts-expect-error
 -	component(payload, options.props ?? {}, {}, {});
--
++	const uid = (() => {
++		var pfx = options.idPrefix ?? 's';
++		var uid = 0;
++		return () => `${pfx}${uid++}`;
++	})();
+ 
 -	if (options.context) {
 -		pop();
 -	}
@@ -43,21 +52,23 @@ index 615a49fbd4c0279b1b4c28c2845293001922307e..13d7cd09da61d418337fd73b08007b54
 -	on_destroy = prev_on_destroy;
 -
 -	let head = payload.head.out + payload.head.title;
--
++	const payload = { out: '', uid };
++	component(payload, options.props ?? {});
+ 
 -	for (const { hash, code } of payload.css) {
 -		head += `<style id="${hash}">${code}</style>`;
 -	}
-+	const payload = { out: '' };
-+	component(payload, options?.props ?? {});
- 
- 	return {
+-
+-	return {
 -		head,
 -		html: payload.out,
-+		head: '',
- 		body: payload.out
- 	};
+-		body: payload.out
+-	};
++	return { body: payload.out };
  }
-@@ -492,12 +455,7 @@ export { await_block as await };
+ 
+ /**
+@@ -493,12 +452,7 @@ export { await_block as await };
  
  /** @param {any} array_like_or_iterator */
  export function ensure_array_like(array_like_or_iterator) {
@@ -72,13 +83,13 @@ index 615a49fbd4c0279b1b4c28c2845293001922307e..13d7cd09da61d418337fd73b08007b54
  
  /**
 diff --git a/src/internal/shared/attributes.js b/src/internal/shared/attributes.js
-index 867d6ba5d37888ecad4c7b7c92e07b96bed92dca..fbe57a65b1d1edb10d6a7555cc32a394c7dedf9b 100644
+index c8758c1d4d4d68cfe3a3ee76c77605ae65285841..92a352784ca26c3404c86294621f8baf06fd2bab 100644
 --- a/src/internal/shared/attributes.js
 +++ b/src/internal/shared/attributes.js
-@@ -22,7 +22,7 @@ const replacements = {
+@@ -23,7 +23,7 @@ const replacements = {
   */
  export function attr(name, value, is_boolean = false) {
- 	if (value == null || (!value && is_boolean) || (value === '' && name === 'class')) return '';
+ 	if (value == null || (!value && is_boolean)) return '';
 -	const normalized = (name in replacements && replacements[name].get(value)) || value;
 +	const normalized = value;
  	const assignment = is_boolean ? '' : `="${escape_html(normalized, true)}"`;

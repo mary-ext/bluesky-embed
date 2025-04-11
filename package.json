@@ -8,7 +8,7 @@
 		"prettier": "^3.5.3",
 		"prettier-plugin-css-order": "^2.1.2",
 		"prettier-plugin-svelte": "^3.3.3",
-		"typescript": "~5.8.2"
+		"typescript": "~5.8.3"
 	},
 	"pnpm": {
 		"patchedDependencies": {

@@ -1,6 +1,7 @@
 import '@atcute/bluesky/lexicons';
 
 import { simpleFetchHandler, XRPC, XRPCError } from '@atcute/client';
+import type { At } from '@atcute/client/lexicons';
 import { render } from 'svelte/server';
 
 import type { PostData } from 'internal/types/post.js';
@@ -44,7 +45,7 @@ export const fetchPost = async (opts: PostFetchOptions): Promise<PostData> => {
 		.get('app.bsky.feed.getPostThread', {
 			signal: opts.signal,
 			params: {
-				uri: opts.uri,
+				uri: opts.uri as At.ResourceUri,
 				parentHeight: !contextless ? 2 : 1,
 				depth: 0,
 			},

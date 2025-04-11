@@ -11,8 +11,8 @@
 		"publish": "pnpm run build && ./scripts/publish.sh"
 	},
 	"dependencies": {
-		"@atcute/bluesky": "^1.0.14",
-		"@atcute/client": "^2.0.8",
+		"@atcute/bluesky": "^2.0.0",
+		"@atcute/client": "^3.0.0",
 		"bluesky-post-embed": "workspace:^",
 		"bluesky-profile-card-embed": "workspace:^",
 		"bluesky-profile-feed-embed": "workspace:^",

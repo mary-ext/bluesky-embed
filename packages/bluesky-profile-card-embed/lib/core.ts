@@ -1,6 +1,7 @@
 import '@atcute/bluesky/lexicons';
 
 import { simpleFetchHandler, XRPC, XRPCError } from '@atcute/client';
+import type { At } from '@atcute/client/lexicons';
 import { render } from 'svelte/server';
 
 import type { ProfileCardData } from 'internal/types/profile-card.js';
@@ -40,7 +41,7 @@ export const fetchProfileCard = async (opts: ProfileCardFetchOptions): Promise<P
 	const { data: profile } = await rpc
 		.get('app.bsky.actor.getProfile', {
 			signal: opts.signal,
-			params: { actor },
+			params: { actor: actor as At.Identifier },
 		})
 		.catch((err) => {
 			if (err instanceof XRPCError) {

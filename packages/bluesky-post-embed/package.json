@@ -27,9 +27,9 @@
 		"prepack": "pnpm run build"
 	},
 	"dependencies": {
-		"@atcute/bluesky": "^1.0.14",
-		"@atcute/bluesky-richtext-segmenter": "^1.0.5",
-		"@atcute/client": "^2.0.8"
+		"@atcute/bluesky": "^2.0.0",
+		"@atcute/bluesky-richtext-segmenter": "^2.0.0",
+		"@atcute/client": "^3.0.0"
 	},
 	"devDependencies": {
 		"@preact/preset-vite": "^2.10.1",

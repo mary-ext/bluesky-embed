@@ -38,7 +38,7 @@ export const LABEL_MAPPING: Record<string, LabelDefinition> = {
 	},
 };
 
-export const findLabel = (labels: Label[] | undefined, authorDid: At.DID): LabelDefinition | undefined => {
+export const findLabel = (labels: Label[] | undefined, authorDid: At.Did): LabelDefinition | undefined => {
 	if (labels?.length) {
 		for (let idx = 0, len = labels.length; idx < len; idx++) {
 			const label = labels[idx];

@@ -1,10 +1,11 @@
 import '@atcute/bluesky/lexicons';
 
 import { simpleFetchHandler, XRPC, XRPCError } from '@atcute/client';
+import type { At } from '@atcute/client/lexicons';
 import { render } from 'svelte/server';
 
-import { DEFAULT_APPVIEW_URL } from 'internal/utils/constants.js';
 import type { ProfileFeedData } from 'internal/types/profile-feed.js';
+import { DEFAULT_APPVIEW_URL } from 'internal/utils/constants.js';
 
 import BlueskyProfileFeed from './bluesky-profile-feed.svelte';
 
@@ -46,7 +47,7 @@ export const fetchProfileFeed = async (opts: ProfileFeedFetchOptions): Promise<P
 		rpc
 			.get('app.bsky.actor.getProfile', {
 				signal: opts.signal,
-				params: { actor },
+				params: { actor: actor as At.Identifier },
 			})
 			.catch((err) => {
 				if (err instanceof XRPCError) {

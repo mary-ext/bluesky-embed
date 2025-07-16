@@ -24,10 +24,10 @@
 		}
 	},
 	"devDependencies": {
-		"@atcute/bluesky": "^2.0.0",
+		"@atcute/bluesky": "^2.1.1",
 		"@atcute/bluesky-richtext-parser": "^1.0.7",
-		"@atcute/bluesky-richtext-segmenter": "^2.0.0",
-		"@atcute/client": "^3.0.0",
+		"@atcute/bluesky-richtext-segmenter": "^2.0.3",
+		"@atcute/client": "^3.1.0",
 		"@tsconfig/svelte": "^5.0.4",
 		"svelte": "catalog:"
 	}

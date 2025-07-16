@@ -38,7 +38,7 @@ export interface ProfileFeedFetchOptions {
 }
 
 export const fetchProfileFeed = async (opts: ProfileFeedFetchOptions): Promise<ProfileFeedData> => {
-	const actor = opts.actor;
+	const actor = opts.actor as At.Identifier;
 	const allowUnauthenticated = opts.allowUnauthenticated ?? false;
 
 	const rpc = new XRPC({ handler: simpleFetchHandler({ service: opts.serviceUri ?? DEFAULT_APPVIEW_URL }) });

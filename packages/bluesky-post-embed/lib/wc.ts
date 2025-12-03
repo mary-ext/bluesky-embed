@@ -1,4 +1,4 @@
-import { fetchPost, renderPost } from './core';
+import { fetchPost, type PostData, renderPost } from './core';
 
 export class BlueskyPost extends HTMLElement {
 	connectedCallback() {
@@ -19,7 +19,15 @@ export class BlueskyPost extends HTMLElement {
 		const contextless = this.getAttribute('contextless') !== null;
 		const allowUnauthenticated = this.getAttribute('allow-unauthenticated') !== null;
 
-		const data = await fetchPost({ uri: src, contextless, allowUnauthenticated, serviceUri });
+		let data: PostData;
+		try {
+			data = await fetchPost({ uri: src, contextless, allowUnauthenticated, serviceUri });
+		} catch (error) {
+			console.warn('Failed to fetch post:', error);
+			// Leave the fallback content in place
+			return;
+		}
+
 		const html = renderPost(data);
 
 		const root = this.shadowRoot;

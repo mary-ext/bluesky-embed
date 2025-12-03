@@ -18,7 +18,15 @@ export class BlueskyProfileCard extends HTMLElement {
 		const serviceUri = this.getAttribute('service-uri') || undefined;
 		const allowUnauthenticated = this.getAttribute('allow-unauthenticated') !== null;
 
-		const data = await fetchProfileCard({ actor, allowUnauthenticated, serviceUri });
+		let data;
+		try {
+			data = await fetchProfileCard({ actor, allowUnauthenticated, serviceUri });
+		} catch (error) {
+			console.warn('Failed to fetch profile card:', error);
+			// Leave the fallback content in place
+			return;
+		}
+
 		const html = renderProfileCard(data);
 
 		const root = this.shadowRoot;

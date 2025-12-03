@@ -18,11 +18,41 @@ export class BlueskyProfileFeed extends HTMLElement {
 		const serviceUri = this.getAttribute('service-uri') || undefined;
 		const allowUnauthenticated = this.getAttribute('allow-unauthenticated') !== null;
 		const includePins = this.getAttribute('include-pins') !== null;
+		const silent = this.getAttribute('silent') !== null;
 
-		const data = await fetchProfileFeed({ actor, allowUnauthenticated, includePins, serviceUri });
+		const data = await fetchProfileFeed({ actor, allowUnauthenticated, includePins, serviceUri }).catch(
+			(error) => {
+				if (silent) {
+					console.warn('Failed to fetch profile feed:', error);
+					return null;
+				}
+				throw error;
+			},
+		);
+
+		if (data === null) {
+			return;
+		}
+
 		const html = renderProfileFeed(data);
 
-		this.innerHTML = html;
+		const root = this.shadowRoot;
+
+		if (!root) {
+			this.innerHTML = html;
+		} else {
+			const template = document.createElement('template');
+			template.innerHTML = html;
+
+			const fragment = template.content;
+			const slot = root.querySelector('slot');
+
+			if (slot) {
+				slot.replaceWith(fragment);
+			} else {
+				root.appendChild(fragment);
+			}
+		}
 	}
 }
 

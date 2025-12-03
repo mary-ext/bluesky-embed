@@ -17,8 +17,20 @@ export class BlueskyProfileCard extends HTMLElement {
 		const actor = this.getAttribute('actor')!;
 		const serviceUri = this.getAttribute('service-uri') || undefined;
 		const allowUnauthenticated = this.getAttribute('allow-unauthenticated') !== null;
+		const silent = this.getAttribute('silent') !== null;
 
-		const data = await fetchProfileCard({ actor, allowUnauthenticated, serviceUri });
+		const data = await fetchProfileCard({ actor, allowUnauthenticated, serviceUri }).catch((error) => {
+			if (silent) {
+				console.warn('Failed to fetch profile card:', error);
+				return null;
+			}
+			throw error;
+		});
+
+		if (data === null) {
+			return;
+		}
+
 		const html = renderProfileCard(data);
 
 		const root = this.shadowRoot;

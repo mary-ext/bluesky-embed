@@ -90,6 +90,9 @@ function svelte(): Plugin {
 				}
 
 				for (const warn of warnings) {
+					if (warn.code === 'state_referenced_locally') {
+						continue;
+					}
 					this.warn(warn);
 				}
 

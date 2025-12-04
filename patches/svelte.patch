@@ -1,74 +1,260 @@
-diff --git a/src/internal/server/index.js b/src/internal/server/index.js
-index 6098b496c5acbad719c34b0a036fc8451b77c121..7da20e493e47b693f32576ad8b4681fa2b63a9d4 100644
---- a/src/internal/server/index.js
-+++ b/src/internal/server/index.js
-@@ -105,57 +105,16 @@ function props_id_generator(prefix) {
-  * @returns {RenderOutput}
+diff --git a/src/compiler/phases/3-transform/server/visitors/AwaitBlock.js b/src/compiler/phases/3-transform/server/visitors/AwaitBlock.js
+index b8d2e421440a0f8e5b12c9cb55ed65ab0f5e7a8a..76bb16136e17cb010069eb7fd4d84cb600ad138c 100644
+--- a/src/compiler/phases/3-transform/server/visitors/AwaitBlock.js
++++ b/src/compiler/phases/3-transform/server/visitors/AwaitBlock.js
+@@ -33,5 +33,5 @@ export function AwaitBlock(node, context) {
+ 		);
+ 	}
+ 
+-	context.state.template.push(statement, block_close);
++	context.state.template.push(statement);
+ }
+diff --git a/src/compiler/phases/3-transform/server/visitors/EachBlock.js b/src/compiler/phases/3-transform/server/visitors/EachBlock.js
+index 3c0a8c167696960efa186179da60c47eca0db2e2..8e96d467f6f20af90226ddb16db383e4e3be70ed 100644
+--- a/src/compiler/phases/3-transform/server/visitors/EachBlock.js
++++ b/src/compiler/phases/3-transform/server/visitors/EachBlock.js
+@@ -47,21 +47,16 @@ export function EachBlock(node, context) {
+ 	);
+ 
+ 	if (node.fallback) {
+-		const open = b.stmt(b.call(b.id('$$renderer.push'), block_open));
+-
+ 		const fallback = /** @type {BlockStatement} */ (context.visit(node.fallback));
+ 
+-		fallback.body.unshift(b.stmt(b.call(b.id('$$renderer.push'), block_open_else)));
+-
+ 		block.body.push(
+ 			b.if(
+ 				b.binary('!==', b.member(array_id, 'length'), b.literal(0)),
+-				b.block([open, for_loop]),
++				b.block([for_loop]),
+ 				fallback
+ 			)
+ 		);
+ 	} else {
+-		state.template.push(block_open);
+ 		block.body.push(for_loop);
+ 	}
+ 
+@@ -71,10 +66,9 @@ export function EachBlock(node, context) {
+ 				block,
+ 				node.metadata.expression.blockers(),
+ 				node.metadata.expression.has_await
+-			),
+-			block_close
++			)
+ 		);
+ 	} else {
+-		state.template.push(...block.body, block_close);
++		state.template.push(...block.body);
+ 	}
+ }
+diff --git a/src/compiler/phases/3-transform/server/visitors/Fragment.js b/src/compiler/phases/3-transform/server/visitors/Fragment.js
+index ef5bd985ae5d6bcae838a58f68145fd070b73179..bdc556ee8547d4bfccdee0e6c10260a6f9769fba 100644
+--- a/src/compiler/phases/3-transform/server/visitors/Fragment.js
++++ b/src/compiler/phases/3-transform/server/visitors/Fragment.js
+@@ -36,11 +36,6 @@ export function Fragment(node, context) {
+ 		context.visit(node, state);
+ 	}
+ 
+-	if (is_text_first) {
+-		// insert `<!---->` to prevent this from being glued to the previous fragment
+-		state.template.push(empty_comment);
+-	}
+-
+ 	process_children(trimmed, { ...context, state });
+ 
+ 	if (state.async_consts && state.async_consts.thunks.length > 0) {
+diff --git a/src/compiler/phases/3-transform/server/visitors/IfBlock.js b/src/compiler/phases/3-transform/server/visitors/IfBlock.js
+index e8418343be9b2fcba39add8762f5139e37cc7e11..3fccb04a180be2e499c2d71e3b6ac250bc7c30b6 100644
+--- a/src/compiler/phases/3-transform/server/visitors/IfBlock.js
++++ b/src/compiler/phases/3-transform/server/visitors/IfBlock.js
+@@ -16,10 +16,6 @@ export function IfBlock(node, context) {
+ 		? /** @type {BlockStatement} */ (context.visit(node.alternate))
+ 		: b.block([]);
+ 
+-	consequent.body.unshift(b.stmt(b.call(b.id('$$renderer.push'), block_open)));
+-
+-	alternate.body.unshift(b.stmt(b.call(b.id('$$renderer.push'), block_open_else)));
+-
+ 	/** @type {Statement} */
+ 	let statement = b.if(test, consequent, alternate);
+ 
+@@ -35,5 +31,5 @@ export function IfBlock(node, context) {
+ 		);
+ 	}
+ 
+-	context.state.template.push(statement, block_close);
++	context.state.template.push(statement);
+ }
+diff --git a/src/compiler/phases/3-transform/server/visitors/KeyBlock.js b/src/compiler/phases/3-transform/server/visitors/KeyBlock.js
+index 1396aa8fada3c5ccbc469a9983af646765bd35e2..02906b5eda4b4a7c2d90243a9d2e28bca606f4d9 100644
+--- a/src/compiler/phases/3-transform/server/visitors/KeyBlock.js
++++ b/src/compiler/phases/3-transform/server/visitors/KeyBlock.js
+@@ -8,15 +8,7 @@ import { block_close, block_open, empty_comment } from './shared/utils.js';
+  * @param {ComponentContext} context
   */
- export function render(component, options = {}) {
--	const uid = props_id_generator(options.idPrefix ? options.idPrefix + '-' : '');
--	/** @type {Payload} */
--	const payload = {
--		out: '',
--		css: new Set(),
--		head: { title: '', out: '', css: new Set(), uid },
--		uid
--	};
+ export function KeyBlock(node, context) {
+-	const is_async = node.metadata.expression.is_async();
 -
--	const prev_on_destroy = on_destroy;
--	on_destroy = [];
--	payload.out += BLOCK_OPEN;
+-	if (is_async) context.state.template.push(block_open);
 -
--	let reset_reset_element;
+ 	context.state.template.push(
+-		empty_comment,
+ 		/** @type {BlockStatement} */ (context.visit(node.fragment)),
+-		empty_comment
+ 	);
 -
--	if (DEV) {
--		// prevent parent/child element state being corrupted by a bad render
--		reset_reset_element = reset_elements();
--	}
--
--	if (options.context) {
--		push();
--		/** @type {Component} */ (current_component).c = options.context;
--	}
--
--	// @ts-expect-error
--	component(payload, options.props ?? {}, {}, {});
-+	const uid = (() => {
-+		var pfx = options.idPrefix ?? 's';
-+		var uid = 0;
-+		return () => `${pfx}${uid++}`;
-+	})();
+-	if (is_async) context.state.template.push(block_close);
+ }
+diff --git a/src/compiler/phases/3-transform/server/visitors/RenderTag.js b/src/compiler/phases/3-transform/server/visitors/RenderTag.js
+index 6d7cef0d95a943d6251101289a821537b259162e..9b4576a8e571aed73046e84ebfa47c276eef7439 100644
+--- a/src/compiler/phases/3-transform/server/visitors/RenderTag.js
++++ b/src/compiler/phases/3-transform/server/visitors/RenderTag.js
+@@ -44,8 +44,4 @@ export function RenderTag(node, context) {
+ 	}
  
--	if (options.context) {
--		pop();
+ 	context.state.template.push(statement);
+-
+-	if (!context.state.skip_hydration_boundaries) {
+-		context.state.template.push(empty_comment);
 -	}
--
--	if (reset_reset_element) {
--		reset_reset_element();
--	}
--
--	payload.out += BLOCK_CLOSE;
--	for (const cleanup of on_destroy) cleanup();
--	on_destroy = prev_on_destroy;
--
--	let head = payload.head.out + payload.head.title;
-+	const payload = { out: '', uid };
-+	component(payload, options.props ?? {});
+ }
+diff --git a/src/compiler/phases/3-transform/server/visitors/SlotElement.js b/src/compiler/phases/3-transform/server/visitors/SlotElement.js
+index d0f8e25d021a70589c6fd191139438a1a95bc45c..4455b964948500ab0f8e8468e7f7fd74139f1d1c 100644
+--- a/src/compiler/phases/3-transform/server/visitors/SlotElement.js
++++ b/src/compiler/phases/3-transform/server/visitors/SlotElement.js
+@@ -73,5 +73,5 @@ export function SlotElement(node, context) {
+ 			)
+ 		: b.stmt(slot);
  
--	for (const { hash, code } of payload.css) {
--		head += `<style id="${hash}">${code}</style>`;
--	}
+-	context.state.template.push(block_open, statement, block_close);
++	context.state.template.push(statement);
+ }
+diff --git a/src/compiler/phases/3-transform/server/visitors/SvelteBoundary.js b/src/compiler/phases/3-transform/server/visitors/SvelteBoundary.js
+index 8a30e765c23008f35ba7a5e43d3c0905f309f555..b5f66aea25087751a864ce515f5f021794ce3d01 100644
+--- a/src/compiler/phases/3-transform/server/visitors/SvelteBoundary.js
++++ b/src/compiler/phases/3-transform/server/visitors/SvelteBoundary.js
+@@ -45,8 +45,8 @@ export function SvelteBoundary(node, context) {
+ 			context.state.template.push(
+ 				b.if(
+ 					callee,
+-					b.block(build_template([block_open_else, b.stmt(pending), block_close])),
+-					b.block(build_template([block_open, block, block_close]))
++					b.block(build_template([b.stmt(pending)])),
++					b.block(build_template([block]))
+ 				)
+ 			);
+ 		} else {
+@@ -62,10 +62,10 @@ export function SvelteBoundary(node, context) {
+ 						b.id('$$renderer')
+ 					)
+ 				: /** @type {BlockStatement} */ (context.visit(pending_snippet.body));
+-			context.state.template.push(block_open_else, pending, block_close);
++			context.state.template.push(pending);
+ 		}
+ 	} else {
+ 		const block = /** @type {BlockStatement} */ (context.visit(node.fragment));
+-		context.state.template.push(block_open, block, block_close);
++		context.state.template.push(block);
+ 	}
+ }
+diff --git a/src/compiler/phases/3-transform/server/visitors/shared/component.js b/src/compiler/phases/3-transform/server/visitors/shared/component.js
+index a90b5e41dfb2e746a12c2dbd5f149c9fbcac5d54..846edda2d005f1b1abbfa64029ae90e12f2a2acc 100644
+--- a/src/compiler/phases/3-transform/server/visitors/shared/component.js
++++ b/src/compiler/phases/3-transform/server/visitors/shared/component.js
+@@ -335,26 +335,13 @@ export function build_inline_component(node, expression, context) {
+ 		statement = create_async_block(
+ 			b.block([
+ 				optimiser.apply(),
+-				dynamic && custom_css_props.length === 0
+-					? b.stmt(b.call('$$renderer.push', empty_comment))
+-					: b.empty,
++				b.empty,
+ 				statement
+ 			]),
+ 			optimiser.blockers(),
+ 			optimiser.has_await
+ 		);
+-	} else if (dynamic && custom_css_props.length === 0) {
+-		context.state.template.push(empty_comment);
+ 	}
+ 
+ 	context.state.template.push(statement);
 -
--	return {
--		head,
--		html: payload.out,
--		body: payload.out
--	};
-+	return { body: payload.out };
+-	if (
+-		!is_async &&
+-		!context.state.skip_hydration_boundaries &&
+-		custom_css_props.length === 0 &&
+-		optimiser.expressions.length === 0
+-	) {
+-		context.state.template.push(empty_comment);
+-	}
+ }
+diff --git a/src/compiler/phases/3-transform/server/visitors/shared/utils.js b/src/compiler/phases/3-transform/server/visitors/shared/utils.js
+index 4736a7c5daf27c6c2dd7c8f0e5136d668f178a95..b2e94a6f257614ed9e2e85f3ff77fa4ed9e3debd 100644
+--- a/src/compiler/phases/3-transform/server/visitors/shared/utils.js
++++ b/src/compiler/phases/3-transform/server/visitors/shared/utils.js
+@@ -116,6 +116,12 @@ export function build_template(template) {
+ 	const statements = [];
+ 
+ 	const flush = () => {
++		// Skip empty pushes
++		if (expressions.length === 0 && strings.every((s) => s === '')) {
++			strings = [];
++			return;
++		}
++
+ 		statements.push(
+ 			b.stmt(
+ 				b.call(
+@@ -326,9 +332,11 @@ export function create_push(expression, metadata, needs_hydration_markers = fals
+  * @returns {Statement}
+  */
+ export function call_component_renderer(body, component_fn_id) {
+-	return b.stmt(
+-		b.call('$$renderer.component', b.arrow([b.id('$$renderer')], body, false), component_fn_id)
+-	);
++	// Just emit the body directly - no component() wrapper needed for sync rendering
++	if (body.type === 'BlockStatement') {
++		return body;
++	}
++	return b.stmt(body);
  }
  
  /**
-@@ -493,12 +452,7 @@ export { await_block as await };
+diff --git a/src/internal/server/index.js b/src/internal/server/index.js
+index c0dbdbda14f6f6c98d47686e275f91034c1eaa6b..13b18b1625d48820f9960d473a8d0c1d07757f3f 100644
+--- a/src/internal/server/index.js
++++ b/src/internal/server/index.js
+@@ -17,7 +17,7 @@ import { DEV } from 'esm-env';
+ import { EMPTY_COMMENT, BLOCK_CLOSE, BLOCK_OPEN, BLOCK_OPEN_ELSE } from './hydration.js';
+ import { validate_store } from '../shared/validate.js';
+ import { is_boolean_attribute, is_raw_text_element, is_void } from '../../utils.js';
+-import { Renderer } from './renderer.js';
++export { render } from './renderer.js';
+ 
+ // https://html.spec.whatwg.org/multipage/syntax.html#attributes-2
+ // https://infra.spec.whatwg.org/#noncharacter
+@@ -51,17 +51,6 @@ export function element(renderer, tag, attributes_fn = noop, children_fn = noop)
+ 	renderer.push('<!---->');
+ }
+ 
+-/**
+- * Only available on the server and when compiling with the `server` option.
+- * Takes a component and returns an object with `body` and `head` properties on it, which you can use to populate the HTML when server-rendering your app.
+- * @template {Record<string, any>} Props
+- * @param {Component<Props> | ComponentType<SvelteComponent<Props>>} component
+- * @param {{ props?: Omit<Props, '$$slots' | '$$events'>; context?: Map<any, any>; idPrefix?: string }} [options]
+- * @returns {RenderOutput}
+- */
+-export function render(component, options = {}) {
+-	return Renderer.render(/** @type {Component<Props>} */ (component), options);
+-}
+ 
+ /**
+  * @param {string} hash
+@@ -411,12 +400,7 @@ export { await_block as await };
  
  /** @param {any} array_like_or_iterator */
  export function ensure_array_like(array_like_or_iterator) {
@@ -82,13 +268,771 @@ index 6098b496c5acbad719c34b0a036fc8451b77c121..7da20e493e47b693f32576ad8b4681fa
  }
  
  /**
+diff --git a/src/internal/server/renderer.js b/src/internal/server/renderer.js
+index 0cfb1a7a93518729d04c26214140eaab29de4870..c36c956d1edff831a5d00f214184b882f96e0985 100644
+--- a/src/internal/server/renderer.js
++++ b/src/internal/server/renderer.js
+@@ -1,741 +1,18 @@
+ /** @import { Component } from 'svelte' */
+-/** @import { HydratableContext, RenderOutput, SSRContext, SyncRenderOutput } from './types.js' */
+-/** @import { MaybePromise } from '#shared' */
+-import { async_mode_flag } from '../flags/index.js';
+-import { abort } from './abort-signal.js';
+-import { pop, push, set_ssr_context, ssr_context, save } from './context.js';
+-import * as e from './errors.js';
+-import * as w from './warnings.js';
+-import { BLOCK_CLOSE, BLOCK_OPEN } from './hydration.js';
+-import { attributes } from './index.js';
+-import { get_render_context, with_render_context, init_render_context } from './render-context.js';
+-import { DEV } from 'esm-env';
+-
+-/** @typedef {'head' | 'body'} RendererType */
+-/** @typedef {{ [key in RendererType]: string }} AccumulatedContent */
+-
+-/**
+- * @typedef {string | Renderer} RendererItem
+- */
++/** @import { RenderOutput } from './types.js' */
+ 
+ /**
+- * Renderers are basically a tree of `string | Renderer`s, where each `Renderer` in the tree represents
+- * work that may or may not have completed. A renderer can be {@link collect}ed to aggregate the
+- * content from itself and all of its children, but this will throw if any of the children are
+- * performing asynchronous work. To asynchronously collect a renderer, just `await` it.
+- *
+- * The `string` values within a renderer are always associated with the {@link type} of that renderer. To switch types,
+- * call {@link child} with a different `type` argument.
++ * @template {Record<string, any>} Props
++ * @param {Component<Props>} component
++ * @param {{ props?: Omit<Props, '$$slots' | '$$events'> }} [options]
++ * @returns {RenderOutput}
+  */
+-export class Renderer {
+-	/**
+-	 * The contents of the renderer.
+-	 * @type {RendererItem[]}
+-	 */
+-	#out = [];
+-
+-	/**
+-	 * Any `onDestroy` callbacks registered during execution of this renderer.
+-	 * @type {(() => void)[] | undefined}
+-	 */
+-	#on_destroy = undefined;
+-
+-	/**
+-	 * Whether this renderer is a component body.
+-	 * @type {boolean}
+-	 */
+-	#is_component_body = false;
+-
+-	/**
+-	 * The type of string content that this renderer is accumulating.
+-	 * @type {RendererType}
+-	 */
+-	type;
+-
+-	/** @type {Renderer | undefined} */
+-	#parent;
+-
+-	/**
+-	 * Asynchronous work associated with this renderer
+-	 * @type {Promise<void> | undefined}
+-	 */
+-	promise = undefined;
+-
+-	/**
+-	 * State which is associated with the content tree as a whole.
+-	 * It will be re-exposed, uncopied, on all children.
+-	 * @type {SSRState}
+-	 * @readonly
+-	 */
+-	global;
+-
+-	/**
+-	 * State that is local to the branch it is declared in.
+-	 * It will be shallow-copied to all children.
+-	 *
+-	 * @type {{ select_value: string | undefined }}
+-	 */
+-	local;
+-
+-	/**
+-	 * @param {SSRState} global
+-	 * @param {Renderer | undefined} [parent]
+-	 */
+-	constructor(global, parent) {
+-		this.#parent = parent;
+-
+-		this.global = global;
+-		this.local = parent ? { ...parent.local } : { select_value: undefined };
+-		this.type = parent ? parent.type : 'body';
+-	}
+-
+-	/**
+-	 * @param {(renderer: Renderer) => void} fn
+-	 */
+-	head(fn) {
+-		const head = new Renderer(this.global, this);
+-		head.type = 'head';
+-
+-		this.#out.push(head);
+-		head.child(fn);
+-	}
+-
+-	/**
+-	 * @param {Array<Promise<void>>} blockers
+-	 * @param {(renderer: Renderer) => void} fn
+-	 */
+-	async_block(blockers, fn) {
+-		this.#out.push(BLOCK_OPEN);
+-		this.async(blockers, fn);
+-		this.#out.push(BLOCK_CLOSE);
+-	}
+-
+-	/**
+-	 * @param {Array<Promise<void>>} blockers
+-	 * @param {(renderer: Renderer) => void} fn
+-	 */
+-	async(blockers, fn) {
+-		let callback = fn;
+-
+-		if (blockers.length > 0) {
+-			const context = ssr_context;
+-
+-			callback = (renderer) => {
+-				return Promise.all(blockers).then(() => {
+-					const previous_context = ssr_context;
+-
+-					try {
+-						set_ssr_context(context);
+-						return fn(renderer);
+-					} finally {
+-						set_ssr_context(previous_context);
+-					}
+-				});
+-			};
+-		}
+-
+-		this.child(callback);
+-	}
+-
+-	/**
+-	 * @param {Array<() => void>} thunks
+-	 */
+-	run(thunks) {
+-		const context = ssr_context;
+-
+-		let promise = Promise.resolve(thunks[0]());
+-		const promises = [promise];
+-
+-		for (const fn of thunks.slice(1)) {
+-			promise = promise.then(() => {
+-				const previous_context = ssr_context;
+-				set_ssr_context(context);
+-
+-				try {
+-					return fn();
+-				} finally {
+-					set_ssr_context(previous_context);
+-				}
+-			});
+-
+-			promises.push(promise);
+-		}
+-
+-		return promises;
+-	}
+-
+-	/**
+-	 * Create a child renderer. The child renderer inherits the state from the parent,
+-	 * but has its own content.
+-	 * @param {(renderer: Renderer) => MaybePromise<void>} fn
+-	 */
+-	child(fn) {
+-		const child = new Renderer(this.global, this);
+-		this.#out.push(child);
+-
+-		const parent = ssr_context;
+-
+-		set_ssr_context({
+-			...ssr_context,
+-			p: parent,
+-			c: null,
+-			r: child
+-		});
+-
+-		const result = fn(child);
+-
+-		set_ssr_context(parent);
+-
+-		if (result instanceof Promise) {
+-			if (child.global.mode === 'sync') {
+-				e.await_invalid();
+-			}
+-			// just to avoid unhandled promise rejections -- we'll end up throwing in `collect_async` if something fails
+-			result.catch(() => {});
+-			child.promise = result;
+-		}
+-
+-		return child;
+-	}
+-
+-	/**
+-	 * Create a component renderer. The component renderer inherits the state from the parent,
+-	 * but has its own content. It is treated as an ordering boundary for ondestroy callbacks.
+-	 * @param {(renderer: Renderer) => MaybePromise<void>} fn
+-	 * @param {Function} [component_fn]
+-	 * @returns {void}
+-	 */
+-	component(fn, component_fn) {
+-		push(component_fn);
+-		const child = this.child(fn);
+-		child.#is_component_body = true;
+-		pop();
+-	}
+-
+-	/**
+-	 * @param {Record<string, any>} attrs
+-	 * @param {(renderer: Renderer) => void} fn
+-	 * @param {string | undefined} [css_hash]
+-	 * @param {Record<string, boolean> | undefined} [classes]
+-	 * @param {Record<string, string> | undefined} [styles]
+-	 * @param {number | undefined} [flags]
+-	 * @returns {void}
+-	 */
+-	select(attrs, fn, css_hash, classes, styles, flags) {
+-		const { value, ...select_attrs } = attrs;
+-
+-		this.push(`<select${attributes(select_attrs, css_hash, classes, styles, flags)}>`);
+-		this.child((renderer) => {
+-			renderer.local.select_value = value;
+-			fn(renderer);
+-		});
+-		this.push('</select>');
+-	}
+-
+-	/**
+-	 * @param {Record<string, any>} attrs
+-	 * @param {string | number | boolean | ((renderer: Renderer) => void)} body
+-	 * @param {string | undefined} [css_hash]
+-	 * @param {Record<string, boolean> | undefined} [classes]
+-	 * @param {Record<string, string> | undefined} [styles]
+-	 * @param {number | undefined} [flags]
+-	 */
+-	option(attrs, body, css_hash, classes, styles, flags) {
+-		this.#out.push(`<option${attributes(attrs, css_hash, classes, styles, flags)}`);
+-
+-		/**
+-		 * @param {Renderer} renderer
+-		 * @param {any} value
+-		 * @param {{ head?: string, body: any }} content
+-		 */
+-		const close = (renderer, value, { head, body }) => {
+-			if ('value' in attrs) {
+-				value = attrs.value;
+-			}
+-
+-			if (value === this.local.select_value) {
+-				renderer.#out.push(' selected');
+-			}
+-
+-			renderer.#out.push(`>${body}</option>`);
+-
+-			// super edge case, but may as well handle it
+-			if (head) {
+-				renderer.head((child) => child.push(head));
+-			}
+-		};
+-
+-		if (typeof body === 'function') {
+-			this.child((renderer) => {
+-				const r = new Renderer(this.global, this);
+-				body(r);
+-
+-				if (this.global.mode === 'async') {
+-					return r.#collect_content_async().then((content) => {
+-						close(renderer, content.body.replaceAll('<!---->', ''), content);
+-					});
+-				} else {
+-					const content = r.#collect_content();
+-					close(renderer, content.body.replaceAll('<!---->', ''), content);
+-				}
+-			});
+-		} else {
+-			close(this, body, { body });
+-		}
+-	}
+-
+-	/**
+-	 * @param {(renderer: Renderer) => void} fn
+-	 */
+-	title(fn) {
+-		const path = this.get_path();
+-
+-		/** @param {string} head */
+-		const close = (head) => {
+-			this.global.set_title(head, path);
+-		};
+-
+-		this.child((renderer) => {
+-			const r = new Renderer(renderer.global, renderer);
+-			fn(r);
+-
+-			if (renderer.global.mode === 'async') {
+-				return r.#collect_content_async().then((content) => {
+-					close(content.head);
+-				});
+-			} else {
+-				const content = r.#collect_content();
+-				close(content.head);
+-			}
+-		});
+-	}
+-
+-	/**
+-	 * @param {string | (() => Promise<string>)} content
+-	 */
+-	push(content) {
+-		if (typeof content === 'function') {
+-			this.child(async (renderer) => renderer.push(await content()));
+-		} else {
+-			this.#out.push(content);
+-		}
+-	}
+-
+-	/**
+-	 * @param {() => void} fn
+-	 */
+-	on_destroy(fn) {
+-		(this.#on_destroy ??= []).push(fn);
+-	}
+-
+-	/**
+-	 * @returns {number[]}
+-	 */
+-	get_path() {
+-		return this.#parent ? [...this.#parent.get_path(), this.#parent.#out.indexOf(this)] : [];
+-	}
+-
+-	/**
+-	 * @deprecated this is needed for legacy component bindings
+-	 */
+-	copy() {
+-		const copy = new Renderer(this.global, this.#parent);
+-		copy.#out = this.#out.map((item) => (item instanceof Renderer ? item.copy() : item));
+-		copy.promise = this.promise;
+-		return copy;
+-	}
+-
+-	/**
+-	 * @param {Renderer} other
+-	 * @deprecated this is needed for legacy component bindings
+-	 */
+-	subsume(other) {
+-		if (this.global.mode !== other.global.mode) {
+-			throw new Error(
+-				"invariant: A renderer cannot switch modes. If you're seeing this, there's a compiler bug. File an issue!"
+-			);
+-		}
+-
+-		this.local = other.local;
+-		this.#out = other.#out.map((item) => {
+-			if (item instanceof Renderer) {
+-				item.subsume(item);
+-			}
+-			return item;
+-		});
+-		this.promise = other.promise;
+-		this.type = other.type;
+-	}
+-
+-	get length() {
+-		return this.#out.length;
+-	}
+-
+-	/**
+-	 * Only available on the server and when compiling with the `server` option.
+-	 * Takes a component and returns an object with `body` and `head` properties on it, which you can use to populate the HTML when server-rendering your app.
+-	 * @template {Record<string, any>} Props
+-	 * @param {Component<Props>} component
+-	 * @param {{ props?: Omit<Props, '$$slots' | '$$events'>; context?: Map<any, any>; idPrefix?: string }} [options]
+-	 * @returns {RenderOutput}
+-	 */
+-	static render(component, options = {}) {
+-		/** @type {AccumulatedContent | undefined} */
+-		let sync;
+-		/** @type {Promise<AccumulatedContent> | undefined} */
+-		let async;
+-
+-		const result = /** @type {RenderOutput} */ ({});
+-		// making these properties non-enumerable so that console.logging
+-		// doesn't trigger a sync render
+-		Object.defineProperties(result, {
+-			html: {
+-				get: () => {
+-					return (sync ??= Renderer.#render(component, options)).body;
+-				}
+-			},
+-			head: {
+-				get: () => {
+-					return (sync ??= Renderer.#render(component, options)).head;
+-				}
+-			},
+-			body: {
+-				get: () => {
+-					return (sync ??= Renderer.#render(component, options)).body;
+-				}
+-			},
+-			then: {
+-				value:
+-					/**
+-					 * this is not type-safe, but honestly it's the best I can do right now, and it's a straightforward function.
+-					 *
+-					 * @template TResult1
+-					 * @template [TResult2=never]
+-					 * @param { (value: SyncRenderOutput) => TResult1 } onfulfilled
+-					 * @param { (reason: unknown) => TResult2 } onrejected
+-					 */
+-					(onfulfilled, onrejected) => {
+-						if (!async_mode_flag) {
+-							const result = (sync ??= Renderer.#render(component, options));
+-							const user_result = onfulfilled({
+-								head: result.head,
+-								body: result.body,
+-								html: result.body
+-							});
+-							return Promise.resolve(user_result);
+-						}
+-						async ??= init_render_context().then(() =>
+-							with_render_context(() => Renderer.#render_async(component, options))
+-						);
+-						return async.then((result) => {
+-							Object.defineProperty(result, 'html', {
+-								// eslint-disable-next-line getter-return
+-								get: () => {
+-									e.html_deprecated();
+-								}
+-							});
+-							return onfulfilled(/** @type {SyncRenderOutput} */ (result));
+-						}, onrejected);
+-					}
+-			}
+-		});
+-
+-		return result;
+-	}
+-
+-	/**
+-	 * Collect all of the `onDestroy` callbacks registered during rendering. In an async context, this is only safe to call
+-	 * after awaiting `collect_async`.
+-	 *
+-	 * Child renderers are "porous" and don't affect execution order, but component body renderers
+-	 * create ordering boundaries. Within a renderer, callbacks run in order until hitting a component boundary.
+-	 * @returns {Iterable<() => void>}
+-	 */
+-	*#collect_on_destroy() {
+-		for (const component of this.#traverse_components()) {
+-			yield* component.#collect_ondestroy();
+-		}
+-	}
+-
+-	/**
+-	 * Performs a depth-first search of renderers, yielding the deepest components first, then additional components as we backtrack up the tree.
+-	 * @returns {Iterable<Renderer>}
+-	 */
+-	*#traverse_components() {
+-		for (const child of this.#out) {
+-			if (typeof child !== 'string') {
+-				yield* child.#traverse_components();
+-			}
+-		}
+-		if (this.#is_component_body) {
+-			yield this;
+-		}
+-	}
+-
+-	/**
+-	 * @returns {Iterable<() => void>}
+-	 */
+-	*#collect_ondestroy() {
+-		if (this.#on_destroy) {
+-			for (const fn of this.#on_destroy) {
+-				yield fn;
+-			}
+-		}
+-		for (const child of this.#out) {
+-			if (child instanceof Renderer && !child.#is_component_body) {
+-				yield* child.#collect_ondestroy();
+-			}
+-		}
+-	}
+-
+-	/**
+-	 * Render a component. Throws if any of the children are performing asynchronous work.
+-	 *
+-	 * @template {Record<string, any>} Props
+-	 * @param {Component<Props>} component
+-	 * @param {{ props?: Omit<Props, '$$slots' | '$$events'>; context?: Map<any, any>; idPrefix?: string }} options
+-	 * @returns {AccumulatedContent}
+-	 */
+-	static #render(component, options) {
+-		var previous_context = ssr_context;
+-		try {
+-			const renderer = Renderer.#open_render('sync', component, options);
+-
+-			const content = renderer.#collect_content();
+-			return Renderer.#close_render(content, renderer);
+-		} finally {
+-			abort();
+-			set_ssr_context(previous_context);
+-		}
+-	}
+-
+-	/**
+-	 * Render a component.
+-	 *
+-	 * @template {Record<string, any>} Props
+-	 * @param {Component<Props>} component
+-	 * @param {{ props?: Omit<Props, '$$slots' | '$$events'>; context?: Map<any, any>; idPrefix?: string }} options
+-	 * @returns {Promise<AccumulatedContent>}
+-	 */
+-	static async #render_async(component, options) {
+-		const previous_context = ssr_context;
+-
+-		try {
+-			const renderer = Renderer.#open_render('async', component, options);
+-			const content = await renderer.#collect_content_async();
+-			const hydratables = await renderer.#collect_hydratables();
+-			if (hydratables !== null) {
+-				content.head = hydratables + content.head;
+-			}
+-			return Renderer.#close_render(content, renderer);
+-		} finally {
+-			set_ssr_context(previous_context);
+-			abort();
+-		}
+-	}
+-
+-	/**
+-	 * Collect all of the code from the `out` array and return it as a string, or a promise resolving to a string.
+-	 * @param {AccumulatedContent} content
+-	 * @returns {AccumulatedContent}
+-	 */
+-	#collect_content(content = { head: '', body: '' }) {
+-		for (const item of this.#out) {
+-			if (typeof item === 'string') {
+-				content[this.type] += item;
+-			} else if (item instanceof Renderer) {
+-				item.#collect_content(content);
+-			}
+-		}
+-
+-		return content;
+-	}
+-
+-	/**
+-	 * Collect all of the code from the `out` array and return it as a string.
+-	 * @param {AccumulatedContent} content
+-	 * @returns {Promise<AccumulatedContent>}
+-	 */
+-	async #collect_content_async(content = { head: '', body: '' }) {
+-		await this.promise;
+-
+-		// no danger to sequentially awaiting stuff in here; all of the work is already kicked off
+-		for (const item of this.#out) {
+-			if (typeof item === 'string') {
+-				content[this.type] += item;
+-			} else if (item instanceof Renderer) {
+-				await item.#collect_content_async(content);
+-			}
+-		}
+-
+-		return content;
+-	}
+-
+-	async #collect_hydratables() {
+-		const ctx = get_render_context().hydratable;
+-
+-		for (const [_, key] of ctx.unresolved_promises) {
+-			// this is a problem -- it means we've finished the render but we're still waiting on a promise to resolve so we can
+-			// serialize it, so we're blocking the response on useless content.
+-			w.unresolved_hydratable(key, ctx.lookup.get(key)?.stack ?? '<missing stack trace>');
+-		}
+-
+-		for (const comparison of ctx.comparisons) {
+-			// these reject if there's a mismatch
+-			await comparison;
+-		}
+-
+-		return await Renderer.#hydratable_block(ctx);
+-	}
+-
+-	/**
+-	 * @template {Record<string, any>} Props
+-	 * @param {'sync' | 'async'} mode
+-	 * @param {import('svelte').Component<Props>} component
+-	 * @param {{ props?: Omit<Props, '$$slots' | '$$events'>; context?: Map<any, any>; idPrefix?: string }} options
+-	 * @returns {Renderer}
+-	 */
+-	static #open_render(mode, component, options) {
+-		const renderer = new Renderer(
+-			new SSRState(mode, options.idPrefix ? options.idPrefix + '-' : '')
+-		);
+-
+-		renderer.push(BLOCK_OPEN);
+-
+-		if (options.context) {
+-			push();
+-			/** @type {SSRContext} */ (ssr_context).c = options.context;
+-			/** @type {SSRContext} */ (ssr_context).r = renderer;
+-		}
+-
+-		// @ts-expect-error
+-		component(renderer, options.props ?? {});
+-
+-		if (options.context) {
+-			pop();
+-		}
+-
+-		renderer.push(BLOCK_CLOSE);
+-
+-		return renderer;
+-	}
+-
+-	/**
+-	 * @param {AccumulatedContent} content
+-	 * @param {Renderer} renderer
+-	 */
+-	static #close_render(content, renderer) {
+-		for (const cleanup of renderer.#collect_on_destroy()) {
+-			cleanup();
+-		}
+-
+-		let head = content.head + renderer.global.get_title();
+-		let body = content.body;
+-
+-		for (const { hash, code } of renderer.global.css) {
+-			head += `<style id="${hash}">${code}</style>`;
+-		}
+-
+-		return {
+-			head,
+-			body
+-		};
+-	}
+-
+-	/**
+-	 * @param {HydratableContext} ctx
+-	 */
+-	static async #hydratable_block(ctx) {
+-		if (ctx.lookup.size === 0) {
+-			return null;
+-		}
+-
+-		let entries = [];
+-		let has_promises = false;
+-
+-		for (const [k, v] of ctx.lookup) {
+-			if (v.promises) {
+-				has_promises = true;
+-				for (const p of v.promises) await p;
+-			}
+-
+-			entries.push(`[${JSON.stringify(k)},${v.serialized}]`);
+-		}
+-
+-		let prelude = `const h = (window.__svelte ??= {}).h ??= new Map();`;
+-
+-		if (has_promises) {
+-			prelude = `const r = (v) => Promise.resolve(v);
+-				${prelude}`;
+-		}
+-
+-		// TODO csp -- have discussed but not implemented
+-		return `
+-		<script>
+-			{
+-				${prelude}
+-
+-				for (const [k, v] of [
+-					${entries.join(',\n\t\t\t\t\t')}
+-				]) {
+-					h.set(k, v);
+-				}
+-			}
+-		</script>`;
+-	}
++function render(component, options = {}) {
++	let out = '';
++	const renderer = { push(s) { out += s; } };
++	component(renderer, options.props ?? {});
++	return { body: out };
+ }
+ 
+-export class SSRState {
+-	/** @readonly @type {'sync' | 'async'} */
+-	mode;
+-
+-	/** @readonly @type {() => string} */
+-	uid;
+-
+-	/** @readonly @type {Set<{ hash: string; code: string }>} */
+-	css = new Set();
+-
+-	/** @type {{ path: number[], value: string }} */
+-	#title = { path: [], value: '' };
+-
+-	/**
+-	 * @param {'sync' | 'async'} mode
+-	 * @param {string} [id_prefix]
+-	 */
+-	constructor(mode, id_prefix = '') {
+-		this.mode = mode;
+-
+-		let uid = 1;
+-		this.uid = () => `${id_prefix}s${uid++}`;
+-	}
+-
+-	get_title() {
+-		return this.#title.value;
+-	}
+-
+-	/**
+-	 * Performs a depth-first (lexicographic) comparison using the path. Rejects sets
+-	 * from earlier than or equal to the current value.
+-	 * @param {string} value
+-	 * @param {number[]} path
+-	 */
+-	set_title(value, path) {
+-		const current = this.#title.path;
+-
+-		let i = 0;
+-		let l = Math.min(path.length, current.length);
+-
+-		// skip identical prefixes - [1, 2, 3, ...] === [1, 2, 3, ...]
+-		while (i < l && path[i] === current[i]) i += 1;
+-
+-		if (path[i] === undefined) return;
+-
+-		// replace title if
+-		// - incoming path is longer - [7, 8, 9] > [7, 8]
+-		// - incoming path is later  - [7, 8, 9] > [7, 8, 8]
+-		if (current[i] === undefined || path[i] > current[i]) {
+-			this.#title.path = path;
+-			this.#title.value = value;
+-		}
+-	}
+-}
++export { render };
++export const Renderer = { render };
 diff --git a/src/internal/shared/attributes.js b/src/internal/shared/attributes.js
-index c8758c1d4d4d68cfe3a3ee76c77605ae65285841..92a352784ca26c3404c86294621f8baf06fd2bab 100644
+index 4ad550e8d612e42d1e719dcbfcbce383bbbbb27f..a12fe17a0efd135bd9fd4f1b1594c059a6d12e54 100644
 --- a/src/internal/shared/attributes.js
 +++ b/src/internal/shared/attributes.js
-@@ -23,7 +23,7 @@ const replacements = {
-  */
- export function attr(name, value, is_boolean = false) {
+@@ -27,7 +27,7 @@ export function attr(name, value, is_boolean = false) {
+ 		is_boolean = true;
+ 	}
  	if (value == null || (!value && is_boolean)) return '';
 -	const normalized = (name in replacements && replacements[name].get(value)) || value;
 +	const normalized = value;

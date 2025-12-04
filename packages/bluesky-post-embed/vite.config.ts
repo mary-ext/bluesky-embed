@@ -81,12 +81,7 @@ function svelte(): Plugin {
 			{
 				const { js, css, warnings } = result;
 
-				// nasty hacks to get smaller sizes
-				let jsCode = js.code
-					.replace(/<!--.*?-->/g, '')
-					.replace(/\$\$slots: {.+?},?/g, '')
-					.replace(/\$\$payload\.out \+= ["'`]{2};|\$\.(push|pop)\(\);/g, '')
-					.replace(/(?<=\$\$payload\.out \+= )`\${([a-zA-Z0-9_$.,()[\]\s]+?)}`(?=;)/, '$1');
+				let jsCode = js.code;
 
 				if (css) {
 					const cssId = `${id}.css`;

@@ -33,13 +33,13 @@
 	},
 	"devDependencies": {
 		"@preact/preset-vite": "^2.10.2",
-		"@tsconfig/svelte": "^5.0.4",
-		"@types/node": "^24.0.14",
+		"@tsconfig/svelte": "^5.0.6",
+		"@types/node": "^24.10.1",
 		"internal": "workspace:^",
-		"preact": "^10.26.9",
+		"preact": "^10.28.0",
 		"svelte": "catalog:",
-		"svelte-check": "^4.2.2",
-		"vite": "^7.0.4",
+		"svelte-check": "^4.3.4",
+		"vite": "^7.2.6",
 		"vite-plugin-dts": "^4.5.4"
 	}
 }

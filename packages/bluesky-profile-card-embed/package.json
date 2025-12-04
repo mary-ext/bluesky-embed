@@ -2,7 +2,7 @@
 	"type": "module",
 	"name": "bluesky-profile-card-embed",
 	"description": "Custom element for embedding Bluesky profile cards",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"author": "externdefs",
 	"license": "MIT",
 	"repository": {

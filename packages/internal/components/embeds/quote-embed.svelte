@@ -198,11 +198,11 @@
 		margin: 8px 12px 12px 12px;
 		overflow: hidden;
 		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 6;
-		line-clamp: 6;
 		flex-grow: 4;
 		flex-basis: 0px;
 		min-width: 0px;
+		-webkit-line-clamp: 6;
+		line-clamp: 6;
 		white-space: pre-wrap;
 		overflow-wrap: break-word;
 	}

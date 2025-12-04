@@ -36,7 +36,7 @@
 		stroke: #2563eb;
 	}
 	.background {
-		stroke: #2563eb;
 		opacity: 20%;
+		stroke: #2563eb;
 	}
 </style>

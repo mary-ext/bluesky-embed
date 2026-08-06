@@ -5,5 +5,11 @@ packages:
   - packages/bluesky-profile-card-embed
   - packages/bluesky-profile-feed-embed
 
+allowBuilds:
+  esbuild: false
+
 catalog:
   svelte: ^5.45.5
+
+patchedDependencies:
+  svelte: patches/svelte.patch

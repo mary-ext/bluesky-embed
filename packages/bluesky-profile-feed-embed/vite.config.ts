@@ -73,6 +73,8 @@ function svelte(): Plugin {
 				},
 				runes: true,
 				filename: id,
+				// we render to a static string, so nothing is ever reactive
+				warningFilter: (warning) => warning.code !== 'state_referenced_locally',
 			});
 
 			{
@@ -87,9 +89,6 @@ function svelte(): Plugin {
 				}
 
 				for (const warn of warnings) {
-					if (warn.code === 'state_referenced_locally') {
-						continue;
-					}
 					this.warn(warn);
 				}
 

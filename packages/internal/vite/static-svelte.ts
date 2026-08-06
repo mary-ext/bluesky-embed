@@ -1,5 +1,9 @@
 import * as path from 'node:path';
 
+import { compile } from 'svelte/compiler';
+
+import { print } from 'esrap';
+import ts from 'esrap/languages/ts';
 import type {
 	ArrowFunctionExpression,
 	BlockStatement,
@@ -12,9 +16,6 @@ import type {
 	Property,
 	SpreadElement,
 } from 'estree';
-import { print } from 'esrap';
-import ts from 'esrap/languages/ts';
-import { compile } from 'svelte/compiler';
 import type { Plugin } from 'vite';
 import { walk, type Context, type Visitors } from 'zimmerframe';
 
@@ -103,8 +104,8 @@ export function transformServerOutput(program: Program, filename = 'component.sv
 			(node.key.type === 'Literal' && node.key.value === '$$slots'));
 
 	/**
-	 * Replaces a `{ $$renderer.component((renderer) => { ... }) }` function body with the body of the
-	 * callback. Components without state have no wrapper, their body stays as it is.
+	 * Replaces a `{ $$renderer.component((renderer) => { ... }) }` function body with the body of the callback.
+	 * Components without state have no wrapper, their body stays as it is.
 	 */
 	const unwrapComponent = (body: BlockStatement): BlockStatement => {
 		if (body.body.length !== 1) return body;

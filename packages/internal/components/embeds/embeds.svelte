@@ -29,7 +29,6 @@
 
 	import { findLabel } from '../../utils/labels';
 	import { parseAtUri } from '../../utils/syntax/at-url';
-
 	import ContentHider from '../content-hider.svelte';
 
 	import ExternalEmbed from './external-embed.svelte';

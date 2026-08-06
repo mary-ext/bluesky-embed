@@ -1,10 +1,9 @@
 {
-	"type": "module",
 	"name": "bluesky-post-embed",
-	"description": "Custom element for embedding Bluesky posts",
 	"version": "1.0.6",
-	"author": "externdefs",
+	"description": "Custom element for embedding Bluesky posts",
 	"license": "MIT",
+	"author": "externdefs",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/mary-ext/bluesky-embed",
@@ -14,6 +13,7 @@
 		"dist/",
 		"themes/"
 	],
+	"type": "module",
 	"exports": {
 		".": "./dist/wc.js",
 		"./core": "./dist/core.js",

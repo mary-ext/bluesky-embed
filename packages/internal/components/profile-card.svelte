@@ -4,6 +4,7 @@
 	import { getProfileUrl } from '../utils/bsky-url';
 	import { findLabel } from '../utils/labels';
 	import { formatCompactNumber } from '../utils/number';
+
 	import RichtextRawRenderer from './richtext-raw-renderer.svelte';
 
 	interface Props {

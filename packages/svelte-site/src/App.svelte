@@ -5,13 +5,12 @@
 </script>
 
 <script lang="ts">
-	import { extract_url } from './lib/matcher';
-
 	import Banner from './components/Banner.svelte';
 	import CircularSpinner from './components/CircularSpinner.svelte';
 	import Field from './components/Field.svelte';
 	import Lazy from './components/Lazy.svelte';
 	import TextInput from './components/TextInput.svelte';
+	import { extract_url } from './lib/matcher';
 
 	const DEFAULT_URL = 'https://bsky.app/profile/did:plc:ragtjsm2j2vknwkz3zp4oxrd/post/3kj2umze7zj2n';
 	// const DEFAULT_URL = 'https://bsky.app/profile/did:plc:ragtjsm2j2vknwkz3zp4oxrd';

@@ -8,7 +8,7 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"moduleDetection": "force",
-		"noEmit": true,
+		"noEmit": true
 	},
-	"include": ["lib", "../internal/types/svelte.d.ts"],
+	"include": ["lib", "../internal/types/svelte.d.ts"]
 }

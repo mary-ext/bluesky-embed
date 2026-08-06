@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'preact/hooks';
 
 import type { ProfileCardData } from 'internal/types/profile-card.js';
+
 import { fetchProfileCard, renderProfileCard } from '../lib/core';
 
 const actor = `patak.dev`;

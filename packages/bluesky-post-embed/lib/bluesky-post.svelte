@@ -45,9 +45,8 @@
 	import EmbedFrame from 'internal/components/embed-frame.svelte';
 	import HighlightedPost from 'internal/components/highlighted-post.svelte';
 	import Post from 'internal/components/post.svelte';
-
-	import { NO_UNAUTHENTICATED_LABEL } from 'internal/utils/constants.js';
 	import type { PostData } from 'internal/types/post.js';
+	import { NO_UNAUTHENTICATED_LABEL } from 'internal/utils/constants.js';
 
 	const { thread, contextless, allowUnauthenticated }: PostData = $props();
 

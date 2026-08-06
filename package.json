@@ -1,13 +1,12 @@
 {
 	"private": true,
 	"scripts": {
-		"fmt": "prettier --cache --write ."
+		"fmt": "oxfmt"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.29.8",
-		"prettier": "^3.7.4",
-		"prettier-plugin-css-order": "^2.1.2",
-		"prettier-plugin-svelte": "^3.4.0",
+		"oxfmt": "^0.62.0",
+		"svelte": "catalog:",
 		"typescript": "~5.8.3"
 	}
 }

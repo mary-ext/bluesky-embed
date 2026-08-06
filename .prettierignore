@@ -1,8 +1,0 @@
-pnpm-lock.yaml
-
-dist/
-
-/packages/svelte-site/pages/
-/packages/bluesky-post-embed/themes/
-/packages/bluesky-profile-card-embed/themes/
-/packages/bluesky-profile-feed-embed/themes/

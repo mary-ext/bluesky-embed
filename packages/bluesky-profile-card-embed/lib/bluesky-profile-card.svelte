@@ -1,7 +1,6 @@
 <script lang="ts">
 	import EmbedFrame from 'internal/components/embed-frame.svelte';
 	import ProfileCard from 'internal/components/profile-card.svelte';
-
 	import type { ProfileCardData } from 'internal/types/profile-card.js';
 	import { NO_UNAUTHENTICATED_LABEL } from 'internal/utils/constants.js';
 

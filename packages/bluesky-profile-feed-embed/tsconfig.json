@@ -8,8 +8,8 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"moduleDetection": "force",
-		"noEmit": true,
+		"noEmit": true
 	},
 	"include": ["lib", "../internal/types/svelte.d.ts"],
-	"references": [{ "path": "./tsconfig.node.json" }],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }

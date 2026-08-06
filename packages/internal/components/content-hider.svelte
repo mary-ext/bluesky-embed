@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
+
 	import type { LabelDefinition } from '../utils/labels';
 
 	interface Props {

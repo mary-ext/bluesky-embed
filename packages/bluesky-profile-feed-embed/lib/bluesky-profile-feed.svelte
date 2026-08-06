@@ -2,7 +2,6 @@
 	import EmbedFrame from 'internal/components/embed-frame.svelte';
 	import FeedPost from 'internal/components/feed-post.svelte';
 	import ProfileFeedHeader from 'internal/components/profile-feed-header.svelte';
-
 	import type { ProfileFeedData } from 'internal/types/profile-feed.js';
 	import { NO_UNAUTHENTICATED_LABEL } from 'internal/utils/constants.js';
 

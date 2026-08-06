@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'preact/hooks';
 
 import type { PostData } from 'internal/types/post.js';
+
 import { fetchPost, renderPost } from '../lib/core';
 
 const uri = `at://did:plc:ragtjsm2j2vknwkz3zp4oxrd/app.bsky.feed.post/3kj2umze7zj2n`;

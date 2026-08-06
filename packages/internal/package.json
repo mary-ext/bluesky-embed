@@ -1,14 +1,26 @@
 {
-	"private": true,
-	"type": "module",
 	"name": "internal",
 	"version": "0.1.0",
+	"private": true,
+	"type": "module",
 	"exports": {
 		"./components/*": "./components/*",
 		"./render/*": "./render/*",
 		"./types/*": "./types/*",
 		"./utils/*": "./utils/*",
 		"./vite/*": "./vite/*"
+	},
+	"devDependencies": {
+		"@atcute/bluesky": "^2.1.1",
+		"@atcute/bluesky-richtext-parser": "^1.0.7",
+		"@atcute/bluesky-richtext-segmenter": "^2.0.4",
+		"@atcute/client": "^3.1.0",
+		"@tsconfig/svelte": "^5.0.6",
+		"@types/estree": "^1.0.8",
+		"esrap": "^2.3.0",
+		"svelte": "catalog:",
+		"vite": "^7.2.6",
+		"zimmerframe": "^1.1.4"
 	},
 	"peerDependencies": {
 		"@atcute/bluesky": "^1.0.9",
@@ -24,17 +36,5 @@
 		"@atcute/bluesky-richtext-segmenter": {
 			"optional": true
 		}
-	},
-	"devDependencies": {
-		"@atcute/bluesky": "^2.1.1",
-		"@atcute/bluesky-richtext-parser": "^1.0.7",
-		"@atcute/bluesky-richtext-segmenter": "^2.0.4",
-		"@atcute/client": "^3.1.0",
-		"@tsconfig/svelte": "^5.0.6",
-		"@types/estree": "^1.0.8",
-		"esrap": "^2.3.0",
-		"svelte": "catalog:",
-		"vite": "^7.2.6",
-		"zimmerframe": "^1.1.4"
 	}
 }

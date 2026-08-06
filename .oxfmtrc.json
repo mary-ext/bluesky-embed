@@ -1,0 +1,61 @@
+{
+	"$schema": "https://unpkg.com/oxfmt/configuration_schema.json",
+	"trailingComma": "all",
+	"useTabs": true,
+	"tabWidth": 2,
+	"printWidth": 110,
+	"semi": true,
+	"singleQuote": true,
+	"bracketSpacing": true,
+	"svelte": true,
+	"jsdoc": {
+		"capitalizeDescriptions": false
+	},
+	"sortImports": {
+		"groups": [
+			["builtin"],
+			["svelte"],
+			["oomfware"],
+			["external"],
+			["workspace"],
+			["parent"],
+			["sibling", "index"]
+		],
+		"customGroups": [
+			{
+				"groupName": "svelte",
+				"elementNamePattern": ["svelte", "svelte/**"]
+			},
+			{
+				"groupName": "oomfware",
+				"elementNamePattern": ["@oomfware/**"]
+			},
+			{
+				"groupName": "workspace",
+				"elementNamePattern": ["internal/**"]
+			}
+		]
+	},
+	"ignorePatterns": [
+		"pnpm-lock.yaml",
+		"/packages/svelte-site/pages/",
+		"/packages/bluesky-post-embed/themes/",
+		"/packages/bluesky-profile-card-embed/themes/",
+		"/packages/bluesky-profile-feed-embed/themes/"
+	],
+	"overrides": [
+		{
+			"files": ["tsconfig.json", "jsconfig.json", "tsconfig.*.json"],
+			"options": {
+				"parser": "jsonc"
+			}
+		},
+		{
+			"files": ["*.md"],
+			"options": {
+				"printWidth": 100,
+				"proseWrap": "always"
+			}
+		}
+	]
+}

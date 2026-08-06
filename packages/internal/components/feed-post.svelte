@@ -3,9 +3,9 @@
 
 	import { getPostUrl, getProfileUrl } from '../utils/bsky-url';
 	import { formatLongDate, formatShortDate } from '../utils/date';
+	import { formatCompactNumber, formatLongNumber } from '../utils/number';
 	import { parseAtUri } from '../utils/syntax/at-url';
 
-	import { formatCompactNumber, formatLongNumber } from '../utils/number';
 	import Embeds from './embeds/embeds.svelte';
 	import RichtextRenderer from './richtext-renderer.svelte';
 

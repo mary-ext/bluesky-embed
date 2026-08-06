@@ -6,7 +6,6 @@
 
 	import { escape_html } from '../../lib/html';
 	import type { ExtractedProfileInfo } from '../../lib/matcher';
-
 	import Banner from '../Banner.svelte';
 	import CircularSpinner from '../CircularSpinner.svelte';
 	import CodeBlock from '../CodeBlock.svelte';
@@ -54,10 +53,10 @@
 		return `<bluesky-profile-feed actor="${escape_html(profile.did)}" include-pins>
   <a target="_blank" href="${escape_html(url)}" class="bluesky-profile-feed-fallback">
     ${
-			profile.displayName?.trim()
-				? `Posts by ${escape_html(profile.displayName)} (@${escape_html(profile.handle)})`
-				: `Posts by @${escape_html(profile.handle)}`
-		}
+					profile.displayName?.trim()
+						? `Posts by ${escape_html(profile.displayName)} (@${escape_html(profile.handle)})`
+						: `Posts by @${escape_html(profile.handle)}`
+				}
   </a>
 </bluesky-profile-feed>
 `;

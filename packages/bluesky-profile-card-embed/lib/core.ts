@@ -1,9 +1,8 @@
 import '@atcute/bluesky/lexicons';
-
 import { simpleFetchHandler, XRPC, XRPCError } from '@atcute/client';
 import type { At } from '@atcute/client/lexicons';
-import { render } from 'internal/render/runtime.js';
 
+import { render } from 'internal/render/runtime.js';
 import type { ProfileCardData } from 'internal/types/profile-card.js';
 import { DEFAULT_APPVIEW_URL } from 'internal/utils/constants.js';
 
@@ -12,22 +11,20 @@ import BlueskyProfileCard from './bluesky-profile-card.svelte';
 export type { ProfileCardData };
 
 export interface ProfileCardFetchOptions {
-	/**
-	 * Handle or DID identifier of the user
-	 */
+	/** Handle or DID identifier of the user */
 	actor: string;
-	/**
-	 * Abort signal to cancel the request
-	 */
+	/** Abort signal to cancel the request */
 	signal?: AbortSignal;
 	/**
 	 * Allow unauthenticated viewing
+	 *
 	 * @default false
 	 */
 	allowUnauthenticated?: boolean;
 	/**
 	 * AppView service to use
-	 * @default "https://public.api.bsky.app"
+	 *
+	 * @default 'https://public.api.bsky.app'
 	 */
 	serviceUri?: string;
 }

@@ -18,7 +18,7 @@ the packages live under `packages/`:
 
 #### root-level tasks
 
-- format via `pnpm run fmt` (prettier)
+- format via `pnpm run fmt` (oxfmt)
 
 #### package-level tasks
 
@@ -41,6 +41,7 @@ run these inside the package directory, e.g. `cd packages/bluesky-post-embed; pn
 - order list-like constructs (arrays, object keys, union/intersection members, enum variants,
   imports, etc.) by whatever meaning the list carries — a discriminant leads the object it tags, an
   external spec or call signature keeps its own sequence — and alphabetically when nothing does.
+  - CSS properties go in outside-in concentric order.
 
 #### control flow and structure
 

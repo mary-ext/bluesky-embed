@@ -10,8 +10,8 @@
 		"moduleDetection": "force",
 		"noEmit": true,
 		"jsx": "react-jsx",
-		"jsxImportSource": "preact",
+		"jsxImportSource": "preact"
 	},
 	"include": ["lib", "src"],
-	"references": [{ "path": "./tsconfig.node.json" }],
+	"references": [{ "path": "./tsconfig.node.json" }]
 }

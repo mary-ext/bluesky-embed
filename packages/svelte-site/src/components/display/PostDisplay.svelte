@@ -10,7 +10,6 @@
 
 	import { escape_html } from '../../lib/html';
 	import type { ExtractedPostInfo } from '../../lib/matcher';
-
 	import Banner from '../Banner.svelte';
 	import CircularSpinner from '../CircularSpinner.svelte';
 	import CodeBlock from '../CodeBlock.svelte';

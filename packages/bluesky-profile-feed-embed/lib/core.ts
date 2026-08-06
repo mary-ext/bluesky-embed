@@ -2,7 +2,7 @@ import '@atcute/bluesky/lexicons';
 
 import { simpleFetchHandler, XRPC, XRPCError } from '@atcute/client';
 import type { At } from '@atcute/client/lexicons';
-import { render } from 'svelte/server';
+import { render } from 'internal/render/runtime.js';
 
 import type { ProfileFeedData } from 'internal/types/profile-feed.js';
 import { DEFAULT_APPVIEW_URL } from 'internal/utils/constants.js';
@@ -83,5 +83,5 @@ export const fetchProfileFeed = async (opts: ProfileFeedFetchOptions): Promise<P
 };
 
 export const renderProfileFeed = (data: ProfileFeedData): string => {
-	return render(BlueskyProfileFeed, { props: data }).body;
+	return render(BlueskyProfileFeed, data);
 };

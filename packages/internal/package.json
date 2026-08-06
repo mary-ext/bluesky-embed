@@ -5,8 +5,10 @@
 	"version": "0.1.0",
 	"exports": {
 		"./components/*": "./components/*",
+		"./render/*": "./render/*",
 		"./types/*": "./types/*",
-		"./utils/*": "./utils/*"
+		"./utils/*": "./utils/*",
+		"./vite/*": "./vite/*"
 	},
 	"peerDependencies": {
 		"@atcute/bluesky": "^1.0.9",
@@ -29,6 +31,10 @@
 		"@atcute/bluesky-richtext-segmenter": "^2.0.4",
 		"@atcute/client": "^3.1.0",
 		"@tsconfig/svelte": "^5.0.6",
-		"svelte": "catalog:"
+		"@types/estree": "^1.0.8",
+		"esrap": "^2.3.0",
+		"svelte": "catalog:",
+		"vite": "^7.2.6",
+		"zimmerframe": "^1.1.4"
 	}
 }

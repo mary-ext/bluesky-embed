@@ -1,10 +1,9 @@
-import * as path from 'node:path';
-
-import { compile as compileSvelte } from 'svelte/compiler';
-import { type Plugin, createFilter, defineConfig } from 'vite';
+import { defineConfig } from 'vite';
 
 import preact from '@preact/preset-vite';
 import dts from 'vite-plugin-dts';
+
+import { staticSvelte } from 'internal/vite/static-svelte.js';
 
 export default defineConfig({
 	base: './',
@@ -29,7 +28,10 @@ export default defineConfig({
 		target: 'esnext',
 	},
 	plugins: [
-		svelte(),
+		staticSvelte({
+			cssHashPrefix: 'github:mary-ext/bluesky-profile-card-embed/',
+			root: __dirname,
+		}),
 		preact(),
 		dts({
 			rollupTypes: true,
@@ -43,60 +45,3 @@ export default defineConfig({
 		}),
 	],
 });
-
-function svelte(): Plugin {
-	const filter = createFilter('**/*.svelte');
-	const stylesheets = new Map<string, string>();
-
-	return {
-		name: 'svelte',
-		resolveId(id) {
-			return stylesheets.has(id) ? id : null;
-		},
-		load(id) {
-			const css = stylesheets.get(id);
-			if (css !== undefined) {
-				this.addWatchFile(id.slice(0, -4));
-				return { code: css };
-			}
-
-			return null;
-		},
-		transform(source, id) {
-			if (!filter(id)) {
-				return null;
-			}
-
-			const result = compileSvelte(source, {
-				generate: 'server',
-				css: 'external',
-				cssHash({ hash, filename }) {
-					const prefix = `github:mary-ext/bluesky-profile-card-embed/`;
-					return `s-` + hash(prefix + path.relative(__dirname, filename));
-				},
-				runes: true,
-				filename: id,
-				// we render to a static string, so nothing is ever reactive
-				warningFilter: (warning) => warning.code !== 'state_referenced_locally',
-			});
-
-			{
-				const { js, css, warnings } = result;
-
-				let jsCode = js.code;
-
-				if (css) {
-					const cssId = `${id}.css`;
-					jsCode = jsCode + `\nimport ${JSON.stringify(cssId)};\n`;
-					stylesheets.set(cssId, css.code);
-				}
-
-				for (const warn of warnings) {
-					this.warn(warn);
-				}
-
-				return { code: jsCode };
-			}
-		},
-	};
-}

@@ -2,7 +2,7 @@ import '@atcute/bluesky/lexicons';
 
 import { simpleFetchHandler, XRPC, XRPCError } from '@atcute/client';
 import type { At } from '@atcute/client/lexicons';
-import { render } from 'svelte/server';
+import { render } from 'internal/render/runtime.js';
 
 import type { PostData } from 'internal/types/post.js';
 import { DEFAULT_APPVIEW_URL } from 'internal/utils/constants.js';
@@ -66,5 +66,5 @@ export const fetchPost = async (opts: PostFetchOptions): Promise<PostData> => {
 };
 
 export const renderPost = (data: PostData): string => {
-	return render(BlueskyPost, { props: data }).body;
+	return render(BlueskyPost, data);
 };

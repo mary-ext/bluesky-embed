@@ -2,7 +2,7 @@ import '@atcute/bluesky/lexicons';
 
 import { simpleFetchHandler, XRPC, XRPCError } from '@atcute/client';
 import type { At } from '@atcute/client/lexicons';
-import { render } from 'svelte/server';
+import { render } from 'internal/render/runtime.js';
 
 import type { ProfileCardData } from 'internal/types/profile-card.js';
 import { DEFAULT_APPVIEW_URL } from 'internal/utils/constants.js';
@@ -57,5 +57,5 @@ export const fetchProfileCard = async (opts: ProfileCardFetchOptions): Promise<P
 };
 
 export const renderProfileCard = (data: ProfileCardData): string => {
-	return render(BlueskyProfileCard, { props: data }).body;
+	return render(BlueskyProfileCard, data);
 };

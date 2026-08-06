@@ -10,5 +10,5 @@
 		"moduleDetection": "force",
 		"noEmit": true,
 	},
-	"include": ["lib"],
+	"include": ["lib", "../internal/types/svelte.d.ts"],
 }

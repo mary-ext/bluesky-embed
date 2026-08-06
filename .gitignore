@@ -1,6 +1,8 @@
 node_modules/
 dist/
 
+.research/
+
 .npm-*.log
 .pnpm-*.log
 .yarn-*.log

@@ -10,3 +10,7 @@ allowBuilds:
 
 catalog:
   svelte: ^5.56.8
+
+minimumReleaseAgeExclude:
+  - vite@8.2.1
+  - vite-prerender-plugin@0.5.13

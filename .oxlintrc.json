@@ -1,6 +1,6 @@
 {
 	"$schema": "https://unpkg.com/oxlint/configuration_schema.json",
-	"ignorePatterns": ["packages/svelte-site/pages/**"],
+	"ignorePatterns": ["**/.svelte-check/**", "packages/svelte-site/pages/**"],
 	"options": {
 		"typeAware": true,
 		"typeCheck": true

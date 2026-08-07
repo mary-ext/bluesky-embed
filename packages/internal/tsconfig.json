@@ -1,13 +1,4 @@
 {
-	"extends": "@tsconfig/svelte/tsconfig.json",
-	"compilerOptions": {
-		"types": ["@atcute/bluesky/lexicons", "node"],
-		"target": "ESNext",
-		"useDefineForClassFields": true,
-		"module": "ESNext",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"moduleDetection": "force",
-		"noEmit": true
-	}
+	"files": [],
+	"references": [{ "path": "./tsconfig.lib.json" }, { "path": "./tsconfig.node.json" }]
 }

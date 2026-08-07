@@ -11,5 +11,5 @@
 		"allowImportingTsExtensions": true,
 		"erasableSyntaxOnly": true
 	},
-	"include": ["tsdown.config.ts", "vite.config.ts"]
+	"include": ["build"]
 }

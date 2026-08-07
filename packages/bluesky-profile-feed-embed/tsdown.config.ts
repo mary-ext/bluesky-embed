@@ -10,6 +10,8 @@ const shared = {
 	platform: 'neutral',
 	target: 'esnext',
 	minify: false,
+	// the root config is a solution file, so point at the project that owns `lib/`
+	tsconfig: 'tsconfig.lib.json',
 	dts: { eager: true },
 	plugins: [
 		staticSvelte({

@@ -38,6 +38,7 @@
 	},
 	"ignorePatterns": [
 		"pnpm-lock.yaml",
+		"**/.svelte-check/",
 		"/packages/svelte-site/pages/",
 		"/packages/bluesky-post-embed/themes/",
 		"/packages/bluesky-profile-card-embed/themes/",

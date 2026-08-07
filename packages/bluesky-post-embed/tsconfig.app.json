@@ -8,7 +8,10 @@
 		"resolveJsonModule": true,
 		"isolatedModules": true,
 		"moduleDetection": "force",
-		"noEmit": true
+		"erasableSyntaxOnly": true,
+		"noEmit": true,
+		"jsx": "react-jsx",
+		"jsxImportSource": "preact"
 	},
-	"include": ["lib", "../internal/types/svelte.d.ts"]
+	"include": ["src", "../internal/types/svelte.d.ts"]
 }

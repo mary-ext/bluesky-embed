@@ -23,7 +23,7 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "pnpm run check && tsdown && rsync -aHAX --delete ../../themes/ themes/",
-		"check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
+		"check": "svelte-check --tsgo --tsconfig ./tsconfig.lib.json && tsc -p tsconfig.app.json && tsc -p tsconfig.node.json",
 		"prepack": "pnpm run build"
 	},
 	"dependencies": {
@@ -39,7 +39,7 @@
 		"internal": "workspace:^",
 		"preact": "^10.28.0",
 		"svelte": "catalog:",
-		"svelte-check": "^4.3.4",
+		"svelte-check": "^4.7.4",
 		"tsdown": "^0.22.14",
 		"vite": "^8.2.1"
 	}

@@ -10,7 +10,7 @@ const shared = {
 	platform: 'neutral',
 	target: 'esnext',
 	minify: false,
-	tsconfig: 'tsconfig.build.json',
+	tsconfig: 'tsconfig.lib.json',
 	dts: { eager: true },
 	plugins: [
 		staticSvelte({

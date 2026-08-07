@@ -8,18 +8,19 @@
 		"./render/*": "./render/*",
 		"./types/*": "./types/*",
 		"./utils/*": "./utils/*",
-		"./vite/*": "./vite/*"
+		"./build/*": "./build/*"
 	},
 	"devDependencies": {
 		"@atcute/bluesky": "^2.1.1",
 		"@atcute/bluesky-richtext-parser": "^1.0.7",
 		"@atcute/bluesky-richtext-segmenter": "^2.0.4",
 		"@atcute/client": "^3.1.0",
+		"@oxc-project/types": "^0.143.0",
 		"@tsconfig/svelte": "^5.0.6",
-		"@types/estree": "^1.0.8",
+		"@types/node": "^24.10.1",
 		"esrap": "^2.3.0",
+		"rolldown": "^1.2.3",
 		"svelte": "catalog:",
-		"vite": "^7.2.6",
 		"zimmerframe": "^1.1.4"
 	},
 	"peerDependencies": {

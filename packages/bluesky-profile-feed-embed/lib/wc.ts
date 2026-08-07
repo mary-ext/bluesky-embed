@@ -1,4 +1,4 @@
-import { fetchProfileFeed, renderProfileFeed } from './core';
+import { fetchProfileFeed, renderProfileFeed } from './core.js';
 
 export class BlueskyProfileFeed extends HTMLElement {
 	connectedCallback() {

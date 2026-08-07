@@ -1,4 +1,4 @@
-import { fetchPost, renderPost } from './core';
+import { fetchPost, renderPost } from './core.js';
 
 export class BlueskyPost extends HTMLElement {
 	connectedCallback() {

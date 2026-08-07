@@ -21,8 +21,8 @@
 		"./themes/*": "./themes/*"
 	},
 	"scripts": {
-		"dev": "vite",
-		"build": "pnpm run check && vite build && rsync -aHAX --delete ../../themes/ themes/",
+		"dev": "tsdown --watch",
+		"build": "pnpm run check && tsdown && rsync -aHAX --delete ../../themes/ themes/",
 		"check": "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json",
 		"prepack": "pnpm run build"
 	},
@@ -33,11 +33,11 @@
 	},
 	"devDependencies": {
 		"@tsconfig/svelte": "^5.0.6",
+		"@tsdown/css": "^0.22.14",
 		"@types/node": "^24.10.1",
 		"internal": "workspace:^",
 		"svelte": "catalog:",
 		"svelte-check": "^4.3.4",
-		"vite": "^7.2.6",
-		"vite-plugin-dts": "^4.5.4"
+		"tsdown": "^0.22.14"
 	}
 }

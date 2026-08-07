@@ -26,8 +26,8 @@ the packages live under `packages/`:
 
 run these inside the package directory, e.g. `cd packages/bluesky-post-embed; pnpm run ...`
 
-- develop via `pnpm run dev` (vite)
-- build via `pnpm run build` (vite)
+- develop via `pnpm run dev` (vite / tsdown)
+- build via `pnpm run build` (tsdown)
 - typecheck via `pnpm run check` (svelte-check + tsc)
 
 ### code writing

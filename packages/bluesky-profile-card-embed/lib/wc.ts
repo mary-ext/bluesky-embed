@@ -1,4 +1,4 @@
-import { fetchProfileCard, renderProfileCard } from './core';
+import { fetchProfileCard, renderProfileCard } from './core.js';
 
 export class BlueskyProfileCard extends HTMLElement {
 	connectedCallback() {

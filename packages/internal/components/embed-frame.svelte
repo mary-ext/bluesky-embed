@@ -29,9 +29,10 @@
 		line-height: calc(var(--font-size) * 1.25);
 		font-family: var(--font-family);
 
-		:global(:where(*)),
-		:global(:where(*::before)),
-		:global(:where(*::after)) {
+		/* a pseudo-element is not a valid `:where()` argument, and `*` is already specificity 0 */
+		:global(*),
+		:global(*::before),
+		:global(*::after) {
 			box-sizing: border-box;
 			margin: 0;
 			padding: 0;

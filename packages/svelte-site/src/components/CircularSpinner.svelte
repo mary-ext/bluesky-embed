@@ -1,9 +1,3 @@
-<script lang="ts">
-	interface Props {}
-
-	let {}: Props = $props();
-</script>
-
 <svg viewBox="0 0 32 32" class="circular-spinner">
 	<circle cx="16" cy="16" fill="none" r="14" stroke-width="4" class="background" />
 	<circle

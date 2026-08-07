@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import type { Snippet, Component } from 'svelte';
+	import type { Component, Snippet } from 'svelte';
 
 	type SvelteComponentModule<C extends Component = Component> = { default: C };
 	type LoaderFunction<C extends Component = Component> = () => Promise<SvelteComponentModule<C>>;

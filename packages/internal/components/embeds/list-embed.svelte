@@ -1,10 +1,12 @@
 <script lang="ts" module>
 	const getPurpose = (purpose: AppBskyGraphDefs.ListPurpose) => {
 		switch (purpose) {
-			case 'app.bsky.graph.defs#curatelist':
+			case 'app.bsky.graph.defs#curatelist': {
 				return `User list`;
-			case 'app.bsky.graph.defs#modlist':
+			}
+			case 'app.bsky.graph.defs#modlist': {
 				return `Moderation list`;
+			}
 		}
 
 		return `Unknown list`;

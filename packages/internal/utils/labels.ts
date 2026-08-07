@@ -57,4 +57,6 @@ export const findLabel = (labels: Label[] | undefined, authorDid: At.Did): Label
 			return def;
 		}
 	}
+
+	return undefined;
 };

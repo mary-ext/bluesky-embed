@@ -19,6 +19,8 @@ the packages live under `packages/`:
 #### root-level tasks
 
 - format via `pnpm run fmt` (oxfmt)
+- lint via `pnpm run lint` (oxlint)
+  - this does not fully cover Svelte components, use `pnpm run check` afterwards.
 
 #### package-level tasks
 

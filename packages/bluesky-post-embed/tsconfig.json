@@ -12,6 +12,5 @@
 		"jsx": "react-jsx",
 		"jsxImportSource": "preact"
 	},
-	"include": ["lib", "src"],
-	"references": [{ "path": "./tsconfig.node.json" }]
+	"include": ["lib", "src", "../internal/types/svelte.d.ts"]
 }

@@ -1,0 +1,57 @@
+{
+	"$schema": "https://unpkg.com/oxlint/configuration_schema.json",
+	"ignorePatterns": ["packages/svelte-site/pages/**"],
+	"options": {
+		"typeAware": true,
+		"typeCheck": true
+	},
+	"plugins": ["eslint", "typescript", "unicorn", "oxc", "import"],
+	"categories": {
+		"correctness": "error",
+		"suspicious": "warn",
+		"perf": "warn"
+	},
+	"rules": {
+		"curly": "warn",
+		"no-array-constructor": "error",
+		"no-await-in-loop": "off",
+		"no-case-declarations": "error",
+		"no-control-regex": "off",
+		"no-empty": "warn",
+		"no-prototype-builtins": "warn",
+		"no-regex-spaces": "warn",
+		"no-shadow": "off",
+		"no-underscore-dangle": "off",
+		"prefer-const": ["warn", { "destructuring": "all" }],
+		"prefer-rest-params": "warn",
+		"prefer-spread": "warn",
+		"sort-imports": ["warn", { "ignoreDeclarationSort": true }],
+		"import/no-duplicates": ["error", { "preferInline": true }],
+		"import/no-empty-named-blocks": "off",
+		"import/no-unassigned-import": "off",
+		"typescript/consistent-type-imports": [
+			"warn",
+			{ "prefer": "type-imports", "fixStyle": "inline-type-imports", "disallowTypeAnnotations": false }
+		],
+		"typescript/no-explicit-any": "warn",
+		"typescript/no-misused-promises": "warn",
+		"typescript/no-namespace": ["error", { "allowDeclarations": true }],
+		"typescript/no-require-imports": "error",
+		"typescript/require-await": "warn",
+		"typescript/restrict-plus-operands": "warn",
+		"unicorn/prefer-add-event-listener": "off",
+		"unicorn/switch-case-braces": ["warn", "always"]
+	},
+	"overrides": [
+		{
+			// the entry points widen plain strings into atcute's branded at-uri and identifier
+			// types. the published options stay unbranded so callers do not have to cast, and the
+			// AppView rejects malformed values. the directive lives here rather than inline
+			// because the library bundles are unminified and would ship the comment.
+			"files": ["packages/*/lib/core.ts"],
+			"rules": {
+				"typescript/no-unsafe-type-assertion": "off"
+			}
+		}
+	]
+}

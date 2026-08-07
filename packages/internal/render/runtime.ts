@@ -4,6 +4,7 @@ export function push(content: string): void {
 	output += content;
 }
 
+// oxlint-disable-next-line typescript/no-explicit-any
 export function render(component: (...args: any[]) => unknown, props: unknown): string {
 	try {
 		output = '';
@@ -19,6 +20,7 @@ const ATTR_REGEX = /[&"<]/g;
 const CONTENT_REGEX = /[&<]/g;
 
 export function escape(value: unknown, isAttribute = false): string {
+	// oxlint-disable-next-line typescript/no-base-to-string
 	const input = String(value ?? '');
 	const pattern = isAttribute ? ATTR_REGEX : CONTENT_REGEX;
 	pattern.lastIndex = 0;
@@ -45,6 +47,7 @@ export function attr(name: string, value: unknown, isBoolean = false): string {
 }
 
 export function attr_class(value: unknown, hash?: string): string {
+	// oxlint-disable-next-line typescript/no-base-to-string
 	let className = value == null ? '' : String(value);
 	if (hash) {
 		className = className ? `${className} ${hash}` : hash;
@@ -54,6 +57,7 @@ export function attr_class(value: unknown, hash?: string): string {
 }
 
 export function attr_style(value: unknown): string {
+	// oxlint-disable-next-line typescript/no-base-to-string
 	const style = value == null ? null : String(value);
 	return style ? ` style="${escape(style, true)}"` : '';
 }

@@ -1,5 +1,5 @@
 import '@atcute/bluesky/lexicons';
-import { simpleFetchHandler, XRPC, XRPCError } from '@atcute/client';
+import { XRPC, XRPCError, simpleFetchHandler } from '@atcute/client';
 import type { At } from '@atcute/client/lexicons';
 
 import { render } from 'internal/render/runtime.js';

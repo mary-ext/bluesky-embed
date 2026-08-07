@@ -1,5 +1,5 @@
 import '@atcute/bluesky/lexicons';
-import { simpleFetchHandler, XRPC, XRPCError } from '@atcute/client';
+import { XRPC, XRPCError, simpleFetchHandler } from '@atcute/client';
 import type { At } from '@atcute/client/lexicons';
 
 import { render } from 'internal/render/runtime.js';
@@ -45,7 +45,7 @@ export const fetchProfileFeed = async (opts: ProfileFeedFetchOptions): Promise<P
 		rpc
 			.get('app.bsky.actor.getProfile', {
 				signal: opts.signal,
-				params: { actor: actor as At.Identifier },
+				params: { actor: actor },
 			})
 			.catch((err) => {
 				if (err instanceof XRPCError) {

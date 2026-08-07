@@ -37,6 +37,8 @@ export default defineConfig({
 					// Make sure the relevant types are present
 					return { content: `import '@atcute/bluesky/lexicons';\n${content}` };
 				}
+
+				return undefined;
 			},
 		}),
 	],

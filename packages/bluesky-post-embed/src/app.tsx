@@ -11,7 +11,7 @@ const App = () => {
 
 	useEffect(() => {
 		if (state && state.uri === uri) {
-			return;
+			return undefined;
 		}
 
 		const controller = new AbortController();
@@ -21,7 +21,7 @@ const App = () => {
 			allowUnauthenticated: true,
 		});
 
-		promise.then((data) => {
+		void promise.then((data) => {
 			setState({ uri, data });
 		});
 

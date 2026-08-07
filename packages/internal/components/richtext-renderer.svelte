@@ -1,5 +1,5 @@
 <script lang="ts" module>
-	import { segmentize, type Facet, type FacetFeature } from '@atcute/bluesky-richtext-segmenter';
+	import { type Facet, type FacetFeature, segmentize } from '@atcute/bluesky-richtext-segmenter';
 
 	import { getHashtagUrl, getProfileUrl } from '../utils/bsky-url';
 

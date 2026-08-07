@@ -37,6 +37,8 @@
 			items.push({ post: post, parent: null });
 			curr = curr.parent;
 		}
+
+		// oxlint-disable-next-line unicorn/no-array-reverse -- safe mutation
 		return items.reverse();
 	};
 </script>

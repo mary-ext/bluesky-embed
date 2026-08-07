@@ -17,7 +17,9 @@ import type {
 	SpreadElement,
 } from 'estree';
 import type { Plugin } from 'vite';
-import { walk, type Context, type Visitors } from 'zimmerframe';
+import { type Context, type Visitors, walk } from 'zimmerframe';
+
+/* oxlint-disable typescript/no-unsafe-type-assertion -- AST manipulation */
 
 const HYDRATION_COMMENT = /<!--(?:\[-?\d*|\]|)-->/g;
 
@@ -45,13 +47,17 @@ export function staticSvelte({ cssHashPrefix, root }: StaticSvelteOptions): Plug
 		},
 		load(id) {
 			const css = stylesheets.get(id);
-			if (css === undefined) return null;
+			if (css === undefined) {
+				return null;
+			}
 
 			this.addWatchFile(id.slice(0, -4));
 			return { code: css };
 		},
 		transform(source, id) {
-			if (!id.endsWith('.svelte')) return null;
+			if (!id.endsWith('.svelte')) {
+				return null;
+			}
 
 			const result = compile(source, {
 				generate: 'server',
@@ -72,43 +78,47 @@ export function staticSvelte({ cssHashPrefix, root }: StaticSvelteOptions): Plug
 				stylesheets.set(cssId, result.css.code);
 			}
 
-			for (const warning of result.warnings) this.warn(warning);
+			for (const warning of result.warnings) {
+				this.warn(warning);
+			}
 			return { code };
 		},
 	};
 }
+
+const isRenderer = (node: Node) => node.type === 'Identifier' && node.name === RENDERER;
+
+const isMethod = (node: Node, object: string, name: string) =>
+	node.type === 'MemberExpression' &&
+	!node.computed &&
+	node.object.type === 'Identifier' &&
+	node.object.name === object &&
+	node.property.type === 'Identifier' &&
+	node.property.name === name;
+
+const isEmptyString = (node: Node) =>
+	(node.type === 'Literal' && node.value === '') ||
+	(node.type === 'TemplateLiteral' && node.expressions.length === 0 && node.quasis[0].value.raw === '');
+
+const isSlots = (node: Property | SpreadElement) =>
+	node.type === 'Property' &&
+	!node.computed &&
+	((node.key.type === 'Identifier' && node.key.name === '$$slots') ||
+		(node.key.type === 'Literal' && node.key.value === '$$slots'));
 
 export function transformServerOutput(program: Program, filename = 'component.svelte'): string {
 	const fail: (message: string) => never = (message) => {
 		throw new Error(`${filename}: ${message}`);
 	};
 
-	const isRenderer = (node: Node) => node.type === 'Identifier' && node.name === RENDERER;
-
-	const isMethod = (node: Node, object: string, name: string) =>
-		node.type === 'MemberExpression' &&
-		!node.computed &&
-		node.object.type === 'Identifier' &&
-		node.object.name === object &&
-		node.property.type === 'Identifier' &&
-		node.property.name === name;
-
-	const isEmptyString = (node: Node) =>
-		(node.type === 'Literal' && node.value === '') ||
-		(node.type === 'TemplateLiteral' && node.expressions.length === 0 && node.quasis[0].value.raw === '');
-
-	const isSlots = (node: Property | SpreadElement) =>
-		node.type === 'Property' &&
-		!node.computed &&
-		((node.key.type === 'Identifier' && node.key.name === '$$slots') ||
-			(node.key.type === 'Literal' && node.key.value === '$$slots'));
-
 	/**
 	 * Replaces a `{ $$renderer.component((renderer) => { ... }) }` function body with the body of the callback.
 	 * Components without state have no wrapper, their body stays as it is.
 	 */
 	const unwrapComponent = (body: BlockStatement): BlockStatement => {
-		if (body.body.length !== 1) return body;
+		if (body.body.length !== 1) {
+			return body;
+		}
 
 		const [statement] = body.body;
 		if (statement.type !== 'ExpressionStatement' || statement.expression.type !== 'CallExpression') {
@@ -116,7 +126,9 @@ export function transformServerOutput(program: Program, filename = 'component.sv
 		}
 
 		const call = statement.expression;
-		if (!isMethod(call.callee, RENDERER, 'component')) return body;
+		if (!isMethod(call.callee, RENDERER, 'component')) {
+			return body;
+		}
 
 		const callback = call.arguments[0];
 		if (
@@ -135,7 +147,9 @@ export function transformServerOutput(program: Program, filename = 'component.sv
 		{ next, visit }: WalkContext,
 	): Node | void => {
 		const first = node.params[0];
-		if (!first || !isRenderer(first)) return next();
+		if (!first || !isRenderer(first)) {
+			return next();
+		}
 
 		const params = node.params.slice(1).map((param) => visit(param) as Pattern);
 		const body = visit(node.body.type === 'BlockStatement' ? unwrapComponent(node.body) : node.body);
@@ -147,14 +161,18 @@ export function transformServerOutput(program: Program, filename = 'component.sv
 
 	const visitors: Visitors<Node, State> = {
 		ImportDeclaration(node, { next }) {
-			if (node.source.value !== 'svelte/internal/server') return next();
+			if (node.source.value !== 'svelte/internal/server') {
+				return next();
+			}
 
 			return { ...node, source: { type: 'Literal', value: RUNTIME_MODULE } };
 		},
 
 		ObjectExpression(node, { next, visit }) {
 			const properties = node.properties.filter((property) => !isSlots(property));
-			if (properties.length === node.properties.length) return next();
+			if (properties.length === node.properties.length) {
+				return next();
+			}
 
 			return {
 				...node,
@@ -225,20 +243,28 @@ export function transformServerOutput(program: Program, filename = 'component.sv
 		ArrowFunctionExpression: stripRenderer,
 
 		Literal(node, { state }) {
-			if (!state.strip || typeof node.value !== 'string') return;
+			if (!state.strip || typeof node.value !== 'string') {
+				return undefined;
+			}
 
 			const value = strip(node.value);
-			if (value === node.value) return;
+			if (value === node.value) {
+				return undefined;
+			}
 
 			// `raw` is left out on purpose, esrap quotes the value for us.
 			return { type: 'Literal', value };
 		},
 
 		TemplateElement(node, { state }) {
-			if (!state.strip) return;
+			if (!state.strip) {
+				return undefined;
+			}
 
 			const raw = strip(node.value.raw);
-			if (raw === node.value.raw) return;
+			if (raw === node.value.raw) {
+				return undefined;
+			}
 
 			return {
 				...node,

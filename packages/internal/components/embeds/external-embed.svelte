@@ -7,7 +7,9 @@
 			try {
 				// @ts-expect-error: `'parse' in URL` is giving truthy
 				url = new URL(str);
-			} catch {}
+			} catch {
+				// noop
+			}
 		}
 
 		if (url && (url.protocol === 'https:' || url.protocol === 'http:')) {

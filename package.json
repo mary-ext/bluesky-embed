@@ -1,11 +1,14 @@
 {
 	"private": true,
 	"scripts": {
-		"fmt": "oxfmt"
+		"fmt": "oxfmt",
+		"lint": "oxlint"
 	},
 	"devDependencies": {
 		"@changesets/cli": "^2.29.8",
 		"oxfmt": "^0.62.0",
+		"oxlint": "^1.77.0",
+		"oxlint-tsgolint": "^7.0.2001",
 		"svelte": "catalog:",
 		"typescript": "~5.8.3"
 	}

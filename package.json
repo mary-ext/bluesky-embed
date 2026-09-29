@@ -5,7 +5,7 @@
 		"lint": "oxlint"
 	},
 	"devDependencies": {
-		"@changesets/cli": "^2.29.8",
+		"@changesets/cli": "^3.0.3",
 		"@typescript/native": "npm:typescript@~7.0.2",
 		"oxfmt": "^0.70.0",
 		"oxlint": "^1.85.0",

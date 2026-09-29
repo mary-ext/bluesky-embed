@@ -1,7 +1,11 @@
 <script lang="ts" module>
-	import { type Facet, type FacetFeature, segmentize } from '@atcute/bluesky-richtext-segmenter';
+	import type { AppBskyRichtextFacet } from '@atcute/bluesky';
+	import { segmentize } from '@atcute/bluesky-richtext-segmenter';
 
 	import { getHashtagUrl, getProfileUrl } from '../utils/bsky-url';
+
+	type Facet = AppBskyRichtextFacet.Main;
+	type FacetFeature = Facet['features'][number];
 
 	const grabFirstSupported = (features: FacetFeature[] | undefined): FacetFeature | undefined => {
 		return features?.find(

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { AppBskyEmbedVideo, AppBskyFeedDefs } from '@atcute/client/lexicons';
+	import type { AppBskyEmbedVideo, AppBskyFeedDefs } from '@atcute/bluesky';
 
 	import { getPostUrl } from '../../utils/bsky-url';
 	import { parseAtUri } from '../../utils/syntax/at-url';

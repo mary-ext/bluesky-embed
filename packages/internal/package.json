@@ -14,10 +14,11 @@
 		"check": "svelte-check --tsgo --tsconfig ./tsconfig.lib.json && tsc -p tsconfig.node.json"
 	},
 	"devDependencies": {
-		"@atcute/bluesky": "^2.1.1",
-		"@atcute/bluesky-richtext-parser": "^1.0.7",
-		"@atcute/bluesky-richtext-segmenter": "^2.0.4",
-		"@atcute/client": "^3.1.0",
+		"@atcute/atproto": "^4.0.4",
+		"@atcute/bluesky": "^4.0.22",
+		"@atcute/bluesky-richtext-parser": "^2.1.2",
+		"@atcute/bluesky-richtext-segmenter": "^3.0.2",
+		"@atcute/lexicons": "^2.1.1",
 		"@oxc-project/types": "^0.151.0",
 		"@tsconfig/svelte": "^5.0.8",
 		"@types/node": "^26.6.3",
@@ -28,10 +29,10 @@
 		"zimmerframe": "^1.1.5"
 	},
 	"peerDependencies": {
-		"@atcute/bluesky": "^1.0.9",
-		"@atcute/bluesky-richtext-parser": "^1.0.7",
-		"@atcute/bluesky-richtext-segmenter": "^1.0.5",
-		"@atcute/client": "^2.0.6",
+		"@atcute/bluesky": "^4.0.22",
+		"@atcute/bluesky-richtext-parser": "^2.1.2",
+		"@atcute/bluesky-richtext-segmenter": "^3.0.2",
+		"@atcute/lexicons": "^2.1.1",
 		"svelte": "catalog:"
 	},
 	"peerDependenciesMeta": {

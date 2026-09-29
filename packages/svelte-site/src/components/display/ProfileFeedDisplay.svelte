@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 
-	import type { AppBskyActorDefs } from '@atcute/client/lexicons';
+	import type { AppBskyActorDefs } from '@atcute/bluesky';
 	import { fetchProfileFeed as fetch_profile_feed } from 'bluesky-profile-feed-embed/core';
 
 	import { escape_html } from '../../lib/html';

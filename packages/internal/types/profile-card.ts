@@ -1,4 +1,4 @@
-import type { AppBskyActorDefs } from '@atcute/client/lexicons';
+import type { AppBskyActorDefs } from '@atcute/bluesky';
 
 export interface ProfileCardData {
 	profile: AppBskyActorDefs.ProfileViewDetailed | null;

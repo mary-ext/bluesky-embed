@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { AppBskyFeedDefs, AppBskyFeedPost } from '@atcute/client/lexicons';
+	import type { AppBskyFeedDefs, AppBskyFeedPost } from '@atcute/bluesky';
 
 	import { getPostUrl, getProfileUrl } from '../utils/bsky-url';
 	import { formatLongDate, formatShortDate } from '../utils/date';
@@ -25,7 +25,7 @@
 	const authorUrl = getProfileUrl(author.did);
 	const authorName = author.displayName?.trim();
 
-	const record = post.record as AppBskyFeedPost.Record;
+	const record = post.record as AppBskyFeedPost.Main;
 	const postUrl = getPostUrl(author.did, parseAtUri(post.uri).rkey);
 
 	const replyCount = post.replyCount || 0;

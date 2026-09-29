@@ -23,14 +23,7 @@
 </script>
 
 <script lang="ts">
-	import type {
-		AppBskyEmbedExternal,
-		AppBskyEmbedImages,
-		AppBskyEmbedRecord,
-		AppBskyEmbedVideo,
-		AppBskyFeedDefs,
-		Brand,
-	} from '@atcute/client/lexicons';
+	import { type AppBskyFeedDefs, type MediaEmbed, type RecordEmbed, unwrapEmbed } from '@atcute/bluesky';
 
 	import { findLabel } from '../../utils/labels';
 	import { parseAtUri } from '../../utils/syntax/at-url';
@@ -45,8 +38,6 @@
 	import VideoEmbed from './video-embed.svelte';
 
 	type Embed = NonNullable<AppBskyFeedDefs.PostView['embed']>;
-	type MediaEmbed = Brand.Union<AppBskyEmbedExternal.View | AppBskyEmbedImages.View | AppBskyEmbedVideo.View>;
-	type RecordEmbed = AppBskyEmbedRecord.View;
 
 	interface Props {
 		post?: AppBskyFeedDefs.PostView;
@@ -55,16 +46,16 @@
 	}
 
 	const { post, embed, large = false }: Props = $props();
+
+	const { media, record } = unwrapEmbed(embed);
 </script>
 
 <div class="embeds">
-	{#if embed.$type === 'app.bsky.embed.recordWithMedia#view'}
-		{@render Media(embed.media)}
-		{@render Record(embed.record)}
-	{:else if embed.$type === 'app.bsky.embed.record#view'}
-		{@render Record(embed)}
-	{:else}
-		{@render Media(embed)}
+	{#if media}
+		{@render Media(media)}
+	{/if}
+	{#if record}
+		{@render Record(record)}
 	{/if}
 </div>
 
@@ -84,9 +75,7 @@
 	</ContentHider>
 {/snippet}
 
-{#snippet Record(embed: RecordEmbed)}
-	{@const record = embed.record}
-
+{#snippet Record(record: RecordEmbed)}
 	{#if record.$type === 'app.bsky.embed.record#viewRecord'}
 		<QuoteEmbed embed={record} {large} />
 	{:else if record.$type === 'app.bsky.feed.defs#generatorView'}

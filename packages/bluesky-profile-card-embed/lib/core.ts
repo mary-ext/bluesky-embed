@@ -1,6 +1,5 @@
-import '@atcute/bluesky/lexicons';
-import { XRPC, XRPCError, simpleFetchHandler } from '@atcute/client';
-import type { At } from '@atcute/client/lexicons';
+import { Client, ClientResponseError, ok, simpleFetchHandler } from '@atcute/client';
+import type { ActorIdentifier } from '@atcute/lexicons';
 
 import { render } from 'internal/render/runtime.js';
 import type { ProfileCardData } from 'internal/types/profile-card.js';
@@ -33,22 +32,24 @@ export const fetchProfileCard = async (opts: ProfileCardFetchOptions): Promise<P
 	const actor = opts.actor;
 	const allowUnauthenticated = opts.allowUnauthenticated ?? false;
 
-	const rpc = new XRPC({ handler: simpleFetchHandler({ service: opts.serviceUri ?? DEFAULT_APPVIEW_URL }) });
+	const rpc = new Client({
+		handler: simpleFetchHandler({ service: opts.serviceUri ?? DEFAULT_APPVIEW_URL }),
+	});
 
-	const { data: profile } = await rpc
-		.get('app.bsky.actor.getProfile', {
+	const profile = await ok(
+		rpc.get('app.bsky.actor.getProfile', {
 			signal: opts.signal,
-			params: { actor: actor as At.Identifier },
-		})
-		.catch((err) => {
-			if (err instanceof XRPCError) {
-				if (err.kind === 'InvalidRequest' && err.description === 'Profile not found') {
-					return { data: null };
-				}
+			params: { actor: actor as ActorIdentifier },
+		}),
+	).catch((err) => {
+		if (err instanceof ClientResponseError) {
+			if (err.error === 'InvalidRequest' && err.description === 'Profile not found') {
+				return null;
 			}
+		}
 
-			return Promise.reject(err);
-		});
+		return Promise.reject(err);
+	});
 
 	return { profile: profile, allowUnauthenticated };
 };

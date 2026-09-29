@@ -1,7 +1,7 @@
 {
 	"extends": "@tsconfig/svelte/tsconfig.json",
 	"compilerOptions": {
-		"types": [],
+		"types": ["@atcute/bluesky"],
 		"target": "ESNext",
 		"useDefineForClassFields": true,
 		"module": "ESNext",

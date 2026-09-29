@@ -1,37 +1,5 @@
-<script lang="ts" module>
-	const getPostImage = (embed: AppBskyFeedDefs.PostView['embed']): AppBskyEmbedImages.View | undefined => {
-		if (embed) {
-			if (embed.$type === 'app.bsky.embed.images#view') {
-				return embed;
-			}
-
-			if (embed.$type === 'app.bsky.embed.recordWithMedia#view') {
-				return getPostImage(embed.media);
-			}
-		}
-	};
-
-	const getPostVideo = (embed: AppBskyFeedDefs.PostView['embed']): AppBskyEmbedVideo.View | undefined => {
-		if (embed) {
-			if (embed.$type === 'app.bsky.embed.video#view') {
-				return embed;
-			}
-
-			if (embed.$type === 'app.bsky.embed.recordWithMedia#view') {
-				return getPostVideo(embed.media);
-			}
-		}
-	};
-</script>
-
 <script lang="ts">
-	import type {
-		AppBskyEmbedImages,
-		AppBskyEmbedRecord,
-		AppBskyEmbedVideo,
-		AppBskyFeedDefs,
-		AppBskyFeedPost,
-	} from '@atcute/client/lexicons';
+	import { type AppBskyEmbedRecord, type AppBskyFeedPost, unwrapMediaEmbed } from '@atcute/bluesky';
 
 	import { getPostUrl } from '../../utils/bsky-url';
 	import { formatShortDate } from '../../utils/date';
@@ -48,15 +16,15 @@
 
 	const { embed: quote, large = false }: Props = $props();
 
-	const record = quote.value as AppBskyFeedPost.Record;
+	const record = quote.value as AppBskyFeedPost.Main;
 	const text = record.text.trim();
 
 	const author = quote.author;
 	const authorName = author.displayName?.trim();
 
-	const embed = quote.embeds?.[0];
-	const image = getPostImage(embed);
-	const video = getPostVideo(embed);
+	const media = unwrapMediaEmbed(quote.embeds?.[0]);
+	const image = media?.$type === 'app.bsky.embed.images#view' ? media : undefined;
+	const video = media?.$type === 'app.bsky.embed.video#view' ? media : undefined;
 
 	const postUrl = getPostUrl(author.did, parseAtUri(quote.uri).rkey);
 

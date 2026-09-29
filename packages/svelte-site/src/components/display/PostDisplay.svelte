@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onDestroy } from 'svelte';
 
-	import type { AppBskyFeedDefs, AppBskyFeedPost } from '@atcute/client/lexicons';
+	import type { AppBskyFeedDefs, AppBskyFeedPost } from '@atcute/bluesky';
 	import { fetchPost as fetch_post } from 'bluesky-post-embed/core';
 
 	import { getPostUrl } from 'internal/utils/bsky-url.ts';
@@ -66,7 +66,7 @@
 
 	const get_markup = (post: AppBskyFeedDefs.PostView) => {
 		const author = post.author;
-		const record = post.record as AppBskyFeedPost.Record;
+		const record = post.record as AppBskyFeedPost.Main;
 
 		return `<bluesky-post src="${escape_html(post.uri)}">
   <blockquote class="bluesky-post-fallback">

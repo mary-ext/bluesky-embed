@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { AppBskyFeedDefs } from '@atcute/client/lexicons';
+	import type { AppBskyFeedDefs } from '@atcute/bluesky';
 
 	import { getFeedUrl } from '../../utils/bsky-url';
 	import { parseAtUri } from '../../utils/syntax/at-url';

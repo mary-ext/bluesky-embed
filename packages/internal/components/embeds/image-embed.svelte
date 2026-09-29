@@ -3,7 +3,7 @@
 </script>
 
 <script lang="ts">
-	import type { AppBskyEmbedImages } from '@atcute/client/lexicons';
+	import type { AppBskyEmbedImages } from '@atcute/bluesky';
 
 	interface Props {
 		embed: AppBskyEmbedImages.View;

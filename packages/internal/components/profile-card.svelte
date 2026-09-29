@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { AppBskyActorDefs } from '@atcute/client/lexicons';
+	import type { AppBskyActorDefs } from '@atcute/bluesky';
 
 	import { getProfileUrl } from '../utils/bsky-url';
 	import { findLabel } from '../utils/labels';

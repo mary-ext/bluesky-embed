@@ -21,7 +21,7 @@
 </script>
 
 <script lang="ts">
-	import type { AppBskyEmbedExternal } from '@atcute/client/lexicons';
+	import type { AppBskyEmbedExternal } from '@atcute/bluesky';
 
 	interface Props {
 		embed: AppBskyEmbedExternal.View;

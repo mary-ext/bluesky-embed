@@ -14,7 +14,7 @@
 </script>
 
 <script lang="ts">
-	import type { AppBskyGraphDefs } from '@atcute/client/lexicons';
+	import type { AppBskyGraphDefs } from '@atcute/bluesky';
 
 	import { getFeedUrl } from '../../utils/bsky-url';
 	import { parseAtUri } from '../../utils/syntax/at-url';

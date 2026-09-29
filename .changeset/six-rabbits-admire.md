@@ -4,4 +4,4 @@
 'bluesky-post-embed': patch
 ---
 
-upgrade atcute dependencies
+upgrade atcute to client v5 and bluesky v4

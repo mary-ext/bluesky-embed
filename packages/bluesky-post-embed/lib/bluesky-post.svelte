@@ -1,7 +1,7 @@
 <script lang="ts" module>
-	import type { AppBskyFeedDefs, AppBskyFeedGetPostThread } from '@atcute/client/lexicons';
+	import type { AppBskyFeedDefs, AppBskyFeedGetPostThread } from '@atcute/bluesky';
 
-	type ThreadData = AppBskyFeedGetPostThread.Output['thread'];
+	type ThreadData = AppBskyFeedGetPostThread.$output['thread'];
 	type PostView = AppBskyFeedDefs.PostView;
 
 	const unwrapPostThread = (data: ThreadData, contextless: boolean, allowUnauthenticated: boolean) => {

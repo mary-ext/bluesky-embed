@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { AppBskyGraphDefs, AppBskyGraphStarterpack } from '@atcute/client/lexicons';
+	import type { AppBskyGraphDefs, AppBskyGraphStarterpack } from '@atcute/bluesky';
 
 	import { getStarterpackImgUrl, getStarterpackUrl } from '../../utils/bsky-url';
 	import { parseAtUri } from '../../utils/syntax/at-url';
@@ -11,7 +11,7 @@
 
 	const { embed: pack, large = false }: Props = $props();
 
-	const record = pack.record as AppBskyGraphStarterpack.Record;
+	const record = pack.record as AppBskyGraphStarterpack.Main;
 
 	const creator = pack.creator;
 	const creatorDid = creator.did;

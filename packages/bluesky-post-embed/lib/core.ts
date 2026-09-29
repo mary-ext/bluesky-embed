@@ -1,6 +1,5 @@
-import '@atcute/bluesky/lexicons';
-import { XRPC, XRPCError, simpleFetchHandler } from '@atcute/client';
-import type { At } from '@atcute/client/lexicons';
+import { Client, ClientResponseError, ok, simpleFetchHandler } from '@atcute/client';
+import type { ResourceUri } from '@atcute/lexicons';
 
 import { render } from 'internal/render/runtime.js';
 import type { PostData } from 'internal/types/post.js';
@@ -36,27 +35,29 @@ export interface PostFetchOptions {
 }
 
 export const fetchPost = async (opts: PostFetchOptions): Promise<PostData> => {
-	const rpc = new XRPC({ handler: simpleFetchHandler({ service: opts.serviceUri ?? DEFAULT_APPVIEW_URL }) });
+	const rpc = new Client({
+		handler: simpleFetchHandler({ service: opts.serviceUri ?? DEFAULT_APPVIEW_URL }),
+	});
 	const contextless = opts.contextless ?? false;
 
-	const { data } = await rpc
-		.get('app.bsky.feed.getPostThread', {
+	const data = await ok(
+		rpc.get('app.bsky.feed.getPostThread', {
 			signal: opts.signal,
 			params: {
-				uri: opts.uri as At.ResourceUri,
+				uri: opts.uri as ResourceUri,
 				parentHeight: !contextless ? 2 : 1,
 				depth: 0,
 			},
-		})
-		.catch((err) => {
-			if (err instanceof XRPCError) {
-				if (err.kind === 'NotFound') {
-					return { data: null };
-				}
+		}),
+	).catch((err) => {
+		if (err instanceof ClientResponseError) {
+			if (err.error === 'NotFound') {
+				return null;
 			}
+		}
 
-			return Promise.reject(err);
-		});
+		return Promise.reject(err);
+	});
 
 	const thread = data?.thread.$type === 'app.bsky.feed.defs#threadViewPost' ? data.thread : null;
 

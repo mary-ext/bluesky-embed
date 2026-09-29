@@ -2,10 +2,6 @@ import { type UserConfig, defineConfig } from 'tsdown';
 
 import { staticSvelte } from 'internal/build/static-svelte.ts';
 
-const RUNTIME_DEPS = ['@atcute/client', '@atcute/bluesky-richtext-segmenter'];
-
-const LEXICON_SUBPATHS = /^@atcute\/(bluesky|client)\/lexicons$/;
-
 const shared = {
 	platform: 'neutral',
 	target: 'esnext',
@@ -24,11 +20,6 @@ export default defineConfig([
 	{
 		...shared,
 		entry: { core: 'lib/core.ts' },
-		deps: {
-			neverBundle: RUNTIME_DEPS,
-			alwaysBundle: [LEXICON_SUBPATHS],
-			dts: { neverBundle: [LEXICON_SUBPATHS] },
-		},
 		css: {
 			fileName: 'core.css',
 			target: false,
@@ -37,6 +28,6 @@ export default defineConfig([
 	{
 		...shared,
 		entry: { wc: 'lib/wc.ts' },
-		deps: { neverBundle: [...RUNTIME_DEPS, './core.js'] },
+		deps: { neverBundle: ['./core.js'] },
 	},
 ]);

@@ -18,14 +18,14 @@
 		"@atcute/bluesky-richtext-parser": "^1.0.7",
 		"@atcute/bluesky-richtext-segmenter": "^2.0.4",
 		"@atcute/client": "^3.1.0",
-		"@oxc-project/types": "^0.143.0",
-		"@tsconfig/svelte": "^5.0.6",
-		"@types/node": "^24.10.1",
-		"esrap": "^2.3.0",
-		"rolldown": "^1.2.3",
+		"@oxc-project/types": "^0.151.0",
+		"@tsconfig/svelte": "^5.0.8",
+		"@types/node": "^26.6.3",
+		"esrap": "^2.4.0",
+		"rolldown": "^1.2.11",
 		"svelte": "catalog:",
-		"svelte-check": "^4.7.4",
-		"zimmerframe": "^1.1.4"
+		"svelte-check": "^4.7.6",
+		"zimmerframe": "^1.1.5"
 	},
 	"peerDependencies": {
 		"@atcute/bluesky": "^1.0.9",

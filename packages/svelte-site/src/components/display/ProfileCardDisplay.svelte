@@ -53,10 +53,10 @@
 		return `<bluesky-profile-card actor="${escape_html(profile.did)}">
   <a target="_blank" href="${escape_html(url)}" class="bluesky-profile-card-fallback">
     ${
-					profile.displayName?.trim()
-						? `Follow ${escape_html(profile.displayName)} (@${escape_html(profile.handle)}) on Bluesky`
-						: `Follow @${escape_html(profile.handle)} on Bluesky`
-				}
+			profile.displayName?.trim()
+				? `Follow ${escape_html(profile.displayName)} (@${escape_html(profile.handle)}) on Bluesky`
+				: `Follow @${escape_html(profile.handle)} on Bluesky`
+		}
   </a>
 </bluesky-profile-card>
 `;

@@ -6,6 +6,7 @@
 	import { tokenize } from '@atcute/bluesky-richtext-parser';
 
 	import { getHashtagUrl, getProfileUrl } from '../utils/bsky-url';
+	import { safeParseUrl } from '../utils/url';
 
 	interface Props {
 		text: string;
@@ -16,7 +17,7 @@
 
 <p class="bsky-rich-text">
 	{#each tokenize(text) as token}
-		{#if token.type === 'autolink'}
+		{#if token.type === 'autolink' && safeParseUrl(token.url) !== null}
 			<a target="_blank" href={token.url} rel="noopener nofollow" class="bsky-rich-text__link">
 				{token.raw.replace(HTTP_RE, '')}
 			</a>

@@ -3,17 +3,25 @@
 	import { segmentize } from '@atcute/bluesky-richtext-segmenter';
 
 	import { getHashtagUrl, getProfileUrl } from '../utils/bsky-url';
+	import { safeParseUrl } from '../utils/url';
 
 	type Facet = AppBskyRichtextFacet.Main;
 	type FacetFeature = Facet['features'][number];
 
 	const grabFirstSupported = (features: FacetFeature[] | undefined): FacetFeature | undefined => {
-		return features?.find(
-			(feature) =>
-				feature.$type === 'app.bsky.richtext.facet#link' ||
-				feature.$type === 'app.bsky.richtext.facet#mention' ||
-				feature.$type === 'app.bsky.richtext.facet#tag',
-		);
+		return features?.find((feature) => {
+			switch (feature.$type) {
+				case 'app.bsky.richtext.facet#link': {
+					return safeParseUrl(feature.uri) !== null;
+				}
+				case 'app.bsky.richtext.facet#mention':
+				case 'app.bsky.richtext.facet#tag': {
+					return true;
+				}
+			}
+
+			return false;
+		});
 	};
 </script>
 

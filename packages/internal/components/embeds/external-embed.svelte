@@ -1,27 +1,7 @@
-<script lang="ts" module>
-	const safeParseUrl = (str: string): URL | null => {
-		let url: URL | null | undefined;
-		if ('parse' in URL) {
-			url = URL.parse(str);
-		} else {
-			try {
-				// @ts-expect-error: `'parse' in URL` is giving truthy
-				url = new URL(str);
-			} catch {
-				// noop
-			}
-		}
-
-		if (url && (url.protocol === 'https:' || url.protocol === 'http:')) {
-			return url;
-		}
-
-		return null;
-	};
-</script>
-
 <script lang="ts">
 	import type { AppBskyEmbedExternal } from '@atcute/bluesky';
+
+	import { safeParseUrl } from '../../utils/url';
 
 	interface Props {
 		embed: AppBskyEmbedExternal.View;

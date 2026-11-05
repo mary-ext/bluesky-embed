@@ -14,7 +14,6 @@ then, import the package on your app.
 
 ```js
 import 'bluesky-profile-feed-embed';
-
 import 'bluesky-profile-feed-embed/style.css';
 import 'bluesky-profile-feed-embed/themes/light.css';
 ```
@@ -58,7 +57,6 @@ server-rendering framework of choice for a zero-JS experience.
 
 ```tsx
 import { fetchProfileFeed, renderProfileFeed } from 'bluesky-profile-feed-embed/core';
-
 import 'bluesky-post-embed/style.css';
 import 'bluesky-post-embed/themes/light.css';
 

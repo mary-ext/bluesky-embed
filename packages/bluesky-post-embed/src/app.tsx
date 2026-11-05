@@ -1,3 +1,4 @@
+import type { HTMLAttributes } from 'preact';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 
 import type { PostData } from 'internal/types/post.js';

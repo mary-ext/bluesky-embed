@@ -1,4 +1,4 @@
-import preact from '@preact/preset-vite';
+import { preact } from '@preact/preset-vite';
 import { defineConfig } from 'vite';
 
 import { staticSvelte } from 'internal/build/static-svelte.js';

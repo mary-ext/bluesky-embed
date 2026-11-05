@@ -15,17 +15,17 @@
 	},
 	"devDependencies": {
 		"@atcute/atproto": "^4.0.4",
-		"@atcute/bluesky": "^4.0.22",
+		"@atcute/bluesky": "^4.0.26",
 		"@atcute/bluesky-richtext-parser": "^2.1.2",
 		"@atcute/bluesky-richtext-segmenter": "^3.0.2",
 		"@atcute/lexicons": "^2.1.1",
-		"@oxc-project/types": "^0.151.0",
+		"@oxc-project/types": "^0.157.0",
 		"@tsconfig/svelte": "^5.0.8",
-		"@types/node": "^26.6.3",
+		"@types/node": "^26.6.6",
 		"esrap": "^2.4.0",
-		"rolldown": "^1.2.11",
+		"rolldown": "^1.2.16",
 		"svelte": "catalog:",
-		"svelte-check": "^4.7.6",
+		"svelte-check": "^4.7.8",
 		"zimmerframe": "^1.1.5"
 	},
 	"peerDependencies": {

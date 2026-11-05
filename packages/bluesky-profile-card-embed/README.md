@@ -14,7 +14,6 @@ then, import the package on your app.
 
 ```js
 import 'bluesky-profile-card-embed';
-
 import 'bluesky-profile-card-embed/style.css';
 import 'bluesky-profile-card-embed/themes/light.css';
 ```
@@ -56,7 +55,6 @@ server-rendering framework of choice for a zero-JS experience.
 
 ```tsx
 import { fetchProfileCard, renderProfileCard } from 'bluesky-profile-card-embed/core';
-
 import 'bluesky-profile-card-embed/style.css';
 import 'bluesky-profile-card-embed/themes/light.css';
 

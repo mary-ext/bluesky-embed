@@ -106,6 +106,8 @@ const isSlots = (node: ObjectProperty | SpreadElement) =>
 	((node.key.type === 'Identifier' && node.key.name === '$$slots') ||
 		(node.key.type === 'Literal' && node.key.value === '$$slots'));
 
+const strip = (value: string) => value.replace(HYDRATION_COMMENT, '');
+
 export function transformServerOutput(program: Program, filename = 'component.svelte'): string {
 	const fail: (message: string) => never = (message) => {
 		throw new Error(`${filename}: ${message}`);
@@ -156,8 +158,6 @@ export function transformServerOutput(program: Program, filename = 'component.sv
 
 		return { ...node, params, body } as Node;
 	};
-
-	const strip = (value: string) => value.replace(HYDRATION_COMMENT, '');
 
 	const visitors: Visitors<Node, State> = {
 		ImportDeclaration(node, { next }) {

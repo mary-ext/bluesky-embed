@@ -1,3 +1,4 @@
+import type { HTMLAttributes } from 'preact';
 import { useEffect, useMemo, useState } from 'preact/hooks';
 
 import type { ProfileCardData } from 'internal/types/profile-card.js';

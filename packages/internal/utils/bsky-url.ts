@@ -7,7 +7,7 @@ export const getPostUrl = (author: string, rkey: string): string => {
 };
 
 export const getHashtagUrl = (tag: string): string => {
-	return `https://bsky.app/hashtag/${tag}`;
+	return `https://bsky.app/hashtag/${encodeURIComponent(tag)}`;
 };
 
 export const getFeedUrl = (author: string, rkey: string): string => {

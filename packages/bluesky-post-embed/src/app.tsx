@@ -19,7 +19,6 @@ const App = () => {
 		const promise = fetchPost({
 			uri: uri,
 			signal: controller.signal,
-			allowUnauthenticated: true,
 		});
 
 		void promise.then((data) => {
@@ -39,7 +38,12 @@ export default App;
 const BlueskyPost = ({ data }: { data: PostData }) => {
 	const html = useMemo(() => renderPost(data), [data]);
 
-	return <bluesky-post src={data.thread?.post.uri} dangerouslySetInnerHTML={{ __html: html }}></bluesky-post>;
+	return (
+		<bluesky-post
+			src={data.type === 'thread' ? data.anchor.post.uri : undefined}
+			dangerouslySetInnerHTML={{ __html: html }}
+		></bluesky-post>
+	);
 };
 
 declare module 'preact' {

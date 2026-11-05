@@ -38,8 +38,6 @@ import 'bluesky-post-embed/themes/light.css';
   AT-URI of the post record
 - `contextless` **Optional**  
   Whether to show the post without any context (no parent reply)
-- `allow-unauthenticated` **Optional**  
-  Whether to allow unauthenticated viewing
 - `service-uri` **Optional**  
   URL to an AppView service, defaults to `https://public.api.bsky.app`
 
@@ -63,7 +61,7 @@ import 'bluesky-post-embed/themes/light.css';
 // fetch the post
 const controller = new AbortController();
 const data = await fetchPost({
-	src: `at://did:plc:ragtjsm2j2vknwkz3zp4oxrd/app.bsky.feed.post/3kj2umze7zj2n`,
+	uri: `at://did:plc:ragtjsm2j2vknwkz3zp4oxrd/app.bsky.feed.post/3kj2umze7zj2n`,
 	signal: controller.signal,
 });
 
@@ -71,7 +69,7 @@ const data = await fetchPost({
 const html = renderPost(data);
 return (
 	<bluesky-post
-		src={data.thread?.post.uri}
+		src={data.type === 'thread' ? data.anchor.post.uri : undefined}
 		dangerouslySetInnerHTML={{ __html: html }}
 	></bluesky-post>
 );

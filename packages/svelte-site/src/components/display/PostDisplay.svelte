@@ -84,7 +84,7 @@
 {:then data}
 	<BlueskyPost {data} />
 
-	{#if data.thread}
+	{#if data.type === 'thread'}
 		<Guide title="How do I embed this to my website?">
 			<Banner type="inform">
 				Doing server-side rendering? Check out examples for
@@ -102,7 +102,7 @@
 
 				<li>
 					<p>Insert the following markup in wherever you want the post to be.</p>
-					<CodeBlock code={get_markup(data.thread.post)} />
+					<CodeBlock code={get_markup(data.anchor.post)} />
 				</li>
 			</GuideInstructions>
 		</Guide>

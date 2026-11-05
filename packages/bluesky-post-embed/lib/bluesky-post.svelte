@@ -1,82 +1,26 @@
-<script lang="ts" module>
-	import type { AppBskyFeedDefs, AppBskyFeedGetPostThread } from '@atcute/bluesky';
-
-	type ThreadData = AppBskyFeedGetPostThread.$output['thread'];
-	type PostView = AppBskyFeedDefs.PostView;
-
-	const unwrapPostThread = (data: ThreadData, contextless: boolean, allowUnauthenticated: boolean) => {
-		const items: { post: PostView; parent: PostView | null }[] = [];
-
-		let i = 0;
-		let il = contextless ? 1 : 2;
-
-		let curr: typeof data | undefined = data;
-		while (curr) {
-			if (
-				curr.$type === 'app.bsky.feed.defs#notFoundPost' ||
-				curr.$type === 'app.bsky.feed.defs#blockedPost'
-			) {
-				break;
-			}
-
-			const post = curr.post;
-
-			if (i !== 0) {
-				items[i - 1].parent = post;
-			}
-
-			if (++i > il) {
-				break;
-			}
-
-			const author = post.author;
-			if (!allowUnauthenticated && author.labels?.some((def) => def.val === '!no-unauthenticated')) {
-				break;
-			}
-
-			items.push({ post: post, parent: null });
-			curr = curr.parent;
-		}
-
-		// oxlint-disable-next-line unicorn/no-array-reverse -- safe mutation
-		return items.reverse();
-	};
-</script>
-
 <script lang="ts">
 	import EmbedFrame from 'internal/components/embed-frame.svelte';
 	import HighlightedPost from 'internal/components/highlighted-post.svelte';
 	import Post from 'internal/components/post.svelte';
 	import type { PostData } from 'internal/types/post.js';
-	import { NO_UNAUTHENTICATED_LABEL } from 'internal/utils/constants.js';
 
-	const { thread, contextless, allowUnauthenticated }: PostData = $props();
-
-	const isPwiForbidden =
-		!allowUnauthenticated &&
-		thread !== null &&
-		thread.$type === 'app.bsky.feed.defs#threadViewPost' &&
-		thread.post.author.labels?.some((label) => label.val === NO_UNAUTHENTICATED_LABEL);
+	const { data }: { data: PostData } = $props();
 </script>
 
-{#if thread === null}
-	{@render Message(`The post can't be found, it may have been deleted.`)}
-{:else if isPwiForbidden}
-	{@render Message(`The author has requested for their posts to not be displayed on external sites.`)}
-{:else}
-	{@const posts = unwrapPostThread(thread, contextless, allowUnauthenticated)}
+{#if data.type === 'thread'}
+	{@const { anchor, parent } = data}
 
 	<EmbedFrame>
-		{#each posts as { post, parent }, idx}
-			{@const hasPrevious = idx !== 0}
+		{#if parent}
+			<Post post={parent.post} parent={parent.parent} />
+		{/if}
 
-			{#if idx === posts.length - 1}
-				<HighlightedPost {post} {parent} prev={hasPrevious} />
-			{:else}
-				<Post {post} {parent} prev={hasPrevious} />
-			{/if}
-		{/each}
+		<HighlightedPost post={anchor.post} parent={anchor.parent} prev={parent !== null} />
 	</EmbedFrame>
+{:else if data.type === 'no-unauthenticated'}
+	{@render Message(`The author has requested for their posts to not be displayed on external sites.`)}
+{:else}
+	{@render Message(`The post can't be found, it may have been deleted.`)}
 {/if}
 
 {#snippet Message(msg: string)}

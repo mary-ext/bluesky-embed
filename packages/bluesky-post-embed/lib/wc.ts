@@ -17,18 +17,15 @@ export class BlueskyPost extends HTMLElement {
 		const src = this.getAttribute('src')!;
 		const serviceUri = this.getAttribute('service-uri') || undefined;
 		const contextless = this.getAttribute('contextless') !== null;
-		const allowUnauthenticated = this.getAttribute('allow-unauthenticated') !== null;
 		const silent = this.getAttribute('silent') !== null;
 
-		const data = await fetchPost({ uri: src, contextless, allowUnauthenticated, serviceUri }).catch(
-			(error) => {
-				if (silent) {
-					console.warn('Failed to fetch post:', error);
-					return null;
-				}
-				throw error;
-			},
-		);
+		const data = await fetchPost({ uri: src, contextless, serviceUri }).catch((error) => {
+			if (silent) {
+				console.warn('Failed to fetch post:', error);
+				return null;
+			}
+			throw error;
+		});
 
 		if (data === null) {
 			return;

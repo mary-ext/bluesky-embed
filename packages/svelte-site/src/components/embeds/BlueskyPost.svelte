@@ -9,4 +9,6 @@
 	let { data }: Props = $props();
 </script>
 
-<bluesky-post src={data.thread?.post.uri}>{@html renderPost(data)}</bluesky-post>
+<bluesky-post src={data.type === 'thread' ? data.anchor.post.uri : undefined}
+	>{@html renderPost(data)}</bluesky-post
+>

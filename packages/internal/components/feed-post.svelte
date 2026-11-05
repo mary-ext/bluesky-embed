@@ -198,6 +198,10 @@
 
 <style>
 	.feed-post {
+		/* padding, avatar and gap on the start side, padding on the end */
+		--bleed-start: calc(16px + 36px + 12px);
+		--bleed-end: 16px;
+
 		padding: 0 16px;
 	}
 	.is-leaf {

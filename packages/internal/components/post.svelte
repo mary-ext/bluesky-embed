@@ -96,6 +96,10 @@
 
 <style>
 	.post {
+		/* padding, avatar and gap on the start side, padding on the end */
+		--bleed-start: calc(16px + 40px + 12px);
+		--bleed-end: 16px;
+
 		display: flex;
 		position: relative;
 		gap: 12px;

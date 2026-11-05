@@ -25,15 +25,17 @@
 <script lang="ts">
 	import { type AppBskyFeedDefs, type MediaEmbed, type RecordEmbed, unwrapEmbed } from '@atcute/bluesky';
 
+	import { getEmbedImages } from '../../utils/embeds';
 	import { findLabel } from '../../utils/labels';
 	import { parseAtUri } from '../../utils/syntax/at-url';
 	import ContentHider from '../content-hider.svelte';
 
 	import ExternalEmbed from './external-embed.svelte';
 	import FeedEmbed from './feed-embed.svelte';
-	import ImageEmbed from './image-embed.svelte';
+	import GalleryEmbed from './gallery-embed.svelte';
 	import ListEmbed from './list-embed.svelte';
 	import QuoteEmbed from './quote-embed.svelte';
+	import SingleImageEmbed from './single-image-embed.svelte';
 	import StarterpackEmbed from './starterpack-embed.svelte';
 	import VideoEmbed from './video-embed.svelte';
 
@@ -65,8 +67,14 @@
 	<ContentHider {warning}>
 		{#if embed.$type === 'app.bsky.embed.external#view'}
 			<ExternalEmbed {embed} />
-		{:else if embed.$type === 'app.bsky.embed.images#view'}
-			<ImageEmbed {embed} standalone />
+		{:else if embed.$type === 'app.bsky.embed.gallery#view' || embed.$type === 'app.bsky.embed.images#view'}
+			{@const images = getEmbedImages(embed)}
+
+			{#if images.length === 1}
+				<SingleImageEmbed image={images[0]} standalone />
+			{:else if images.length !== 0}
+				<GalleryEmbed {images} />
+			{/if}
 		{:else if embed.$type === 'app.bsky.embed.video#view'}
 			<VideoEmbed {post} {embed} standalone />
 		{:else}

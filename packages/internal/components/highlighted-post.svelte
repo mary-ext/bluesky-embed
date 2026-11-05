@@ -141,6 +141,9 @@
 
 <style>
 	.highlighted-post {
+		--bleed-start: 16px;
+		--bleed-end: 16px;
+
 		padding: 16px;
 	}
 

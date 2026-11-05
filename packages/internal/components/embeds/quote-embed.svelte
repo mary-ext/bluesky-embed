@@ -3,10 +3,12 @@
 
 	import { getPostUrl } from '../../utils/bsky-url';
 	import { formatShortDate } from '../../utils/date';
+	import { getEmbedImages } from '../../utils/embeds';
 	import { findLabel } from '../../utils/labels';
 	import { parseAtUri } from '../../utils/syntax/at-url';
 
-	import ImageEmbed from './image-embed.svelte';
+	import GalleryEmbed from './gallery-embed.svelte';
+	import SingleImageEmbed from './single-image-embed.svelte';
 	import VideoEmbed from './video-embed.svelte';
 
 	interface Props {
@@ -23,7 +25,7 @@
 	const authorName = author.displayName?.trim();
 
 	const media = unwrapMediaEmbed(quote.embeds?.[0]);
-	const image = media?.$type === 'app.bsky.embed.images#view' ? media : undefined;
+	const images = getEmbedImages(media);
 	const video = media?.$type === 'app.bsky.embed.video#view' ? media : undefined;
 
 	const postUrl = getPostUrl(author.did, parseAtUri(quote.uri).rkey);
@@ -59,9 +61,10 @@
 	{#if text}
 		<div class="body">
 			{#if !large}
-				{#if image}
+				{#if images.length !== 0}
 					<div class="aside">
-						<ImageEmbed embed={image} blur={isMediaBlurred} />
+						<!-- a scrolling strip is too cramped at this size, the leading image stands in for the rest -->
+						<SingleImageEmbed image={images[0]} blur={isMediaBlurred} />
 					</div>
 				{:else if video}
 					<div class="aside">
@@ -77,8 +80,12 @@
 	{/if}
 
 	{#if large || !text}
-		{#if image}
-			<ImageEmbed embed={image} borderless blur={isMediaBlurred} />
+		{#if images.length === 1}
+			<SingleImageEmbed image={images[0]} borderless blur={isMediaBlurred} />
+		{:else if images.length !== 0}
+			<div class="gallery">
+				<GalleryEmbed {images} blur={isMediaBlurred} />
+			</div>
 		{:else if video}
 			<VideoEmbed embed={video} borderless blur={isMediaBlurred} />
 		{/if}
@@ -177,5 +184,13 @@
 
 	.divide {
 		padding: 6px 0;
+	}
+
+	.gallery {
+		/* bleed out to the quote's edges rather than the parent post's */
+		--bleed-start: 12px;
+		--bleed-end: 12px;
+
+		padding: 0 var(--bleed-end) 12px var(--bleed-start);
 	}
 </style>

@@ -166,6 +166,10 @@ importers:
         version: 0.23.5(@tsdown/css@0.23.5)(@typescript/typescript6@6.0.2)(@volar/typescript@2.4.26(@typescript/typescript6@6.0.2))
 
   packages/internal:
+    dependencies:
+      '@mary-ext/array-fns':
+        specifier: ^0.1.0
+        version: 0.1.0
     devDependencies:
       '@atcute/atproto':
         specifier: ^4.0.4
@@ -481,6 +485,9 @@ packages:
   '@manypkg/tools@2.1.2':
     resolution: {integrity: sha512-6QEf6yqFbETdwGITKq57aYoPfX/3K8XFNwsAlx0C1M7o8cb79sv1M3w+tWuWvIcSbNqrLF7OD7YpZMVVz335hQ==}
     engines: {node: '>=20.0.0'}
+
+  '@mary-ext/array-fns@0.1.0':
+    resolution: {integrity: sha512-lH9+OrLNSRiwBvocdkTgASVM8ISsGf531j1Bjx8GzIWtzYU9A3Mi6GkC0zT83b8oCPNAo5ULWTU3kIUNesVv+g==}
 
   '@oomfware/eval@0.1.0':
     resolution: {integrity: sha512-EIkukTd3zDQEHUjcfFRDq79Jgm4OEyUrEUvp/SwgjfoH2POaE5cvaswIonFwdt8fSzJF5xtAdgcgIoKD8sPpjg==}
@@ -2278,6 +2285,8 @@ snapshots:
       jju: 1.4.0
       tinyglobby: 0.2.17
       yaml: 2.9.1
+
+  '@mary-ext/array-fns@0.1.0': {}
 
   '@oomfware/eval@0.1.0': {}
 

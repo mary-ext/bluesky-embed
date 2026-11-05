@@ -1,4 +1,5 @@
 import type { AppBskyEmbedDefs, MediaEmbed } from '@atcute/bluesky';
+import { mapDefined } from '@mary-ext/array-fns';
 
 /** an image from an images or gallery embed. */
 export interface EmbedImage {
@@ -25,11 +26,19 @@ const getRatio = (aspectRatio: AppBskyEmbedDefs.AspectRatio | undefined): number
 export const getEmbedImages = (embed: MediaEmbed | undefined): EmbedImage[] => {
 	switch (embed?.$type) {
 		case 'app.bsky.embed.gallery#view': {
-			return embed.items.map((item) => ({
-				alt: item.alt,
-				ratio: getRatio(item.aspectRatio),
-				thumbnail: item.thumbnail,
-			}));
+			return mapDefined(embed.items, (item) => {
+				switch (item.$type) {
+					case 'app.bsky.embed.gallery#viewImage': {
+						return {
+							alt: item.alt,
+							ratio: getRatio(item.aspectRatio),
+							thumbnail: item.thumbnail,
+						};
+					}
+				}
+
+				return undefined;
+			});
 		}
 		case 'app.bsky.embed.images#view': {
 			return embed.images.map((image) => ({

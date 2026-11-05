@@ -13,6 +13,9 @@
 	"scripts": {
 		"check": "svelte-check --tsgo --tsconfig ./tsconfig.lib.json && tsc -p tsconfig.node.json"
 	},
+	"dependencies": {
+		"@mary-ext/array-fns": "^0.1.0"
+	},
 	"devDependencies": {
 		"@atcute/atproto": "^4.0.4",
 		"@atcute/bluesky": "^4.0.26",

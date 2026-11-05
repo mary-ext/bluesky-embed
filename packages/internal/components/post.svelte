@@ -27,9 +27,9 @@
 	const isAuthorBlurred = !!findLabel(author.labels, author.did);
 </script>
 
-<div class="post">
+<div class="bsky-post">
 	{#if !prev}
-		<svg class="logo" fill="none" viewBox="0 0 320 286">
+		<svg class="bsky-post__logo" fill="none" viewBox="0 0 320 286">
 			<path
 				fill="#0A7AFF"
 				d="M69.364 19.146c36.687 27.806 76.147 84.186 90.636 114.439 14.489-30.253 53.948-86.633 90.636-114.439C277.107-.917 320-16.44 320 32.957c0 9.865-5.603 82.875-8.889 94.729-11.423 41.208-53.045 51.719-90.071 45.357 64.719 11.12 81.182 47.953 45.627 84.785-80 82.874-106.667-44.333-106.667-44.333s-26.667 127.207-106.667 44.333c-35.555-36.832-19.092-73.665 45.627-84.785-37.026 6.362-78.648-4.149-90.071-45.357C5.603 115.832 0 42.822 0 32.957 0-16.44 42.893-.917 69.364 19.147Z"
@@ -37,42 +37,42 @@
 		</svg>
 	{/if}
 
-	<div class="aside">
-		<a target="_blank" href={authorUrl} class="avatar-wrapper">
+	<div class="bsky-post__aside">
+		<a target="_blank" href={authorUrl} class="bsky-post__avatar-wrapper">
 			{#if author.avatar}
 				<img
 					loading="lazy"
 					src={author.avatar}
 					alt=""
-					class={`avatar` + (isAuthorBlurred ? ` is-blurred` : ``)}
+					class={`bsky-post__avatar` + (isAuthorBlurred ? ` bsky-post__avatar--blurred` : ``)}
 				/>
 			{/if}
 		</a>
 
-		<div class="line"></div>
+		<div class="bsky-post__line"></div>
 	</div>
 
-	<div class="main">
-		<div class="meta">
-			<a href={authorUrl} target="_blank" class="name-wrapper">
+	<div class="bsky-post__main">
+		<div class="bsky-post__meta">
+			<a href={authorUrl} target="_blank" class="bsky-post__name-wrapper">
 				{#if authorName}
-					<bdi class="display-name-wrapper">
-						<span class="display-name">{authorName}</span>
+					<bdi class="bsky-post__display-name-wrapper">
+						<span class="bsky-post__display-name">{authorName}</span>
 					</bdi>
 				{/if}
 
-				<span class="handle">@{author.handle}</span>
+				<span class="bsky-post__handle">@{author.handle}</span>
 			</a>
 
-			<span aria-hidden="true" class="dot"> · </span>
+			<span aria-hidden="true" class="bsky-post__dot"> · </span>
 
-			<a target="_blank" href={postUrl} title={formatLongDate(record.createdAt)} class="date">
+			<a target="_blank" href={postUrl} title={formatLongDate(record.createdAt)} class="bsky-post__date">
 				<time datetime={record.createdAt}>{formatShortDate(record.createdAt)}</time>
 			</a>
 		</div>
 
 		{#if !prev && record.reply}
-			<p class="context">
+			<p class="bsky-post__context">
 				{#if parent}
 					{@const author = parent.author}
 
@@ -95,75 +95,77 @@
 </div>
 
 <style>
-	.post {
-		/* padding, avatar and gap on the start side, padding on the end */
-		--bleed-start: calc(16px + 40px + 12px);
-		--bleed-end: 16px;
+	:global .bluesky-embed {
+		.bsky-post {
+			/* padding, avatar and gap on the start side, padding on the end */
+			--bleed-start: calc(16px + 40px + 12px);
+			--bleed-end: 16px;
 
-		display: flex;
-		position: relative;
-		gap: 12px;
-		padding: 12px 16px 0 16px;
-	}
-
-	.logo {
-		position: absolute;
-		top: 12px;
-		right: 12px;
-		width: 24px;
-		height: 24px;
-	}
-
-	.aside {
-		flex-shrink: 0;
-	}
-
-	.avatar-wrapper {
-		display: block;
-		border-radius: 9999px;
-		background: var(--background-secondary);
-		width: 40px;
-		height: 40px;
-		overflow: hidden;
-
-		&:hover {
-			filter: brightness(0.85);
+			display: flex;
+			position: relative;
+			gap: 12px;
+			padding: 12px 16px 0 16px;
 		}
-	}
 
-	.avatar {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-	.is-blurred {
-		scale: 125%;
-		filter: blur(4px);
-	}
+		.bsky-post__logo {
+			position: absolute;
+			top: 12px;
+			right: 12px;
+			width: 24px;
+			height: 24px;
+		}
 
-	.line {
-		position: absolute;
-		top: 56px;
-		bottom: -12px;
-		left: 35px;
-		border-left: 2px solid var(--divider);
-	}
+		.bsky-post__aside {
+			flex-shrink: 0;
+		}
 
-	.main {
-		display: flex;
-		flex-grow: 1;
-		flex-direction: column;
-		min-width: 0px;
-	}
+		.bsky-post__avatar-wrapper {
+			display: block;
+			border-radius: 9999px;
+			background: var(--background-secondary);
+			width: 40px;
+			height: 40px;
+			overflow: hidden;
 
-	.meta {
-		display: flex;
-		align-items: center;
-		margin: 0 0 2px 0;
-		padding: 0 calc(24px + 8px) 0 0;
-		color: var(--text-secondary);
+			&:hover {
+				filter: brightness(0.85);
+			}
+		}
 
-		.name-wrapper {
+		.bsky-post__avatar {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+		.bsky-post__avatar--blurred {
+			scale: 125%;
+			filter: blur(4px);
+		}
+
+		.bsky-post__line {
+			position: absolute;
+			top: 56px;
+			bottom: -12px;
+			left: 35px;
+			border-left: 2px solid var(--divider);
+		}
+
+		.bsky-post__main {
+			display: flex;
+			flex-grow: 1;
+			flex-direction: column;
+			min-width: 0px;
+		}
+
+		.bsky-post__meta {
+			display: flex;
+			align-items: center;
+			margin: 0 0 2px 0;
+			padding: 0 calc(24px + 8px) 0 0;
+			color: var(--text-secondary);
+		}
+
+		.bsky-post__name-wrapper {
 			display: flex;
 			gap: 4px;
 			max-width: 100%;
@@ -174,33 +176,33 @@
 			white-space: nowrap;
 		}
 
-		.display-name-wrapper {
+		.bsky-post__display-name-wrapper {
 			overflow: hidden;
 			text-overflow: ellipsis;
 
-			.name-wrapper:hover & {
+			.bsky-post__name-wrapper:hover & {
 				text-decoration: underline;
 			}
 		}
 
-		.display-name {
+		.bsky-post__display-name {
 			color: var(--text-primary);
 			font-weight: 700;
 		}
 
-		.handle {
+		.bsky-post__handle {
 			display: block;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 		}
 
-		.dot {
+		.bsky-post__dot {
 			flex-shrink: 0;
 			margin: 0 6px;
 		}
 
-		.date {
+		.bsky-post__date {
 			color: inherit;
 			text-decoration: none;
 			white-space: nowrap;
@@ -209,21 +211,21 @@
 				text-decoration: underline;
 			}
 		}
-	}
 
-	.context {
-		overflow: hidden;
-		color: var(--text-secondary);
-		font-size: calc(var(--font-size) * 0.8125);
-		text-overflow: ellipsis;
-		white-space: nowrap;
+		.bsky-post__context {
+			overflow: hidden;
+			color: var(--text-secondary);
+			font-size: calc(var(--font-size) * 0.8125);
+			text-overflow: ellipsis;
+			white-space: nowrap;
 
-		a {
-			color: inherit;
-			font-weight: 500;
+			a {
+				color: inherit;
+				font-weight: 500;
 
-			&:hover {
-				text-decoration: underline;
+				&:hover {
+					text-decoration: underline;
+				}
 			}
 		}
 	}

@@ -8,12 +8,7 @@ const shared = {
 	minify: false,
 	tsconfig: 'tsconfig.lib.json',
 	dts: { eager: true },
-	plugins: [
-		staticSvelte({
-			cssHashPrefix: 'github:mary-ext/bluesky-profile-card-embed/',
-			root: import.meta.dirname,
-		}),
-	],
+	plugins: [staticSvelte()],
 } satisfies UserConfig;
 
 export default defineConfig([

@@ -9,12 +9,7 @@ const shared = {
 	// the root config is a solution file, so point at the project that owns `lib/`
 	tsconfig: 'tsconfig.lib.json',
 	dts: { eager: true },
-	plugins: [
-		staticSvelte({
-			cssHashPrefix: 'github:mary-ext/bluesky-profile-feed-embed/',
-			root: import.meta.dirname,
-		}),
-	],
+	plugins: [staticSvelte()],
 } satisfies UserConfig;
 
 export default defineConfig([

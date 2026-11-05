@@ -34,19 +34,24 @@
 	const domain = safeParseUrl(external.uri)?.host;
 </script>
 
-<a target="_blank" href={domain && external.uri} rel="noopener noreferrer nofollow" class="external-embed">
+<a
+	target="_blank"
+	href={domain && external.uri}
+	rel="noopener noreferrer nofollow"
+	class="bsky-external-embed"
+>
 	{#if external.thumb}
-		<img loading="lazy" src={external.thumb} alt="" class="thumbnail" />
+		<img loading="lazy" src={external.thumb} alt="" class="bsky-external-embed__thumbnail" />
 	{/if}
 
-	<div class="meta">
-		<p class="title">{external.title}</p>
-		<p class="description">{external.description}</p>
+	<div class="bsky-external-embed__meta">
+		<p class="bsky-external-embed__title">{external.title}</p>
+		<p class="bsky-external-embed__description">{external.description}</p>
 
 		{#if domain}
-			<div class="domain">
+			<div class="bsky-external-embed__domain">
 				<!-- earth -->
-				<svg class="icon" fill="none" viewBox="0 0 24 24">
+				<svg class="bsky-icon" fill="none" viewBox="0 0 24 24">
 					<path
 						stroke="currentColor"
 						stroke-linecap="round"
@@ -55,77 +60,79 @@
 					/>
 				</svg>
 
-				<span class="domain-name">{domain}</span>
+				<span class="bsky-external-embed__domain-name">{domain}</span>
 			</div>
 		{/if}
 	</div>
 </a>
 
 <style>
-	.external-embed {
-		display: block;
-		border: 1px solid var(--divider);
-		border-radius: 6px;
-		overflow: hidden;
+	:global .bluesky-embed {
+		.bsky-external-embed {
+			display: block;
+			border: 1px solid var(--divider);
+			border-radius: 6px;
+			overflow: hidden;
 
-		&:hover {
-			border-color: var(--divider-hover);
+			&:hover {
+				border-color: var(--divider-hover);
+			}
 		}
-	}
 
-	.thumbnail {
-		display: block;
-		border-bottom: 1px solid var(--divider);
-		background: #000000;
-		aspect-ratio: 1.91;
-		width: 100%;
+		.bsky-external-embed__thumbnail {
+			display: block;
+			border-bottom: 1px solid var(--divider);
+			background: #000000;
+			aspect-ratio: 1.91;
+			width: 100%;
 
-		.external-embed:hover & {
-			border-color: var(--divider-hover);
+			.bsky-external-embed:hover & {
+				border-color: var(--divider-hover);
+			}
 		}
-	}
 
-	.meta {
-		padding: 12px;
-	}
-
-	.title {
-		display: -webkit-box;
-		overflow: hidden;
-		font-weight: 700;
-		white-space: pre-wrap;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
-		line-clamp: 2;
-		overflow-wrap: break-word;
-
-		&:empty {
-			display: none;
+		.bsky-external-embed__meta {
+			padding: 12px;
 		}
-	}
-	.description {
-		display: -webkit-box;
-		overflow: hidden;
-		color: var(--text-secondary);
-		font-size: calc(var(--font-size) * 0.8125);
-		white-space: pre-wrap;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
-		line-clamp: 2;
-		overflow-wrap: break-word;
 
-		&:empty {
-			display: none;
+		.bsky-external-embed__title {
+			display: -webkit-box;
+			overflow: hidden;
+			font-weight: 700;
+			white-space: pre-wrap;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			line-clamp: 2;
+			overflow-wrap: break-word;
+
+			&:empty {
+				display: none;
+			}
 		}
-	}
+		.bsky-external-embed__description {
+			display: -webkit-box;
+			overflow: hidden;
+			color: var(--text-secondary);
+			font-size: calc(var(--font-size) * 0.8125);
+			white-space: pre-wrap;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			line-clamp: 2;
+			overflow-wrap: break-word;
 
-	.domain {
-		display: flex;
-		align-items: center;
-		gap: 6px;
-		margin: 6px 0 0 0;
-		color: var(--text-secondary);
-		font-weight: 500;
-		font-size: calc(var(--font-size) * 0.75);
+			&:empty {
+				display: none;
+			}
+		}
+
+		.bsky-external-embed__domain {
+			display: flex;
+			align-items: center;
+			gap: 6px;
+			margin: 6px 0 0 0;
+			color: var(--text-secondary);
+			font-weight: 500;
+			font-size: calc(var(--font-size) * 0.75);
+		}
 	}
 </style>

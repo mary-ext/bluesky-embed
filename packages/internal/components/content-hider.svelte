@@ -14,9 +14,9 @@
 {#if !warning}
 	{@render children()}
 {:else}
-	<details class="content-hider">
-		<summary class="gate">
-			<svg class="icon" fill="none" viewBox="0 0 24 24">
+	<details class="bsky-content-hider">
+		<summary class="bsky-content-hider__gate">
+			<svg class="bsky-icon bsky-content-hider__icon" fill="none" viewBox="0 0 24 24">
 				<path
 					stroke="currentColor"
 					stroke-linecap="square"
@@ -31,9 +31,9 @@
 				/>
 			</svg>
 
-			<span class="label">{warning.name}</span>
+			<span class="bsky-content-hider__label">{warning.name}</span>
 
-			<span class="action"></span>
+			<span class="bsky-content-hider__action"></span>
 		</summary>
 
 		{@render children()}
@@ -41,49 +41,51 @@
 {/if}
 
 <style>
-	.gate {
-		display: flex;
-		align-items: center;
-		gap: 12px;
-		cursor: pointer;
-		border: 1px solid var(--divider);
-		border-radius: 6px;
-		padding: 0 12px;
-		height: 44px;
+	:global .bluesky-embed {
+		.bsky-content-hider__gate {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			cursor: pointer;
+			border: 1px solid var(--divider);
+			border-radius: 6px;
+			padding: 0 12px;
+			height: 44px;
 
-		.content-hider[open] & {
-			margin-bottom: 12px;
+			.bsky-content-hider[open] & {
+				margin-bottom: 12px;
+			}
+
+			&:hover {
+				border-color: var(--divider-hover);
+			}
 		}
 
-		&:hover {
-			border-color: var(--divider-hover);
+		.bsky-content-hider__icon {
+			width: 18px;
+			height: 18px;
+			color: var(--text-secondary);
 		}
-	}
-
-	.icon {
-		width: 18px;
-		height: 18px;
-		color: var(--text-secondary);
-	}
-	.label {
-		flex-grow: 1;
-		overflow: hidden;
-		font-weight: 500;
-		user-select: none;
-		text-overflow: ellipsis;
-	}
-
-	.action {
-		color: var(--text-link);
-		font-weight: 500;
-		font-size: calc(var(--font-size) * 0.8125);
-		line-height: calc(var(--font-size) * 1.25);
-
-		&::before {
-			content: 'Show';
+		.bsky-content-hider__label {
+			flex-grow: 1;
+			overflow: hidden;
+			font-weight: 500;
+			user-select: none;
+			text-overflow: ellipsis;
 		}
-		.content-hider[open] &::before {
-			content: 'Hide';
+
+		.bsky-content-hider__action {
+			color: var(--text-link);
+			font-weight: 500;
+			font-size: calc(var(--font-size) * 0.8125);
+			line-height: calc(var(--font-size) * 1.25);
+
+			&::before {
+				content: 'Show';
+			}
+			.bsky-content-hider[open] &::before {
+				content: 'Hide';
+			}
 		}
 	}
 </style>

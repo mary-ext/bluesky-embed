@@ -15,13 +15,13 @@
 	const feedUrl = getFeedUrl(creator.did, parseAtUri(feed.uri).rkey);
 </script>
 
-<a target="_blank" href={feedUrl} class="feed-embed">
-	<div class="main">
-		<div class="avatar-wrapper">
+<a target="_blank" href={feedUrl} class="bsky-feed-embed">
+	<div class="bsky-feed-embed__main">
+		<div class="bsky-feed-embed__avatar-wrapper">
 			{#if feed.avatar}
-				<img loading="lazy" src={feed.avatar} alt="" class="avatar" />
+				<img loading="lazy" src={feed.avatar} alt="" class="bsky-feed-embed__avatar" />
 			{:else}
-				<svg viewBox="0 0 32 32" class="avatar">
+				<svg viewBox="0 0 32 32" class="bsky-feed-embed__avatar">
 					<path fill="#0070FF" d="M0 0h32v32H0z" />
 					<path
 						fill="#fff"
@@ -32,69 +32,71 @@
 			{/if}
 		</div>
 
-		<div class="info">
-			<p class="name">{feed.displayName}</p>
-			<p class="creator">Feed by @{creator.handle}</p>
+		<div class="bsky-feed-embed__info">
+			<p class="bsky-feed-embed__name">{feed.displayName}</p>
+			<p class="bsky-feed-embed__creator">Feed by @{creator.handle}</p>
 		</div>
 	</div>
 
-	<p class="description">{feed.description}</p>
+	<p class="bsky-feed-embed__description">{feed.description}</p>
 </a>
 
 <style>
-	.feed-embed {
-		display: flex;
-		flex-direction: column;
-		gap: 12px;
-		border: 1px solid var(--divider);
-		border-radius: 6px;
-		padding: 12px;
+	:global .bluesky-embed {
+		.bsky-feed-embed {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			border: 1px solid var(--divider);
+			border-radius: 6px;
+			padding: 12px;
 
-		&:hover {
-			border-color: var(--divider-hover);
+			&:hover {
+				border-color: var(--divider-hover);
+			}
 		}
-	}
 
-	.main {
-		display: flex;
-		gap: 12px;
-	}
+		.bsky-feed-embed__main {
+			display: flex;
+			gap: 12px;
+		}
 
-	.avatar-wrapper {
-		margin: 2px 0 0 0;
-		border-radius: 6px;
-		background: var(--background-secondary);
-		width: 36px;
-		height: 36px;
-		overflow: hidden;
-	}
-	.avatar {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
+		.bsky-feed-embed__avatar-wrapper {
+			margin: 2px 0 0 0;
+			border-radius: 6px;
+			background: var(--background-secondary);
+			width: 36px;
+			height: 36px;
+			overflow: hidden;
+		}
+		.bsky-feed-embed__avatar {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
 
-	.name {
-		font-weight: 700;
-	}
+		.bsky-feed-embed__name {
+			font-weight: 700;
+		}
 
-	.creator {
-		color: var(--text-secondary);
-		font-size: calc(var(--font-size) * 0.8125);
-	}
+		.bsky-feed-embed__creator {
+			color: var(--text-secondary);
+			font-size: calc(var(--font-size) * 0.8125);
+		}
 
-	.description {
-		display: -webkit-box;
-		overflow: hidden;
-		font-size: calc(var(--font-size) * 0.8125);
-		white-space: pre-wrap;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
-		line-clamp: 2;
-		overflow-wrap: break-word;
+		.bsky-feed-embed__description {
+			display: -webkit-box;
+			overflow: hidden;
+			font-size: calc(var(--font-size) * 0.8125);
+			white-space: pre-wrap;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			line-clamp: 2;
+			overflow-wrap: break-word;
 
-		&:empty {
-			display: none;
+			&:empty {
+				display: none;
+			}
 		}
 	}
 </style>

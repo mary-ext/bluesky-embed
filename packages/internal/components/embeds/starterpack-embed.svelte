@@ -20,16 +20,16 @@
 	const packUrl = getStarterpackUrl(creatorDid, rkey);
 </script>
 
-<a target="_blank" href={packUrl} class="starterpack-embed">
+<a target="_blank" href={packUrl} class="bsky-starterpack-embed">
 	{#if large}
 		{@const imageUrl = getStarterpackImgUrl(creatorDid, rkey)}
 
-		<img loading="lazy" src={imageUrl} alt="" class="banner" />
+		<img loading="lazy" src={imageUrl} alt="" class="bsky-starterpack-embed__banner" />
 	{/if}
 
-	<div class="meta">
-		<div class="main">
-			<svg fill="none" viewBox="0 0 24 24" class="avatar">
+	<div class="bsky-starterpack-embed__meta">
+		<div class="bsky-starterpack-embed__main">
+			<svg fill="none" viewBox="0 0 24 24" class="bsky-starterpack-embed__avatar">
 				<defs>
 					<linearGradient id="a" x1="0" x2="100%" y1="0" y2="0" gradientTransform="rotate(45)">
 						<stop offset="0" stop-color="#0A7AFF" />
@@ -50,73 +50,75 @@
 				/>
 			</svg>
 
-			<div class="info">
-				<p class="name">{record.name}</p>
-				<p class="creator">Starter pack by @{creator.handle}</p>
+			<div class="bsky-starterpack-embed__info">
+				<p class="bsky-starterpack-embed__name">{record.name}</p>
+				<p class="bsky-starterpack-embed__creator">Starter pack by @{creator.handle}</p>
 			</div>
 		</div>
 
-		<p class="description">{record.description}</p>
+		<p class="bsky-starterpack-embed__description">{record.description}</p>
 	</div>
 </a>
 
 <style>
-	.starterpack-embed {
-		display: block;
-		border: 1px solid var(--divider);
-		border-radius: 6px;
-		overflow: hidden;
+	:global .bluesky-embed {
+		.bsky-starterpack-embed {
+			display: block;
+			border: 1px solid var(--divider);
+			border-radius: 6px;
+			overflow: hidden;
 
-		&:hover {
-			border-color: var(--divider-hover);
+			&:hover {
+				border-color: var(--divider-hover);
+			}
 		}
-	}
 
-	.banner {
-		display: block;
-		aspect-ratio: 1.91;
-		width: 100%;
-	}
+		.bsky-starterpack-embed__banner {
+			display: block;
+			aspect-ratio: 1.91;
+			width: 100%;
+		}
 
-	.meta {
-		display: flex;
-		flex-direction: column;
-		gap: 12px;
-		padding: 12px;
-	}
+		.bsky-starterpack-embed__meta {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			padding: 12px;
+		}
 
-	.main {
-		display: flex;
-		gap: 12px;
-	}
+		.bsky-starterpack-embed__main {
+			display: flex;
+			gap: 12px;
+		}
 
-	.avatar {
-		margin: 2px;
-		width: 36px;
-		height: 36px;
-	}
+		.bsky-starterpack-embed__avatar {
+			margin: 2px;
+			width: 36px;
+			height: 36px;
+		}
 
-	.name {
-		font-weight: 700;
-	}
+		.bsky-starterpack-embed__name {
+			font-weight: 700;
+		}
 
-	.creator {
-		color: var(--text-secondary);
-		font-size: calc(var(--font-size) * 0.8125);
-	}
+		.bsky-starterpack-embed__creator {
+			color: var(--text-secondary);
+			font-size: calc(var(--font-size) * 0.8125);
+		}
 
-	.description {
-		display: -webkit-box;
-		overflow: hidden;
-		font-size: calc(var(--font-size) * 0.8125);
-		white-space: pre-wrap;
-		-webkit-box-orient: vertical;
-		-webkit-line-clamp: 2;
-		line-clamp: 2;
-		overflow-wrap: break-word;
+		.bsky-starterpack-embed__description {
+			display: -webkit-box;
+			overflow: hidden;
+			font-size: calc(var(--font-size) * 0.8125);
+			white-space: pre-wrap;
+			-webkit-box-orient: vertical;
+			-webkit-line-clamp: 2;
+			line-clamp: 2;
+			overflow-wrap: break-word;
 
-		&:empty {
-			display: none;
+			&:empty {
+				display: none;
+			}
 		}
 	}
 </style>

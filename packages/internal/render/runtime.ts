@@ -46,13 +46,9 @@ export function attr(name: string, value: unknown, isBoolean = false): string {
 	return ` ${name}${isBoolean ? `=""` : `="${escape(value, true)}"`}`;
 }
 
-export function attr_class(value: unknown, hash?: string): string {
+export function attr_class(value: unknown): string {
 	// oxlint-disable-next-line typescript/no-base-to-string
-	let className = value == null ? '' : String(value);
-	if (hash) {
-		className = className ? `${className} ${hash}` : hash;
-	}
-
+	const className = value == null ? '' : String(value);
 	return className ? ` class="${escape(className, true)}"` : '';
 }
 

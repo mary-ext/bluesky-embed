@@ -5,11 +5,5 @@ import { staticSvelte } from 'internal/build/static-svelte.js';
 
 export default defineConfig({
 	base: './',
-	plugins: [
-		staticSvelte({
-			cssHashPrefix: 'github:mary-ext/bluesky-profile-card-embed/',
-			root: import.meta.dirname,
-		}),
-		preact(),
-	],
+	plugins: [staticSvelte(), preact()],
 });

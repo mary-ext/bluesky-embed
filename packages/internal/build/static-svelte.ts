@@ -1,7 +1,5 @@
 /* oxlint-disable typescript/no-unsafe-type-assertion -- AST manipulation */
 
-import * as path from 'node:path';
-
 import { compile } from 'svelte/compiler';
 
 import type {
@@ -22,6 +20,8 @@ import { type Context, type Visitors, walk } from 'zimmerframe';
 
 const HYDRATION_COMMENT = /<!--(?:\[-?\d*|\]|)-->/g;
 
+const SCOPED_CSS_HASH = 'svelte-scoped-css';
+
 const RENDERER = '$$renderer';
 const RUNTIME = '$';
 const RUNTIME_MODULE = 'internal/render/runtime.js';
@@ -30,12 +30,7 @@ type State = { strip: boolean };
 
 type WalkContext = Context<Node, State>;
 
-interface StaticSvelteOptions {
-	cssHashPrefix: string;
-	root: string;
-}
-
-export function staticSvelte({ cssHashPrefix, root }: StaticSvelteOptions): Plugin {
+export function staticSvelte(): Plugin {
 	const stylesheets = new Map<string, string>();
 
 	return {
@@ -60,14 +55,17 @@ export function staticSvelte({ cssHashPrefix, root }: StaticSvelteOptions): Plug
 			const result = compile(source, {
 				generate: 'server',
 				css: 'external',
-				cssHash({ hash, filename }) {
-					return `s-` + hash(cssHashPrefix + path.relative(root, filename));
-				},
+				cssHash: () => SCOPED_CSS_HASH,
 				runes: true,
 				filename: id,
 				// We render once to a static string, so nothing is ever reactive.
 				warningFilter: (warning) => warning.code !== 'state_referenced_locally',
 			});
+
+			// throw if a scoped selector slips through
+			if (result.css?.code.includes(SCOPED_CSS_HASH)) {
+				this.error(`${id}: scoped styles are not supported, wrap them in \`:global .bluesky-embed { ... }\``);
+			}
 
 			let code = transformServerOutput(this.parse(result.js.code), id);
 			if (result.css) {

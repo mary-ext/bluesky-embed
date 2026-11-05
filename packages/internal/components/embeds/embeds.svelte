@@ -52,7 +52,7 @@
 	const { media, record } = unwrapEmbed(embed);
 </script>
 
-<div class="embeds">
+<div class="bsky-embeds">
 	{#if media}
 		{@render Media(media)}
 	{/if}
@@ -107,21 +107,23 @@
 {/snippet}
 
 {#snippet Message(message: string)}
-	<div class="message">{message}</div>
+	<div class="bsky-embeds__message">{message}</div>
 {/snippet}
 
 <style>
-	.embeds {
-		display: flex;
-		flex-direction: column;
-		gap: 12px;
-		margin: 12px 0 0 0;
-	}
+	:global .bluesky-embed {
+		.bsky-embeds {
+			display: flex;
+			flex-direction: column;
+			gap: 12px;
+			margin: 12px 0 0 0;
+		}
 
-	.message {
-		border: 1px solid var(--divider);
-		border-radius: 6px;
-		padding: 12px;
-		color: var(--text-secondary);
+		.bsky-embeds__message {
+			border: 1px solid var(--divider);
+			border-radius: 6px;
+			padding: 12px;
+			color: var(--text-secondary);
+		}
 	}
 </style>

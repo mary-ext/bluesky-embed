@@ -33,11 +33,11 @@
 	const repostCount = (post.repostCount || 0) + (post.quoteCount || 0);
 </script>
 
-<div class={`feed-post` + (!next ? ` is-leaf` : ``)}>
-	<div class="contexts">
+<div class={`bsky-feed-post` + (!next ? ` bsky-feed-post--leaf` : ``)}>
+	<div class="bsky-feed-post__contexts">
 		{#if prev}
-			<div class="ascendant-line-wrapper">
-				<div class="line"></div>
+			<div class="bsky-feed-post__ascendant-line-wrapper">
+				<div class="bsky-feed-post__ascendant-line"></div>
 			</div>
 		{/if}
 
@@ -45,9 +45,9 @@
 			{#if reason.$type === 'app.bsky.feed.defs#reasonRepost'}
 				{@const by = reason.by}
 
-				<div class="context">
-					<div class="aside">
-						<svg class="icon" viewBox="0 0 24 24" fill="none">
+				<div class="bsky-feed-post__context">
+					<div class="bsky-feed-post__context-aside">
+						<svg class="bsky-icon" viewBox="0 0 24 24" fill="none">
 							<path
 								d="M17 3L20 6L17 9M7 21L4 18L7 15M5 18H20V13M4 11V6H19"
 								stroke="currentColor"
@@ -56,15 +56,15 @@
 							/>
 						</svg>
 					</div>
-					<a href={getProfileUrl(by.did)} class="main">
-						<span dir="auto" class="name">{by.displayName}</span>
-						<span class="affix">{' '}reposted</span>
+					<a href={getProfileUrl(by.did)} class="bsky-feed-post__context-main">
+						<span dir="auto" class="bsky-feed-post__context-name">{by.displayName}</span>
+						<span class="bsky-feed-post__context-affix">{' '}reposted</span>
 					</a>
 				</div>
 			{:else if reason.$type === 'app.bsky.feed.defs#reasonPin'}
-				<div class="context">
-					<div class="aside">
-						<svg class="icon" fill="none" viewBox="0 0 24 24">
+				<div class="bsky-feed-post__context">
+					<div class="bsky-feed-post__context-aside">
+						<svg class="bsky-icon" fill="none" viewBox="0 0 24 24">
 							<path
 								stroke="currentColor"
 								stroke-linecap="square"
@@ -73,46 +73,51 @@
 							/>
 						</svg>
 					</div>
-					<span class="main">Pinned</span>
+					<span class="bsky-feed-post__context-main">Pinned</span>
 				</div>
 			{/if}
 		{/if}
 	</div>
 
-	<div class="content">
-		<div class="aside">
-			<a target="_blank" href={authorUrl} class="avatar-wrapper">
+	<div class="bsky-feed-post__content">
+		<div class="bsky-feed-post__content-aside">
+			<a target="_blank" href={authorUrl} class="bsky-feed-post__avatar-wrapper">
 				{#if author.avatar}
-					<img loading="lazy" src={author.avatar} alt="" class="avatar" />
+					<img loading="lazy" src={author.avatar} alt="" class="bsky-feed-post__avatar" />
 				{/if}
 			</a>
 
 			{#if next}
-				<div class="descendant-line"></div>
+				<div class="bsky-feed-post__descendant-line"></div>
 			{/if}
 		</div>
 
-		<div class="main">
-			<div class="meta">
-				<a href={authorUrl} target="_blank" class="name-wrapper">
+		<div class="bsky-feed-post__content-main">
+			<div class="bsky-feed-post__meta">
+				<a href={authorUrl} target="_blank" class="bsky-feed-post__name-wrapper">
 					{#if authorName}
-						<bdi class="display-name-wrapper">
-							<span class="display-name">{authorName}</span>
+						<bdi class="bsky-feed-post__display-name-wrapper">
+							<span class="bsky-feed-post__display-name">{authorName}</span>
 						</bdi>
 					{/if}
 
-					<span class="handle">@{author.handle}</span>
+					<span class="bsky-feed-post__handle">@{author.handle}</span>
 				</a>
 
-				<span aria-hidden="true" class="dot"> · </span>
+				<span aria-hidden="true" class="bsky-feed-post__dot"> · </span>
 
-				<a target="_blank" href={postUrl} title={formatLongDate(record.createdAt)} class="date">
+				<a
+					target="_blank"
+					href={postUrl}
+					title={formatLongDate(record.createdAt)}
+					class="bsky-feed-post__date"
+				>
 					<time datetime={record.createdAt}>{formatShortDate(record.createdAt)}</time>
 				</a>
 			</div>
 
 			{#if !prev && record.reply}
-				<p class="reply-context">
+				<p class="bsky-feed-post__reply-context">
 					{#if parent && parent.$type === 'app.bsky.feed.defs#postView'}
 						{@const author = parent.author}
 
@@ -132,14 +137,14 @@
 				<Embeds {post} embed={post.embed} />
 			{/if}
 
-			<div class="metrics">
+			<div class="bsky-feed-post__metrics">
 				<div
 					title={replyCount === 1
 						? `${formatLongNumber(replyCount)} reply`
 						: `${formatLongNumber(replyCount)} replies`}
-					class="stat"
+					class="bsky-feed-post__stat"
 				>
-					<svg class="icon" fill="none" viewBox="0 0 24 24">
+					<svg class="bsky-icon" fill="none" viewBox="0 0 24 24">
 						<path
 							stroke="currentColor"
 							stroke-linecap="square"
@@ -148,7 +153,7 @@
 						/>
 					</svg>
 
-					<span class="count">
+					<span class="bsky-feed-post__stat-count">
 						{formatCompactNumber(replyCount)}
 					</span>
 				</div>
@@ -157,9 +162,9 @@
 					title={repostCount === 1
 						? `${formatLongNumber(repostCount)} repost`
 						: `${formatLongNumber(repostCount)} reposts`}
-					class="stat"
+					class="bsky-feed-post__stat"
 				>
-					<svg class="icon" fill="none" viewBox="0 0 24 24">
+					<svg class="bsky-icon" fill="none" viewBox="0 0 24 24">
 						<path
 							stroke="currentColor"
 							stroke-linecap="square"
@@ -168,7 +173,7 @@
 						/>
 					</svg>
 
-					<span class="count">
+					<span class="bsky-feed-post__stat-count">
 						{formatCompactNumber(repostCount)}
 					</span>
 				</div>
@@ -177,9 +182,9 @@
 					title={likeCount === 1
 						? `${formatLongNumber(likeCount)} like`
 						: `${formatLongNumber(likeCount)} likes`}
-					class="stat"
+					class="bsky-feed-post__stat"
 				>
-					<svg class="icon" fill="none" viewBox="0 0 24 24">
+					<svg class="bsky-icon" fill="none" viewBox="0 0 24 24">
 						<path
 							stroke="currentColor"
 							stroke-width="2"
@@ -187,7 +192,7 @@
 						/>
 					</svg>
 
-					<span class="count">
+					<span class="bsky-feed-post__stat-count">
 						{formatCompactNumber(likeCount)}
 					</span>
 				</div>
@@ -197,59 +202,59 @@
 </div>
 
 <style>
-	.feed-post {
-		/* padding, avatar and gap on the start side, padding on the end */
-		--bleed-start: calc(16px + 36px + 12px);
-		--bleed-end: 16px;
+	:global .bluesky-embed {
+		.bsky-feed-post {
+			/* padding, avatar and gap on the start side, padding on the end */
+			--bleed-start: calc(16px + 36px + 12px);
+			--bleed-end: 16px;
 
-		padding: 0 16px;
-	}
-	.is-leaf {
-		border-bottom: 1px solid var(--divider);
-	}
+			padding: 0 16px;
+		}
+		.bsky-feed-post--leaf {
+			border-bottom: 1px solid var(--divider);
+		}
 
-	.ascendant-line-wrapper {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		width: 36px;
-
-		.line {
+		.bsky-feed-post__ascendant-line-wrapper {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			width: 36px;
+		}
+		.bsky-feed-post__ascendant-line {
 			position: absolute;
 			top: 0;
 			bottom: 4px;
 			flex-grow: 1;
 			border-left: 2px solid var(--divider);
 		}
-	}
-	.descendant-line {
-		flex-grow: 1;
-		margin-top: 4px;
-		border-left: 2px solid var(--divider);
-	}
+		.bsky-feed-post__descendant-line {
+			flex-grow: 1;
+			margin-top: 4px;
+			border-left: 2px solid var(--divider);
+		}
 
-	.contexts {
-		display: flex;
-		position: relative;
-		flex-direction: column;
-		padding: 8px 0 4px 0;
-	}
-	.context {
-		display: flex;
-		align-items: center;
-		gap: 12px;
-		color: var(--text-secondary);
-		font-size: 0.8125rem;
-		line-height: 1.25rem;
+		.bsky-feed-post__contexts {
+			display: flex;
+			position: relative;
+			flex-direction: column;
+			padding: 8px 0 4px 0;
+		}
 
-		.aside {
+		.bsky-feed-post__context {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			color: var(--text-secondary);
+			font-size: 0.8125rem;
+			line-height: 1.25rem;
+		}
+		.bsky-feed-post__context-aside {
 			display: flex;
 			flex-shrink: 0;
 			justify-content: flex-end;
 			width: 36px;
 		}
-
-		.main {
+		.bsky-feed-post__context-main {
 			display: flex;
 			min-width: 0px;
 
@@ -257,63 +262,59 @@
 				text-decoration-line: underline;
 			}
 		}
-
-		.name {
+		.bsky-feed-post__context-name {
 			overflow: hidden;
 			font-weight: 500;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 		}
-
-		.affix {
+		.bsky-feed-post__context-affix {
 			flex-shrink: 0;
 			white-space: pre;
 		}
-	}
 
-	.content {
-		display: flex;
-		gap: 12px;
-
-		.aside {
+		.bsky-feed-post__content {
+			display: flex;
+			gap: 12px;
+		}
+		.bsky-feed-post__content-aside {
 			display: flex;
 			flex-shrink: 0;
 			flex-direction: column;
 			align-items: center;
 		}
-
-		.main {
+		.bsky-feed-post__content-main {
 			flex-grow: 1;
 			padding-bottom: 12px;
 			min-width: 0;
 		}
-	}
 
-	.avatar-wrapper {
-		display: block;
-		border-radius: 9999px;
-		background: var(--background-secondary);
-		width: 36px;
-		height: 36px;
-		overflow: hidden;
+		.bsky-feed-post__avatar-wrapper {
+			display: block;
+			border-radius: 9999px;
+			background: var(--background-secondary);
+			width: 36px;
+			height: 36px;
+			overflow: hidden;
 
-		&:hover {
-			filter: brightness(0.85);
+			&:hover {
+				filter: brightness(0.85);
+			}
 		}
-	}
-	.avatar {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
+		.bsky-feed-post__avatar {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
 
-	.meta {
-		display: flex;
-		align-items: center;
-		margin: 0 0 2px 0;
-		color: var(--text-secondary);
+		.bsky-feed-post__meta {
+			display: flex;
+			align-items: center;
+			margin: 0 0 2px 0;
+			color: var(--text-secondary);
+		}
 
-		.name-wrapper {
+		.bsky-feed-post__name-wrapper {
 			display: flex;
 			gap: 4px;
 			max-width: 100%;
@@ -324,33 +325,33 @@
 			white-space: nowrap;
 		}
 
-		.display-name-wrapper {
+		.bsky-feed-post__display-name-wrapper {
 			overflow: hidden;
 			text-overflow: ellipsis;
 
-			.name-wrapper:hover & {
+			.bsky-feed-post__name-wrapper:hover & {
 				text-decoration: underline;
 			}
 		}
 
-		.display-name {
+		.bsky-feed-post__display-name {
 			color: var(--text-primary);
 			font-weight: 700;
 		}
 
-		.handle {
+		.bsky-feed-post__handle {
 			display: block;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			white-space: nowrap;
 		}
 
-		.dot {
+		.bsky-feed-post__dot {
 			flex-shrink: 0;
 			margin: 0 6px;
 		}
 
-		.date {
+		.bsky-feed-post__date {
 			color: inherit;
 			text-decoration: none;
 			white-space: nowrap;
@@ -359,40 +360,39 @@
 				text-decoration: underline;
 			}
 		}
-	}
 
-	.reply-context {
-		overflow: hidden;
-		color: var(--text-secondary);
-		font-size: calc(var(--font-size) * 0.8125);
-		text-overflow: ellipsis;
-		white-space: nowrap;
+		.bsky-feed-post__reply-context {
+			overflow: hidden;
+			color: var(--text-secondary);
+			font-size: calc(var(--font-size) * 0.8125);
+			text-overflow: ellipsis;
+			white-space: nowrap;
 
-		a {
-			color: inherit;
-			font-weight: 500;
+			a {
+				color: inherit;
+				font-weight: 500;
 
-			&:hover {
-				text-decoration: underline;
+				&:hover {
+					text-decoration: underline;
+				}
 			}
 		}
-	}
 
-	.metrics {
-		display: flex;
-		align-items: center;
-		gap: 16px;
-		margin-top: 12px;
-		color: var(--text-secondary);
-	}
-	.stat {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		min-width: 0px;
-		max-width: 100%;
-
-		.count {
+		.bsky-feed-post__metrics {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			margin-top: 12px;
+			color: var(--text-secondary);
+		}
+		.bsky-feed-post__stat {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+			min-width: 0px;
+			max-width: 100%;
+		}
+		.bsky-feed-post__stat-count {
 			padding-right: 8px;
 			overflow: hidden;
 			font-size: calc(var(--font-size) * 0.8125);

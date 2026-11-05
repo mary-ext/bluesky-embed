@@ -45,18 +45,20 @@
 	})();
 </script>
 
-<div class="gallery-embed">
+<div class="bsky-gallery-embed">
 	<div
-		class="strip"
+		class="bsky-gallery-embed__strip"
 		style={`--base: ${strip.base}px; --count: ${strip.count}; --last: ${strip.last}; --total: ${strip.total}; --widest: ${strip.widest}`}
 	>
 		{#each tiles as { contained, image, ratio }}
-			<div class="item" style={`--ratio: ${ratio}`}>
+			<div class="bsky-gallery-embed__item" style={`--ratio: ${ratio}`}>
 				<img
 					loading="lazy"
 					src={image.thumbnail}
 					alt={image.alt}
-					class={`image` + (contained ? ` is-contained` : ``) + (blur ? ` is-blurred` : ``)}
+					class={`bsky-gallery-embed__image` +
+						(contained ? ` bsky-gallery-embed__image--contained` : ``) +
+						(blur ? ` bsky-gallery-embed__image--blurred` : ``)}
 				/>
 			</div>
 		{/each}
@@ -64,72 +66,74 @@
 </div>
 
 <style>
-	.gallery-embed {
-		/*
-		 * the surrounding layout declares how far out its edges are via `--bleed-start` and `--bleed-end`, the
-		 * strip extends out to them while keeping its images lined up with the content at rest.
-		 */
-		--start: var(--bleed-start, 0px);
-		--end: var(--bleed-end, 0px);
+	:global .bluesky-embed {
+		.bsky-gallery-embed {
+			/*
+			 * the surrounding layout declares how far out its edges are via `--bleed-start` and `--bleed-end`, the
+			 * strip extends out to them while keeping its images lined up with the content at rest.
+			 */
+			--start: var(--bleed-start, 0px);
+			--end: var(--bleed-end, 0px);
 
-		container-type: inline-size;
-		margin-inline: calc(-1 * var(--start)) calc(-1 * var(--end));
-	}
+			container-type: inline-size;
+			margin-inline: calc(-1 * var(--start)) calc(-1 * var(--end));
+		}
 
-	.strip {
-		--gap: 8px;
-		/* sliver of the next image kept in view so the strip hints that there's more to scroll */
-		--peek: 28px;
-		/* shrink the row until the widest image fits whole alongside the peek */
-		--height: min(var(--base), (100cqi - var(--start) - var(--gap) - var(--peek)) / var(--widest));
-		--width: calc(var(--height) * var(--total) + var(--gap) * (var(--count) - 1));
+		.bsky-gallery-embed__strip {
+			--gap: 8px;
+			/* sliver of the next image kept in view so the strip hints that there's more to scroll */
+			--peek: 28px;
+			/* shrink the row until the widest image fits whole alongside the peek */
+			--height: min(var(--base), (100cqi - var(--start) - var(--gap) - var(--peek)) / var(--widest));
+			--width: calc(var(--height) * var(--total) + var(--gap) * (var(--count) - 1));
 
-		display: flex;
-		gap: var(--gap);
-		/*
-		 * the end padding lets the last image snap to the leading edge. the overflow term is scaled up and
-		 * clamped so it acts as a switch: a strip that fits never scrolls, and padding would only add dead space
-		 * past the last image.
-		 */
-		padding-inline: var(--start)
-			max(
-				var(--end),
-				min(
-					(var(--start) + var(--width) + var(--end) - 100cqi) * 1000,
-					100cqi - var(--start) - var(--height) * var(--last)
-				)
-			);
-		overflow-x: auto;
-		overflow-y: hidden;
-		overscroll-behavior-x: contain;
-		scroll-padding-inline-start: var(--start);
-		scroll-snap-type: x mandatory;
-		scrollbar-width: thin;
-	}
+			display: flex;
+			gap: var(--gap);
+			/*
+			 * the end padding lets the last image snap to the leading edge. the overflow term is scaled up and
+			 * clamped so it acts as a switch: a strip that fits never scrolls, and padding would only add dead space
+			 * past the last image.
+			 */
+			padding-inline: var(--start)
+				max(
+					var(--end),
+					min(
+						(var(--start) + var(--width) + var(--end) - 100cqi) * 1000,
+						100cqi - var(--start) - var(--height) * var(--last)
+					)
+				);
+			overflow-x: auto;
+			overflow-y: hidden;
+			overscroll-behavior-x: contain;
+			scroll-padding-inline-start: var(--start);
+			scroll-snap-type: x mandatory;
+			scrollbar-width: thin;
+		}
 
-	.item {
-		flex: none;
-		scroll-snap-align: start;
-		border: 1px solid var(--divider);
-		border-radius: 6px;
-		width: calc(var(--height) * var(--ratio));
-		height: var(--height);
-		overflow: hidden;
-	}
+		.bsky-gallery-embed__item {
+			flex: none;
+			scroll-snap-align: start;
+			border: 1px solid var(--divider);
+			border-radius: 6px;
+			width: calc(var(--height) * var(--ratio));
+			height: var(--height);
+			overflow: hidden;
+		}
 
-	.image {
-		display: block;
-		background: #000000;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		font-size: 0px;
-	}
-	.is-contained {
-		object-fit: contain;
-	}
-	.is-blurred {
-		scale: 125%;
-		filter: blur(24px);
+		.bsky-gallery-embed__image {
+			display: block;
+			background: #000000;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			font-size: 0px;
+		}
+		.bsky-gallery-embed__image--contained {
+			object-fit: contain;
+		}
+		.bsky-gallery-embed__image--blurred {
+			scale: 125%;
+			filter: blur(24px);
+		}
 	}
 </style>

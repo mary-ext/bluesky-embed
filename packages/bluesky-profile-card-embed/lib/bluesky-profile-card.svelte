@@ -22,16 +22,6 @@
 
 {#snippet Message(msg: string)}
 	<EmbedFrame>
-		<div class="message">{msg}</div>
+		<div class="bluesky-embed__message">{msg}</div>
 	</EmbedFrame>
 {/snippet}
-
-<style>
-	.message {
-		margin: 0 auto;
-		padding: 32px 16px;
-		max-width: 380px;
-		color: var(--text-secondary);
-		text-align: center;
-	}
-</style>

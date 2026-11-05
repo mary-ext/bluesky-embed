@@ -50,46 +50,40 @@
 		<ProfileFeedHeader {profile} />
 
 		{#if items.length > 0}
-			<div class="feed">
+			<div class="bsky-profile-feed">
 				{#each items as item}
 					<FeedPost {item} />
 				{/each}
 
-				<div class="end-marker">
-					<div class="dot"></div>
+				<div class="bsky-profile-feed__end-marker">
+					<div class="bsky-profile-feed__end-dot"></div>
 				</div>
 			</div>
 		{:else}
-			<div class="message">This user has not made any posts.</div>
+			<div class="bluesky-embed__message">This user has not made any posts.</div>
 		{/if}
 	</EmbedFrame>
 {/if}
 
 {#snippet Message(msg: string)}
 	<EmbedFrame>
-		<div class="message">{msg}</div>
+		<div class="bluesky-embed__message">{msg}</div>
 	</EmbedFrame>
 {/snippet}
 
 <style>
-	.message {
-		margin: 0 auto;
-		padding: 32px 16px;
-		max-width: 380px;
-		color: var(--text-secondary);
-		text-align: center;
-	}
+	:global .bluesky-embed {
+		.bsky-profile-feed {
+			max-height: var(--max-feed-height);
+			overflow-y: auto;
+		}
 
-	.feed {
-		max-height: var(--max-feed-height);
-		overflow-y: auto;
-	}
-	.end-marker {
-		display: grid;
-		place-items: center;
-		height: 48px;
-
-		.dot {
+		.bsky-profile-feed__end-marker {
+			display: grid;
+			place-items: center;
+			height: 48px;
+		}
+		.bsky-profile-feed__end-dot {
 			border-radius: 50%;
 			background: var(--text-secondary);
 			width: 4px;

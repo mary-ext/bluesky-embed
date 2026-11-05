@@ -13,7 +13,7 @@
 </div>
 
 <style>
-	.bluesky-embed {
+	:global .bluesky-embed {
 		position: relative;
 		box-sizing: border-box;
 		margin: 0 auto;
@@ -30,22 +30,30 @@
 		font-family: var(--font-family);
 
 		/* a pseudo-element is not a valid `:where()` argument, and `*` is already specificity 0 */
-		:global(*),
-		:global(*::before),
-		:global(*::after) {
+		*,
+		*::before,
+		*::after {
 			box-sizing: border-box;
 			margin: 0;
 			padding: 0;
 		}
-		:global(:where(a)) {
+		:where(a) {
 			color: inherit;
 			text-decoration: none;
 		}
 
-		:global(:where(.icon)) {
+		:where(.bsky-icon) {
 			flex-shrink: 0;
 			width: 1em;
 			height: 1em;
+		}
+
+		.bluesky-embed__message {
+			margin: 0 auto;
+			padding: 32px 16px;
+			max-width: 380px;
+			color: var(--text-secondary);
+			text-align: center;
 		}
 	}
 </style>
